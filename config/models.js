@@ -27,6 +27,8 @@ module.exports.models = {
   * See http://sailsjs.org/#!/documentation/concepts/ORM/model-settings.html  *
   *                                                                          *
   ***************************************************************************/
-  // migrate: 'alter'
-
+     migrate: 'drop',
+     connection: 'localPostgresqlServer',
+     autoCreatedAt: true,
+     autoUpdatedAt: true,
 };
