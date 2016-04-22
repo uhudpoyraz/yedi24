@@ -38,6 +38,13 @@ module.exports.routes = {
     view: 'index'
   },
 
+  '/admin': {
+    view: 'admin/index/admin',
+    locals: {
+      layout: 'adminlayout'
+    }
+  },
+
   'get /admin':'Admin/AdminIndexController.index',
 
   /*Bina*/
