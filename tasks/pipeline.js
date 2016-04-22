@@ -46,11 +46,11 @@ var jsAdminFilesToInject = [
   //'jsAdmin/dependencies/sails.io.js',
 
   // Dependencies like jQuery, or Angular are brought in here
-  'jsAdmin/dependencies/**/*.js',
+  'admin/js/dependencies/**/*.js',
 
   // All of the rest of your client-side js files
   // will be injected here in no particular order.
-  'jsAdmin/**/*.js'
+  'admin/js/**/*.js'
 ];
 
 // Client-side HTML templates are injected using the sources below
