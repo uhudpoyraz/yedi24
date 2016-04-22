@@ -54,7 +54,33 @@ module.exports.routes = {
   'get /admin/bina/edit/:id':'Admin/AdminBinaController.edit',
   'post /admin/bina/update':'Admin/AdminBinaController.update',
 
+  /*Blok*/
+  'get /admin/blok/add':'Admin/AdminBlokController.add',
+  'post /admin/blok/save':'Admin/AdminBlokController.save',
+  'get /admin/blok':'Admin/AdminBlokController.list',
+  'get /admin/blok/edit/:id':'Admin/AdminBlokController.edit',
+  'post /admin/blok/update':'Admin/AdminBlokController.update',
 
+  /*Birim*/
+  'get /admin/birim/add':'Admin/AdminBirimController.add',
+  'post /admin/birim/save':'Admin/AdminBirimController.save',
+  'get /admin/birim':'Admin/AdminBirimController.list',
+  'get /admin/birim/edit/:id':'Admin/AdminBirimController.edit',
+  'post /admin/birim/update':'Admin/AdminBirimController.update',
+
+  /*IletisimTip*/
+  'get /admin/iletisimtip/add':'Admin/AdminIletisimTipController.add',
+  'post /admin/iletisimtip/save':'Admin/AdminIletisimTipController.save',
+  'get /admin/iletisimtip':'Admin/AdminIletisimTipController.list',
+  'get /admin/iletisimtip/edit/:id':'Admin/AdminIletisimTipController.edit',
+  'post /admin/iletisimtip/update':'Admin/AdminIletisimTipController.update',
+
+  /*SiteAyar*/
+  'get /admin/ayar/add':'Admin/AdminSiteAyarController.add',
+  'post /admin/ayar/save':'Admin/AdminSiteAyarController.save',
+  'get /admin/ayar':'Admin/AdminSiteAyarController.list',
+  'get /admin/ayar/edit/:id':'Admin/AdminSiteAyarController.edit',
+  'post /admin/ayar/update':'Admin/AdminSiteAyarController.update',
 
   /***************************************************************************
   *                                                                          *

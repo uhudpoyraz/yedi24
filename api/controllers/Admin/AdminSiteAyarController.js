@@ -1,27 +1,27 @@
 /**
- * BinaController
+ * Admin/AdminSiteAyarController
  *
- * @description :: Server-side logic for managing binas
+ * @description :: Server-side logic for managing admin/adminsiteayars
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 
 module.exports = {
-
+	
 
 
   /**
-   * `BinaController.add()`
+   * `Admin/AdminSiteAyarController.add()`
    */
   add: function (req, res) {
 
+    res.view('admin/ayar/add', {layout: 'admin/layout'});
 
-    res.view('admin/bina/add', {layout: 'admin/layout'});
 
   },
 
 
   /**
-   * `BinaController.save()`
+   * `Admin/AdminSiteAyarController.save()`
    */
   save: function (req, res) {
     return res.json({
@@ -31,27 +31,29 @@ module.exports = {
 
 
   /**
-   * `BinaController.list()`
+   * `Admin/AdminSiteAyarController.list()`
    */
   list: function (req, res) {
 
-    res.view('admin/bina/list',{layout:'admin/layout'});
+    res.view('admin/ayar/list', {layout: 'admin/layout'});
+
 
   },
 
 
   /**
-   * `BinaController.edit()`
+   * `Admin/AdminSiteAyarController.edit()`
    */
   edit: function (req, res) {
 
-    res.view('admin/bina/edit',{layout:'admin/layout'});
+    res.view('admin/ayar/edit', {layout: 'admin/layout'});
+
 
   },
 
 
   /**
-   * `BinaController.update()`
+   * `Admin/AdminSiteAyarController.update()`
    */
   update: function (req, res) {
     return res.json({
@@ -61,7 +63,7 @@ module.exports = {
 
 
   /**
-   * `BinaController.show()`
+   * `Admin/AdminSiteAyarController.show()`
    */
   show: function (req, res) {
     return res.json({

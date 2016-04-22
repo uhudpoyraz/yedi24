@@ -1,7 +1,7 @@
 /**
- * BinaController
+ * Admin/AdminBlokController
  *
- * @description :: Server-side logic for managing binas
+ * @description :: Server-side logic for managing admin/adminbloks
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 
@@ -10,18 +10,17 @@ module.exports = {
 
 
   /**
-   * `BinaController.add()`
+   * `Admin/AdminBlokController.add()`
    */
   add: function (req, res) {
 
-
-    res.view('admin/bina/add', {layout: 'admin/layout'});
+    res.view('admin/blok/add', {layout: 'admin/layout'});
 
   },
 
 
   /**
-   * `BinaController.save()`
+   * `Admin/AdminBlokController.save()`
    */
   save: function (req, res) {
     return res.json({
@@ -31,27 +30,30 @@ module.exports = {
 
 
   /**
-   * `BinaController.list()`
+   * `Admin/AdminBlokController.list()`
    */
   list: function (req, res) {
 
-    res.view('admin/bina/list',{layout:'admin/layout'});
+    res.view('admin/blok/list', {layout: 'admin/layout'});
+
 
   },
 
 
   /**
-   * `BinaController.edit()`
+   * `Admin/AdminBlokController.edit()`
    */
   edit: function (req, res) {
 
-    res.view('admin/bina/edit',{layout:'admin/layout'});
+
+    res.view('admin/blok/edit', {layout: 'admin/layout'});
+
 
   },
 
 
   /**
-   * `BinaController.update()`
+   * `Admin/AdminBlokController.update()`
    */
   update: function (req, res) {
     return res.json({
@@ -61,7 +63,7 @@ module.exports = {
 
 
   /**
-   * `BinaController.show()`
+   * `Admin/AdminBlokController.show()`
    */
   show: function (req, res) {
     return res.json({
