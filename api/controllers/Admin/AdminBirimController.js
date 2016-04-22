@@ -1,27 +1,27 @@
 /**
- * BinaController
+ * Admin/birimController
  *
- * @description :: Server-side logic for managing binas
+ * @description :: Server-side logic for managing admin/birims
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 
 module.exports = {
-
+	
 
 
   /**
-   * `BinaController.add()`
+   * `Admin/birimController.add()`
    */
   add: function (req, res) {
 
 
-    res.view('admin/bina/add', {layout: 'admin/layout'});
+    res.view('admin/birim/add', {layout: 'admin/layout'});
 
   },
 
 
   /**
-   * `BinaController.save()`
+   * `Admin/birimController.save()`
    */
   save: function (req, res) {
     return res.json({
@@ -31,27 +31,26 @@ module.exports = {
 
 
   /**
-   * `BinaController.list()`
+   * `Admin/birimController.list()`
    */
   list: function (req, res) {
 
-    res.view('admin/bina/list',{layout:'admin/layout'});
+    res.view('admin/birim/list',{layout:'admin/layout'});
 
   },
 
 
   /**
-   * `BinaController.edit()`
+   * `Admin/birimController.edit()`
    */
   edit: function (req, res) {
 
-    res.view('admin/bina/edit',{layout:'admin/layout'});
+    res.view('admin/birim/edit',{layout:'admin/layout'});
 
   },
 
-
   /**
-   * `BinaController.update()`
+   * `Admin/birimController.update()`
    */
   update: function (req, res) {
     return res.json({
@@ -61,7 +60,7 @@ module.exports = {
 
 
   /**
-   * `BinaController.show()`
+   * `Admin/birimController.show()`
    */
   show: function (req, res) {
     return res.json({

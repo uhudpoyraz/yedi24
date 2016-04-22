@@ -1,27 +1,27 @@
 /**
- * BinaController
+ * Admin/AdminIletisimTipController
  *
- * @description :: Server-side logic for managing binas
+ * @description :: Server-side logic for managing admin/adminiletisimtips
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 
 module.exports = {
-
+	
 
 
   /**
-   * `BinaController.add()`
+   * `Admin/AdminIletisimTipController.add()`
    */
   add: function (req, res) {
 
+    res.view('admin/iletisimtip/add', {layout: 'admin/layout'});
 
-    res.view('admin/bina/add', {layout: 'admin/layout'});
 
   },
 
 
   /**
-   * `BinaController.save()`
+   * `Admin/AdminIletisimTipController.save()`
    */
   save: function (req, res) {
     return res.json({
@@ -31,27 +31,29 @@ module.exports = {
 
 
   /**
-   * `BinaController.list()`
+   * `Admin/AdminIletisimTipController.list()`
    */
   list: function (req, res) {
 
-    res.view('admin/bina/list',{layout:'admin/layout'});
+    res.view('admin/iletisimtip/list', {layout: 'admin/layout'});
+
 
   },
 
 
   /**
-   * `BinaController.edit()`
+   * `Admin/AdminIletisimTipController.edit()`
    */
   edit: function (req, res) {
 
-    res.view('admin/bina/edit',{layout:'admin/layout'});
+    res.view('admin/iletisimtip/edit', {layout: 'admin/layout'});
+
 
   },
 
 
   /**
-   * `BinaController.update()`
+   * `Admin/AdminIletisimTipController.update()`
    */
   update: function (req, res) {
     return res.json({
@@ -61,7 +63,7 @@ module.exports = {
 
 
   /**
-   * `BinaController.show()`
+   * `Admin/AdminIletisimTipController.show()`
    */
   show: function (req, res) {
     return res.json({
