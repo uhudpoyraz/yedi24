@@ -32,13 +32,21 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  '/': {
-    view: 'homepage'
+
+
+   '/': {
+    view: 'index'
   },
 
-  '/index': {
-    view: 'index'
-  }
+  'get /admin':'Admin/AdminIndexController.index',
+
+  /*Bina*/
+  'get /admin/bina/add':'Admin/AdminBinaController.add',
+  'post /admin/bina/save':'Admin/AdminBinaController.save',
+  'get /admin/bina':'Admin/AdminBinaController.list',
+  'get /admin/bina/edit/:id':'Admin/AdminBinaController.edit',
+  'post /admin/bina/update':'Admin/AdminBinaController.update',
+
 
 
   /***************************************************************************
