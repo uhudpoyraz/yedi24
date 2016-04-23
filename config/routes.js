@@ -54,8 +54,8 @@ module.exports.routes = {
   'get /admin/bina/edit/:id':'Admin/AdminBinaController.edit',
   'post /admin/bina/update':'Admin/AdminBinaController.update',
   'get /admin/bina/delete/:id':'Admin/AdminBinaController.delete',
-  
-  
+
+
   /*Blok*/
   'get /admin/blok/add':'Admin/AdminBlokController.add',
   'post /admin/blok/save':'Admin/AdminBlokController.save',
@@ -77,7 +77,7 @@ module.exports.routes = {
   'get /admin/iletisimtipi/edit/:id':'Admin/AdminIletisimTipiController.edit',
   'post /admin/iletisimtipi/update':'Admin/AdminIletisimTipiController.update',
   'get /admin/iletisimtipi/delete/:id':'Admin/AdminIletisimTipiController.delete',
-  
+
   /*SiteAyar*/
   'get /admin/ayar/add':'Admin/AdminSiteAyarController.add',
   'post /admin/ayar/save':'Admin/AdminSiteAyarController.save',
@@ -93,6 +93,15 @@ module.exports.routes = {
   'get /admin/sikayetdurumtipi/edit/:id':'Admin/AdminSikayetDurumTipiController.edit',
   'post /admin/sikayetdurumtipi/update':'Admin/AdminSikayetDurumTipiController.update',
   'get /admin/sikayetdurumtipi/delete/:id':'Admin/AdminSikayetDurumTipiController.delete',
+
+  /*Yetkilendirme*/
+  'get /admin/yetkitipi/add':'Admin/AdminYetkiTipleriController.add',
+  'post /admin/yetkitipi/save':'Admin/AdminYetkiTipleriController.save',
+  'get /admin/yetkitipi':'Admin/AdminYetkiTipleriController.list',
+  'get /admin/yetkitipi/edit/:id':'Admin/AdminYetkiTipleriController.edit',
+  'post /admin/yetkitipi/update':'Admin/AdminYetkiTipleriController.update',
+  'get /admin/yetkitipi/delete/:id':'Admin/AdminYetkiTipleriController.delete'
+
 
   /***************************************************************************
   *                                                                          *

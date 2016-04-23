@@ -46,7 +46,7 @@ module.exports = {
       via: 'kullanici'
     },
     gorev: {
-      model: 'yetkilendirme'
+      model: 'yetkitipi'
     },
 
     sikayetler: {
