@@ -19,7 +19,7 @@ var cssFilesToInject = [
 ];
 
 var cssAdminFilesToInject = [
-  'admin/**/*.css'
+  'admin/*/*.css'
 ];
 
 // Client-side javascript files to inject in order
