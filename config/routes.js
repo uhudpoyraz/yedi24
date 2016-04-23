@@ -71,12 +71,13 @@ module.exports.routes = {
   'post /admin/birim/update':'Admin/AdminBirimController.update',
 
   /*IletisimTip*/
-  'get /admin/iletisimtip/add':'Admin/AdminIletisimTipController.add',
-  'post /admin/iletisimtip/save':'Admin/AdminIletisimTipController.save',
-  'get /admin/iletisimtip':'Admin/AdminIletisimTipController.list',
-  'get /admin/iletisimtip/edit/:id':'Admin/AdminIletisimTipController.edit',
-  'post /admin/iletisimtip/update':'Admin/AdminIletisimTipController.update',
-
+  'get /admin/iletisimtipi/add':'Admin/AdminIletisimTipiController.add',
+  'post /admin/iletisimtipi/save':'Admin/AdminIletisimTipiController.save',
+  'get /admin/iletisimtipi':'Admin/AdminIletisimTipiController.list',
+  'get /admin/iletisimtipi/edit/:id':'Admin/AdminIletisimTipiController.edit',
+  'post /admin/iletisimtipi/update':'Admin/AdminIletisimTipiController.update',
+  'get /admin/iletisimtipi/delete/:id':'Admin/AdminIletisimTipiController.delete',
+  
   /*SiteAyar*/
   'get /admin/ayar/add':'Admin/AdminSiteAyarController.add',
   'post /admin/ayar/save':'Admin/AdminSiteAyarController.save',
@@ -84,6 +85,14 @@ module.exports.routes = {
   'get /admin/ayar/edit/:id':'Admin/AdminSiteAyarController.edit',
   'post /admin/ayar/update':'Admin/AdminSiteAyarController.update',
   'get /admin/ayar/delete/:id':'Admin/AdminSiteAyarController.delete',
+
+  /*SikayetDurumTipi*/
+  'get /admin/sikayetdurumtipi/add':'Admin/AdminSikayetDurumTipiController.add',
+  'post /admin/sikayetdurumtipi/save':'Admin/AdminSikayetDurumTipiController.save',
+  'get /admin/sikayetdurumtipi':'Admin/AdminSikayetDurumTipiController.list',
+  'get /admin/sikayetdurumtipi/edit/:id':'Admin/AdminSikayetDurumTipiController.edit',
+  'post /admin/sikayetdurumtipi/update':'Admin/AdminSikayetDurumTipiController.update',
+  'get /admin/sikayetdurumtipi/delete/:id':'Admin/AdminSikayetDurumTipiController.delete',
 
   /***************************************************************************
   *                                                                          *

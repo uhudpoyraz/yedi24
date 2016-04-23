@@ -2,7 +2,7 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      Bina Listesi
+      İletişim Tipi Listesi
 
     </h1>
 
@@ -23,12 +23,15 @@
             <th style="width: 40px">Sil</th>
           </tr>
 
+          <% _.each(iletisimtipleri, function(tip) {%>
           <tr>
-            <td>{{$a->id}}</td>
-            <td>{{$a->deger}}</td>
-            <td><a href=""><span class="badge bg-green">düzenle</span></a></td>
-            <td><a onclick="return confirm('Silmek İstediğinizden Eminmisiniz ?');" href=""><span class="badge bg-red">sil</span></a></td>
+            <td><%=tip.id %></td>
+            <td><%=tip.deger%></td>
+
+            <td><a href="/admin/iletisimtipi/edit/<%=tip.id %>"><span class="badge bg-green">düzenle</span></a></td>
+            <td><a onclick="return confirm('Silmek İstediğinizden Eminmisiniz ?');" href="/admin/iletisimtipi/delete/<%=tip.id %>"><span class="badge bg-red">sil</span></a></td>
           </tr>
+          <% }) %>
 
           </tbody></table>
       </div><!-- /.box-body -->

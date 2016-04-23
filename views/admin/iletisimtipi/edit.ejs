@@ -1,0 +1,44 @@
+<aside class="right-side">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      İletisim Tipi Düzenle
+
+    </h1>
+
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="box box" style="width: 50%;">
+      <div class="box-body">
+        <form role="form"  action="admin/iletisimtipi/update" method="post">
+          <!-- text input -->
+          <input type="hidden" name="id" value="<%=iletisimtipi.id%>" >
+          <div class="form-group">
+            <label>İletisim Tipi</label>
+            <input type="text" name="deger" id="deger"  value="<%=iletisimtipi.deger%>" class="form-control">
+          </div>
+
+          <div class="form-group">
+            <button class="btn btn-primary btn-sm">Guncelle</button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </section>
+  <!-- /.content -->
+</aside>
+
+
+<script type="text/javascript">
+  function form_validate(){
+    var name=$("#name").val().length;
+    if(name<3){
+      alert("Isim en az 3 karakter olmalı");
+      return false;
+    }
+  }
+
+</script>
