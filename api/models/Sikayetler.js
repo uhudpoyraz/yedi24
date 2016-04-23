@@ -39,9 +39,8 @@ module.exports = {
 
     durumlar: {
     collection: 'durumlar',
-    via: 'durum'
-  },
-
+    via: 'sikayetId'
+  }
   }
 };
 

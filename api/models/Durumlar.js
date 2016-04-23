@@ -44,7 +44,7 @@ module.exports = {
 
     eklentiler: {
       collection: 'eklentiler',
-      via: 'durum'
+      via: 'durumId'
     },
     durumtipi: {
       collection:'durumTipi',

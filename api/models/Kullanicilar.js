@@ -43,7 +43,7 @@ module.exports = {
 
     iletisimBilgisi: {
       collection: 'iletisim',
-      via: 'kullanici'
+      via: 'kullaniciId'
     },
     gorev: {
       model: 'yetkitipi'
@@ -51,12 +51,12 @@ module.exports = {
 
     sikayetler: {
       collection: 'sikayetler',
-      via: 'kullanici'
+      via: 'kullaniciId'
     },
 
     bloklar: {
       collection: 'blok',
-      via: 'kullanici'
+      via: 'kullaniciId'
     },
 
   }

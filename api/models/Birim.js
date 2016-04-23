@@ -14,12 +14,7 @@ module.exports = {
       autoIncrement: true,
       primaryKey: true
     },
-
-    binaId:{
-
-      type:'integer'
-
-    },
+    
 
     blokId:{
 

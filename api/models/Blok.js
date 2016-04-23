@@ -44,7 +44,7 @@ module.exports = {
     },
     birimler: {
       collection: 'birim',
-      via: 'birim'
+      via: 'blokId'
     },
   }
 };

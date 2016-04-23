@@ -23,7 +23,7 @@ module.exports = {
 
     iletisimler: {
       collection: 'iletisim',
-      via: 'Iletisimtipi'
+      via: 'iletisimTipId'
     }
 
   }
