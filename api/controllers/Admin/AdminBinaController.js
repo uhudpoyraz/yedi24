@@ -24,9 +24,22 @@ module.exports = {
    * `BinaController.save()`
    */
   save: function (req, res) {
-    return res.json({
-      todo: 'save() is not implemented yet!'
+
+    var name=req.param('name');
+    var code=req.param('code');
+    Bina.create({isim:name,kod:code}).exec(function createCB(err, created){
+      console.log('Created user with name ' + created.isim);
+            if(err) {
+              return res.json({
+                todo: 'hata olustu'
+              });
+            }
+      if (err) {
+        //Handle Error
+      }
+      return res.redirect('/admin/bina/add')
     });
+
   },
 
 
@@ -35,7 +48,15 @@ module.exports = {
    */
   list: function (req, res) {
 
-    res.view('admin/bina/list',{layout:'admin/layout'});
+    Bina.find(function(err, binalar) {
+      if (err) {return res.serverError(err);}
+
+      return res.view('admin/bina/list',{layout:'admin/layout',binalar: binalar});
+
+    });
+
+
+
 
   },
 
@@ -45,8 +66,22 @@ module.exports = {
    */
   edit: function (req, res) {
 
-    res.view('admin/bina/edit',{layout:'admin/layout'});
 
+    var id=req.param('id');
+
+    Bina.findOne({
+      id:id
+    }).exec(function (err, bina){
+        if (err) {
+          return res.negotiate(err);
+        }
+        if (!bina) {
+          return res.notFound('Could not find Finn, sorry.');
+        }
+
+
+    res.view('admin/bina/edit',{layout:'admin/layout',bina:bina});
+    });
   },
 
 
@@ -54,8 +89,31 @@ module.exports = {
    * `BinaController.update()`
    */
   update: function (req, res) {
-    return res.json({
-      todo: 'update() is not implemented yet!'
+
+
+
+      Bina.findOne(req.body.id).exec(function(error, bina) {
+      if(error) {
+        // do something with the error.
+      }
+
+      if(req.body.name) {
+
+        bina.isim = req.body.name;
+      }
+        if(req.body.code) {
+
+          bina.kod = req.body.code;
+        }
+
+        bina.save(function(error) {
+        if(error) {
+          // do something with the error.
+        } else {
+          // value saved!
+          return res.redirect('/admin/bina/edit/'+req.body.id);
+        }
+      });
     });
   },
 
@@ -67,6 +125,19 @@ module.exports = {
     return res.json({
       todo: 'show() is not implemented yet!'
     });
+  },
+
+  delete: function (req, res) {
+
+    var id=req.param('id');
+
+    Bina.destroy({id: id})
+      .exec(function(e,r){
+
+        return res.redirect('/admin/bina/');
+      });
   }
+
+
 };
 

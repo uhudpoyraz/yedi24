@@ -17,17 +17,20 @@
         <table class="table table-bordered">
           <tbody><tr>
             <th style="width: 10px">id</th>
-            <th>Magaza İsmi</th>
+            <th>Bina İsmi</th>
+            <th>Bina Kodu</th>
             <th style="width: 40px">Düzenle</th>
             <th style="width: 40px">Sil</th>
           </tr>
-
+          <% _.each(binalar, function(bina) {%>
           <tr>
-            <td>{{$a->id}}</td>
-            <td>{{$a->name}}</td>
-            <td><a href=""><span class="badge bg-green">düzenle</span></a></td>
-            <td><a onclick="return confirm('Silmek İstediğinizden Eminmisiniz ?');" href=""><span class="badge bg-red">sil</span></a></td>
+            <td><%=bina.id %></td>
+            <td><%=bina.isim%></td>
+            <td><%=bina.kod%></td>
+            <td><a href="/admin/bina/edit/<%=bina.id %>"><span class="badge bg-green">düzenle</span></a></td>
+            <td><a onclick="return confirm('Silmek İstediğinizden Eminmisiniz ?');" href="/admin/bina/delete/<%=bina.id %>"><span class="badge bg-red">sil</span></a></td>
           </tr>
+          <% }) %>
 
           </tbody></table>
       </div><!-- /.box-body -->

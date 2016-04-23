@@ -12,15 +12,16 @@
   <section class="content">
     <div class="box box" style="width: 50%;">
       <div class="box-body">
-        <form role="form" onsubmit="return form_validate();" action="" method="post">
+        <form role="form" onsubmit="return form_validate();" action="/admin/bina/update" method="post">
         <!-- text input -->
+          <input type="hidden" name="id" value="<%=bina.id%>">
         <div class="form-group">
           <label>Bina İsmi</label>
-          <input type="text" name="name" id="name" class="form-control">
+          <input type="text" name="name" id="name"  value="<%=bina.isim%>" class="form-control">
         </div>
           <div class="form-group">
             <label>Bina Kodu</label>
-            <input type="text" name="code" id="code" class="form-control">
+            <input type="text" name="code" id="code" value="<%=bina.kod%>" class="form-control">
           </div>
         <div class="form-group">
           <button class="btn btn-primary btn-sm">Duzenle</button>
