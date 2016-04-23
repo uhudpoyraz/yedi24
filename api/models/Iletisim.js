@@ -15,27 +15,16 @@ module.exports = {
       primaryKey: true
     },
 
-    kullaniciId:{
-
-      type:'integer'
-
-    },
-
-    iletisimTipId:{
-
-      type:'integer'
-
-    },
-
     deger:{
 
       type:'string'
 
     },
-    kullanici: {
+    kullaniciId: {
       model: 'kullanicilar'
     },
-    Iletisimtipi: {
+
+    iletisimTipId: {
       model: 'iletisimtipi'
     },
 

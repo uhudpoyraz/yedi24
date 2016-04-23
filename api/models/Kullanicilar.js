@@ -28,13 +28,6 @@ module.exports = {
     sifre: {type: 'string'},
 
 
-
-    gorevId: {
-
-      type: 'integer',
-      size: 2
-    },
-
     hesapDurum: {
 
       type: 'boolean'
@@ -45,7 +38,10 @@ module.exports = {
       collection: 'iletisim',
       via: 'kullaniciId'
     },
-    gorev: {
+    
+    
+    
+    gorevId: {
       model: 'yetkitipi'
     },
 

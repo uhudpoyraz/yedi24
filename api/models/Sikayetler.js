@@ -15,11 +15,6 @@ module.exports = {
       primaryKey: true
     },
 
-    kullaniciId:{
-
-      type:'integer'
-
-    },
 
     aciklama:{
 
@@ -33,7 +28,7 @@ module.exports = {
 
     },
 
-    kullanici: {
+    kullaniciId: {
       model: 'kullanicilar'
     },
 

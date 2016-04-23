@@ -16,13 +16,7 @@ module.exports = {
     },
     
 
-    blokId:{
-
-      type:'integer'
-
-    },
-
-    isim:{
+     isim:{
 
       type:'string'
 
@@ -33,7 +27,7 @@ module.exports = {
       type:'string'
 
     },
-    birim: {
+    blokId: {
       model: 'blok'
     },
   }

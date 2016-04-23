@@ -20,19 +20,14 @@ module.exports = {
       type:'integer'
 
     },
-
-    durumId:{
-
-      type:'integer'
-
-    },
+ 
 
     dosyaAdi:{
 
       type:'string'
 
     },
-    durum: {
+    durumId: {
       model: 'durumlar'
     },
   }

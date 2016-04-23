@@ -15,11 +15,7 @@ module.exports = {
       primaryKey: true
     },
 
-    sikayetId:{
 
-      type:'integer'
-
-    },
     sikayetIlgiliId:{
 
       type:'integer'
@@ -38,7 +34,7 @@ module.exports = {
 
     }
     ,
-    durum: {
+    sikayetId: {
       model: 'sikayetler'
     },
 

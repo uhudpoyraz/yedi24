@@ -15,18 +15,6 @@ module.exports = {
       primaryKey: true
     },
 
-    kullaniciId:{
-
-      type:'integer'
-
-    },
-
-    binaId:{
-
-      type:'integer'
-
-    },
-
     isim:{
 
       type:'string'
@@ -36,11 +24,11 @@ module.exports = {
       type:'string'
 
     },
-    kullanici: {
+    kullaniciId: {
       model: 'kullanicilar'
     },
-    bina: {
-      model: 'bina'
+    binaId: {
+      model: 'Bina'
     },
     birimler: {
       collection: 'birim',
