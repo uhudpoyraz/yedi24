@@ -39,9 +39,9 @@ module.exports.routes = {
   },
 
   '/admin': {
-    view: 'admin/index/admin',
+    view: 'admin/index/homepage',
     locals: {
-      layout: 'adminlayout'
+      layout: 'admin/layout'
     }
   },
 
@@ -83,6 +83,7 @@ module.exports.routes = {
   'get /admin/ayar':'Admin/AdminSiteAyarController.list',
   'get /admin/ayar/edit/:id':'Admin/AdminSiteAyarController.edit',
   'post /admin/ayar/update':'Admin/AdminSiteAyarController.update',
+  'get /admin/ayar/delete/:id':'Admin/AdminSiteAyarController.delete',
 
   /***************************************************************************
   *                                                                          *

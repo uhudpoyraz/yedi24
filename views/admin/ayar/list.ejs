@@ -2,7 +2,7 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      Bina Listesi
+      Ayar Listesi
 
     </h1>
 
@@ -22,14 +22,15 @@
             <th style="width: 40px">Düzenle</th>
             <th style="width: 40px">Sil</th>
           </tr>
-
+          <% _.each(parametreler, function(parametre) {%>
           <tr>
-            <td>{{$a->id}}</td>
-            <td>{{$a->name}}</td>
-            <td>{{$a->deger}}</td>
-            <td><a href=""><span class="badge bg-green">düzenle</span></a></td>
-            <td><a onclick="return confirm('Silmek İstediğinizden Eminmisiniz ?');" href=""><span class="badge bg-red">sil</span></a></td>
+            <td><%=parametre.id %></td>
+            <td><%=parametre.isim%></td>
+            <td><%=parametre.deger%></td>
+            <td><a href="/admin/ayar/edit/<%=parametre.id %>"><span class="badge bg-green">düzenle</span></a></td>
+            <td><a onclick="return confirm('Silmek İstediğinizden Eminmisiniz ?');" href="/admin/ayar/delete/<%=parametre.id %>"><span class="badge bg-red">sil</span></a></td>
           </tr>
+          <% }) %>
 
           </tbody></table>
       </div><!-- /.box-body -->
