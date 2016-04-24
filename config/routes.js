@@ -63,14 +63,15 @@ module.exports.routes = {
   'get /admin/blok/edit/:id':'Admin/AdminBlokController.edit',
   'post /admin/blok/update':'Admin/AdminBlokController.update',
   'get /admin/blok/delete/:id':'Admin/AdminBlokController.delete',
-  
+
   /*Birim*/
   'get /admin/birim/add':'Admin/AdminBirimController.add',
   'post /admin/birim/save':'Admin/AdminBirimController.save',
   'get /admin/birim':'Admin/AdminBirimController.list',
   'get /admin/birim/edit/:id':'Admin/AdminBirimController.edit',
   'post /admin/birim/update':'Admin/AdminBirimController.update',
-
+  'get /admin/birim/delete/:id':'Admin/AdminBirimController.delete',
+  
   /*IletisimTip*/
   'get /admin/iletisimtipi/add':'Admin/AdminIletisimTipiController.add',
   'post /admin/iletisimtipi/save':'Admin/AdminIletisimTipiController.save',
@@ -104,7 +105,7 @@ module.exports.routes = {
   'post /admin/yetkitipi/update':'Admin/AdminYetkiTipleriController.update',
   'get /admin/yetkitipi/delete/:id':'Admin/AdminYetkiTipleriController.delete',
 
- 
+
   /*Karaliste*/
   'get /admin/karaliste/add':'Admin/AdminKaralisteController.add',
   'post /admin/karaliste/save':'Admin/AdminKaralisteController.save',

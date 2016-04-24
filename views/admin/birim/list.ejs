@@ -2,7 +2,7 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      Bina Listesi
+      Birim Listesi
 
     </h1>
 
@@ -17,17 +17,23 @@
         <table class="table table-bordered">
           <tbody><tr>
             <th style="width: 10px">id</th>
-            <th>Magaza İsmi</th>
+            <th>Birim İsmi</th>
+            <th>Birim Kodu</th>
+            <th>Blok İsmi</th>
             <th style="width: 40px">Düzenle</th>
             <th style="width: 40px">Sil</th>
           </tr>
+          <% _.each(birimler, function(birim) {%>
 
           <tr>
-            <td>{{$a->id}}</td>
-            <td>{{$a->name}}</td>
-            <td><a href=""><span class="badge bg-green">düzenle</span></a></td>
-            <td><a onclick="return confirm('Silmek İstediğinizden Eminmisiniz ?');" href=""><span class="badge bg-red">sil</span></a></td>
+            <td><%=birim.id%></td>
+            <td><%=birim.isim%></td>
+            <td><%=birim.kod%></td>
+            <td><%=birim.blokId.isim%></td>
+            <td><a href="/admin/birim/edit/<%=birim.id %>"><span class="badge bg-green">düzenle</span></a></td>
+            <td><a onclick="return confirm('Silmek İstediğinizden Eminmisiniz ?');" href="/admin/birim/delete/<%=birim.id %>"><span class="badge bg-red">sil</span></a></td>
           </tr>
+          <% }) %>
 
           </tbody></table>
       </div><!-- /.box-body -->
