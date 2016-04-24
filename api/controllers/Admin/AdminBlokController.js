@@ -37,8 +37,7 @@ module.exports = {
    */
   save: function (req, res) {
 
-   // var kullaniciId=req.param('kullaniciid');
-    var kullaniciId=1;
+    var kullaniciId=req.param('kullaniciid');
     var binaId=req.param('binaid');
     var name=req.param('name');
     var code=req.param('code');
