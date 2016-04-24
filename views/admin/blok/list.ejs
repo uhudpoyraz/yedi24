@@ -17,17 +17,23 @@
         <table class="table table-bordered">
           <tbody><tr>
             <th style="width: 10px">id</th>
-            <th>Magaza İsmi</th>
+            <th>Blok İsmi</th>
+            <th>Blok Kodu</th>
+            <th>Bina İsmi</th>
             <th style="width: 40px">Düzenle</th>
             <th style="width: 40px">Sil</th>
           </tr>
+          <% _.each(bloklar, function(blok) {%>
 
           <tr>
-            <td>{{$a->id}}</td>
-            <td>{{$a->name}}</td>
-            <td><a href=""><span class="badge bg-green">düzenle</span></a></td>
-            <td><a onclick="return confirm('Silmek İstediğinizden Eminmisiniz ?');" href=""><span class="badge bg-red">sil</span></a></td>
+            <td><%=blok.id%></td>
+            <td><%=blok.isim%></td>
+            <td><%=blok.kod%></td>
+            <td><%=blok.binaId.isim%></td>
+            <td><a href="/admin/blok/edit/<%=blok.id %>"><span class="badge bg-green">düzenle</span></a></td>
+            <td><a onclick="return confirm('Silmek İstediğinizden Eminmisiniz ?');" href="/admin/blok/delete/<%=blok.id %>"><span class="badge bg-red">sil</span></a></td>
           </tr>
+          <% }) %>
 
           </tbody></table>
       </div><!-- /.box-body -->

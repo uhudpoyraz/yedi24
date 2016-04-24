@@ -62,7 +62,8 @@ module.exports.routes = {
   'get /admin/blok':'Admin/AdminBlokController.list',
   'get /admin/blok/edit/:id':'Admin/AdminBlokController.edit',
   'post /admin/blok/update':'Admin/AdminBlokController.update',
-
+  'get /admin/blok/delete/:id':'Admin/AdminBlokController.delete',
+  
   /*Birim*/
   'get /admin/birim/add':'Admin/AdminBirimController.add',
   'post /admin/birim/save':'Admin/AdminBirimController.save',
@@ -95,7 +96,7 @@ module.exports.routes = {
   'get /admin/sikayetdurumtipi/delete/:id':'Admin/AdminSikayetDurumTipiController.delete',
 
 
-  /*Yetkilendirme*/
+  /*YetkiTipi*/
   'get /admin/yetkitipi/add':'Admin/AdminYetkiTipleriController.add',
   'post /admin/yetkitipi/save':'Admin/AdminYetkiTipleriController.save',
   'get /admin/yetkitipi':'Admin/AdminYetkiTipleriController.list',
