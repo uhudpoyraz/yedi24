@@ -20,6 +20,11 @@ module.exports = {
       type:'string'
 
     },
+    surec:{
+      
+      type:'integer'
+      
+    },
 
     durumtipi:{
       model:'durumlar',
