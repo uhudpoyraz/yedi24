@@ -114,7 +114,13 @@ module.exports.routes = {
   'post /admin/karaliste/update':'Admin/AdminKaralisteController.update',
   'get /admin/karaliste/delete/:id':'Admin/AdminKaralisteController.delete',
 
-
+  /*İletişim*/
+  'get /admin/iletisim/add':'Admin/AdminIletisimController.add',
+  'post /admin/iletisim/save':'Admin/AdminIletisimController.save',
+  'get /admin/iletisim':'Admin/AdminIletisimController.list',
+  'get /admin/iletisim/edit/:id':'Admin/AdminIletisimController.edit',
+  'post /admin/iletisim/update':'Admin/AdminIletisimController.update',
+  'get /admin/iletisim/delete/:id':'Admin/AdminIletisimController.delete',
   /***************************************************************************
   *                                                                          *
   * Custom routes here...                                                    *
