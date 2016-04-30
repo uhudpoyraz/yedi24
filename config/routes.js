@@ -55,7 +55,7 @@ module.exports.routes = {
   'post /admin/bina/update':'Admin/AdminBinaController.update',
   'get /admin/bina/delete/:id':'Admin/AdminBinaController.delete',
 
-
+  
   /*Blok*/
   'get /admin/blok/add':'Admin/AdminBlokController.add',
   'post /admin/blok/save':'Admin/AdminBlokController.save',

@@ -10,6 +10,7 @@
  */
 module.exports.globals = {
 
+  customRoutes : {'blokEkle': '/admin/blok/add'}
   /****************************************************************************
   *                                                                           *
   * Expose the lodash installed in Sails core as a global variable. If this   *
