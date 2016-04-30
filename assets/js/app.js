@@ -46,4 +46,40 @@ $(function(){
     return false;
   });
 
+  $('#confirmsignup').click(function(){
+
+    var name= $('#registerName').val();
+    var surname=$('#registerSurname').val();
+    var email=$('#registerEmail').val();
+    var password = $('#registerePassword').val();
+    var reEnterPassword = $('#registereReEnterPassword').val();
+    /* Ajax Baslasin */
+
+    if(password!=reEnterPassword){
+
+      alert("Şifreler Uyuşmamaktadır.");
+
+      return false;
+    }
+
+    $.ajax({
+      type:'GET',
+      data:'name='+name+'&surname='+surname+'&email='+email+'&password='+password,
+      dataType:'json',
+      url:'/ajax/user/register/',
+      success: function(data ) {
+
+        if(data.succes==true){
+
+          alert(data.message);
+        }else {
+
+          alert(data.message);
+        }
+      }
+    });
+    return false;
+  });
+
+
 });

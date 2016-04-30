@@ -60,6 +60,7 @@ module.exports = {
    */
   birimList: function (req, res) {
 
+
     var blokId = req.param('blokid');
     console.log("blokId" + blokId);
     Birim.find({blokId: blokId}).exec(function (err, birimByBlok) {
@@ -71,4 +72,25 @@ module.exports = {
 
     });
   },
+
+  userRegister:function (req,res) {1
+
+    var name= req.param("name");
+    var surname=req.param("surname");
+    var email=req.param("email");
+    var password=req.param("password");
+
+    Kullanicilar.create({isim: name, soyIsim: surname, email:email, sifre:password, hesapDurum: 0, gorevId:0}).exec(function createCB(err, created){
+      console.log('Created email with name ' + created.email);
+      if(err) {
+        return res.json({succes:false,message:'Sorun Oluştur.'});
+      }
+      return res.json({succes:true,message:'Kayit Başarıyla Tamamlanmıştır.'});
+
+    });
+
+
+
+  }
+
 }

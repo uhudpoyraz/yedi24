@@ -165,7 +165,9 @@
                             <fieldset>
                                 <!-- Sign In Form -->
                                 <!-- Text input-->
-                                <div class="control-group">
+
+
+                              <div class="control-group">
                                     <label class="control-label" for="signinEmail">Email:</label>
                                     <div class="controls">
                                         <input required="" id="signinEmail" name="email" type="text"
@@ -210,10 +212,30 @@
                             <fieldset>
                                 <!-- Sign Up Form -->
                                 <!-- Text input-->
-                                <div class="control-group">
+
+
+                              <div class="control-group">
+                                <label class="control-label" for="name">İsim:</label>
+                                <div class="controls">
+                                  <input id="registerName"  name="registername" type="text" class="form-control" placeholder="İsminiz" class="input-medium"
+                                          required="">
+                                </div>
+                              </div>
+
+                              <div class="control-group">
+                                <label class="control-label" for="signinEmail">Soyadınız:</label>
+                                <div class="controls">
+                                  <input id="registerSurname" name="surname" type="text" class="form-control" placeholder="Soyadınız" class="input-medium"
+                                          required="">
+                                </div>
+                              </div>
+
+
+
+                              <div class="control-group">
                                     <label class="control-label" for="Email">Email:</label>
                                     <div class="controls">
-                                        <input id="Email" name="Email" class="form-control" type="text"
+                                        <input id="registerEmail" name="registeremail" class="form-control" type="text"
                                                placeholder="email adresiniz" class="input-large" required="">
                                     </div>
                                 </div>
@@ -222,7 +244,7 @@
                                 <div class="control-group">
                                     <label class="control-label" for="password">Şifre:</label>
                                     <div class="controls">
-                                        <input id="password" name="password" class="form-control" type="password"
+                                        <input id="registerePassword" name="registerepassword" class="form-control" type="password"
                                                placeholder="********" class="input-large" required="">
                                         <em>1-8 Karakter</em>
                                     </div>
@@ -232,7 +254,7 @@
                                 <div class="control-group">
                                     <label class="control-label" for="reenterpassword">Şifre Tekrar:</label>
                                     <div class="controls">
-                                        <input id="reenterpassword" class="form-control" name="reenterpassword"
+                                        <input id="registereReEnterPassword" class="form-control" name="registerereenterpassword"
                                                type="password" placeholder="********" class="input-large" required="">
                                     </div>
                                 </div>
