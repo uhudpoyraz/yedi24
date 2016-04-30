@@ -30,8 +30,9 @@ module.exports = {
       console.log('Created email with name ' + created.email);
             if(err) {
               return res.json({
-                err
-              });
+                
+                
+               });
             }
       if (err) {
         //Handle Error
@@ -100,7 +101,7 @@ module.exports = {
 		if(req.body.duty) {
 			kayıt.gorevId = req.body.duty;
 		}
-        
+
         kayıt.save(function(error) {
         if(error) {
           // do something with the error.

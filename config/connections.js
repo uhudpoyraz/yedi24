@@ -77,7 +77,7 @@ module.exports.connections = {
    localPostgresqlServer: {
     adapter: 'sails-postgresql',
      host: 'localhost',
-     user: 'postgres', // optional
+     user: 'root', // optional
      password: '123456', // optional
     database: 'yedi24' //optional
    }

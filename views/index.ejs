@@ -50,30 +50,27 @@
                     <div class="panel-body">
                         <form role="form">
                             <div class="form-group">
-                                <label for="sel1">Seçim alanı 1:</label>
-                                <select class="form-control" id="sel1">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
+                                <label for="sel1">Binalar:</label>
+                              <label id="sonuc" for="sel1">Binalar:</label>
+                              <select class="form-control" name="binaid" id="binaId">
+                                <option value="0">Seçiniz</option>
+
+                                <% _.each(binalar, function(bina) {%>
+                                <option value="<%=bina.id%>"><%=bina.isim%></option>
+                                <% }) %>
+
+                              </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="sel1">Blok:</label>
+                                <select class="form-control" name="blokid" id="blokId">
+                                  <option value="0">Seçiniz</option>
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="sel1">Seçim alanı 2:</label>
-                                <select class="form-control" id="sel2">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="sel1">Seçim alanı 3:</label>
-                                <select class="form-control" id="sel3">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
+                                <label for="sel1">Mekan: </label>
+                                <select class="form-control" name="birimid" id="birimId">
+                                  <option value="0">Seçiniz</option>
                                 </select>
                             </div>
                         </form>

@@ -31,9 +31,10 @@ module.exports.routes = {
   * `assets` directory)                                                      *
   *                                                                          *
   ***************************************************************************/
-   '/': {
-    view: 'index'
-  },
+  'get /':'AnasayfaController.index',
+
+  'get /ajax/bloklist/':'AnasayfaController.blokList',
+  'get /ajax/birimlist/':'AnasayfaController.birimList',
 
   '/admin': {
     view: 'admin/index/homepage',
@@ -52,7 +53,7 @@ module.exports.routes = {
   'post /admin/bina/update':'Admin/AdminBinaController.update',
   'get /admin/bina/delete/:id':'Admin/AdminBinaController.delete',
 
-  
+
   /*Blok*/
   'get /admin/blok/add':'Admin/AdminBlokController.add',
   'post /admin/blok/save':'Admin/AdminBlokController.save',
@@ -68,7 +69,7 @@ module.exports.routes = {
   'get /admin/birim/edit/:id':'Admin/AdminBirimController.edit',
   'post /admin/birim/update':'Admin/AdminBirimController.update',
   'get /admin/birim/delete/:id':'Admin/AdminBirimController.delete',
-  
+
   /*IletisimTip*/
   'get /admin/iletisimtipi/add':'Admin/AdminIletisimTipiController.add',
   'post /admin/iletisimtipi/save':'Admin/AdminIletisimTipiController.save',
