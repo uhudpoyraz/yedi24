@@ -14,15 +14,14 @@
       <div class="box-body">
         <form role="form"  action="admin/iletisimtipi/update" method="post">
           <!-- text input -->
-          <input type="hidden" name="id" value="<%=iletisimtipi.id%>" >
-          <div class="form-group">
-            <label>İletisim Tipi</label>
-            <input type="text" name="deger" id="deger"  value="<%=iletisimtipi.deger%>" class="form-control">
-          </div>
-
-          <div class="form-group">
-            <button class="btn btn-primary btn-sm">Guncelle</button>
-          </div>
+        <input type="hidden" name="id" value="<%=iletisimtipi.id%>" >
+        <div class="form-group">
+          <label>İletisim Değer</label>
+          <input type="text" name="deger" id="deger" class="form-control">
+        </div>
+        <div class="form-group">
+          <button class="btn btn-primary btn-sm">Ekle</button>
+        </div>
 
         </form>
       </div>

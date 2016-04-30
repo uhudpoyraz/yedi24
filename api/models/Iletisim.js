@@ -15,11 +15,6 @@ module.exports = {
       primaryKey: true
     },
 
-    deger:{
-
-      type:'string'
-
-    },
     kullaniciId: {
       model: 'kullanicilar'
     },
@@ -28,6 +23,11 @@ module.exports = {
       model: 'iletisimtipi'
     },
 
+    deger:{
+
+      type:'string'
+
+    },
   }
 };
 

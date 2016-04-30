@@ -16,7 +16,6 @@ module.exports = {
     },
     isim: {type: 'string'},
 
-
     soyIsim: {
 
       type: 'string',
@@ -34,15 +33,13 @@ module.exports = {
 
     },
 
+    gorevId: {
+      model: 'yetkitipi'
+    },
+
     iletisimBilgisi: {
       collection: 'iletisim',
       via: 'kullaniciId'
-    },
-    
-    
-    
-    gorevId: {
-      model: 'yetkitipi'
     },
 
     sikayetler: {
@@ -54,7 +51,6 @@ module.exports = {
       collection: 'blok',
       via: 'kullaniciId'
     },
-
   }
 };
 
