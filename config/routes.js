@@ -31,9 +31,6 @@ module.exports.routes = {
   * `assets` directory)                                                      *
   *                                                                          *
   ***************************************************************************/
-
-
-
    '/': {
     view: 'index'
   },
@@ -121,6 +118,14 @@ module.exports.routes = {
   'get /admin/iletisim/edit/:id':'Admin/AdminIletisimController.edit',
   'post /admin/iletisim/update':'Admin/AdminIletisimController.update',
   'get /admin/iletisim/delete/:id':'Admin/AdminIletisimController.delete',
+
+  /*Kullanici*/
+  'get /admin/kullanici/add':'Admin/AdminKullaniciController.add',
+  'post /admin/kullanici/save':'Admin/AdminKullaniciController.save',
+  'get /admin/kullanici':'Admin/AdminKullaniciController.list',
+  'get /admin/kullanici/edit/:id':'Admin/AdminKullaniciController.edit',
+  'post /admin/kullanici/update':'Admin/AdminKullaniciController.update',
+  'get /admin/kullanici/delete/:id':'Admin/AdminKullaniciController.delete',
   /***************************************************************************
   *                                                                          *
   * Custom routes here...                                                    *
@@ -130,5 +135,4 @@ module.exports.routes = {
   * for configuration options and examples.                                  *
   *                                                                          *
   ***************************************************************************/
-
 };

@@ -1,0 +1,51 @@
+<aside class="right-side">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      Kullanıcılar
+    </h1>
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+
+    <div class="box">
+
+      <div class="box-body">
+        <table class="table table-bordered">
+          <tbody><tr>
+            <th style="width: 10px">id</th>
+            <th>İsim</th>
+            <th>Soyisim</th>
+            <th>Email</th>
+            <th>Şifre</th>
+            <th>Durum</th>
+            <th>GörevId</th>
+            <th style="width: 40px">Düzenle</th>
+            <th style="width: 40px">Sil</th>
+          </tr>
+          <% _.each(kullanicilar, function(kullanici) {%>
+          <tr>
+            <td><%=kullanici.id %></td>
+            <th><%=kullanici.isim%></th>
+            <th><%=kullanici.soyIsim%></th>
+            <th><%=kullanici.email%></th>
+            <th><%=kullanici.sifre%></th>
+            <th><%=kullanici.hesapDurum%></th>
+            <th><%=kullanici.gorevId%></th>
+            <td><a href="/admin/kullanici/edit/<%=kullanici.id %>"><span class="badge bg-green">düzenle</span></a></td>
+            <td><a onclick="return confirm('Silmek İstediğinizden Eminmisiniz ?');" href="/admin/kullanici/delete/<%=kullanici.id %>"><span class="badge bg-red">sil</span></a></td>
+          </tr>
+          <% }) %>
+
+          </tbody></table>
+      </div><!-- /.box-body -->
+      <div class="box-footer clearfix ">
+        <div class="pagination-sm no-margin pull-right">
+
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- /.content -->
+</aside>
