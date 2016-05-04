@@ -9,7 +9,7 @@ module.exports = {
 
 
   index: function (req, res) {
-  
+
     var binalar = Bina.find(function (err, binalar) {
       if (err) {
         return res.serverError(err);
@@ -79,8 +79,10 @@ module.exports = {
     var surname=req.param("surname");
     var email=req.param("email");
     var password=req.param("password");
+    var crypto = require('crypto');
+    var passwordHash= crypto.createHash('sha1').update(password).digest('hex');
 
-    Kullanicilar.create({isim: name, soyIsim: surname, email:email, sifre:password, hesapDurum: 0, gorevId:0}).exec(function createCB(err, created){
+    Kullanicilar.create({isim: name, soyIsim: surname, email:email, sifre:passwordHash, hesapDurum: 0, gorevId:0}).exec(function createCB(err, created){
       console.log('Created email with name ' + created.email);
       if(err) {
         return res.json({succes:false,message:'Sorun Oluştur.'});
