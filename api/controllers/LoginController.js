@@ -25,9 +25,21 @@ module.exports = {
         var crypto = require('crypto');
         var hash = crypto.createHash('sha1').update(password).digest('hex');
 
+
+
         if (kullanici.sifre == hash) {
-          req.session.kullaniciDetay =kullanici;
-          return res.json({"success": true,message:"Giriş Başarılı."});
+            if(kullanici.hesapDurum==1){
+
+              req.session.kullaniciDetay =kullanici;
+              return res.json({"success": true,message:"Giriş Başarılı."});
+            }else{
+
+              return res.json({"success": false,message:"Hesabınız onaylanmamıstır.Lütfen Hesabınızı onaylayınız."});
+
+
+            }
+
+
         } else {
           return res.json({"success": false,message:"Şifre veya Email Hatalı."});
 

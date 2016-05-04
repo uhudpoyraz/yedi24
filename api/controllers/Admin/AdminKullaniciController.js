@@ -25,6 +25,7 @@ module.exports = {
     var password = req.param('password');
     var status = req.param('status');
     var duty = req.param('duty');
+
     var crypto = require('crypto');
     var passwordHash= crypto.createHash('sha1').update(password).digest('hex');
 
