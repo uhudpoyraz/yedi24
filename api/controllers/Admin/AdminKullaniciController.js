@@ -25,13 +25,15 @@ module.exports = {
     var password = req.param('password');
     var status = req.param('status');
     var duty = req.param('duty');
+    var crypto = require('crypto');
+    var passwordHash= crypto.createHash('sha1').update(password).digest('hex');
 
-    Kullanicilar.create({isim: name, soyIsim: surname, email:email, sifre:password, hesapDurum: status, gorevId:duty}).exec(function createCB(err, created){
+    Kullanicilar.create({isim: name, soyIsim: surname, email:email, sifre:passwordHash, hesapDurum: status, gorevId:duty}).exec(function createCB(err, created){
       console.log('Created email with name ' + created.email);
             if(err) {
               return res.json({
-                
-                
+
+
                });
             }
       if (err) {

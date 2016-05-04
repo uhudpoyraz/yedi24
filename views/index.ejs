@@ -11,14 +11,16 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Yedi24</a>
+                    <a class="navbar-brand" href="/">Yedi24</a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="#">Şikayet Listesi <span class="sr-only">(current)</span></a></li>
-                        <li class="dropdown">
+                      <% if (session.kullaniciDetay!=null) {%>
+
+                      <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                aria-haspopup="true" aria-expanded="false">Aktif Şikayetler <span
                                     class="caret"></span></a>
@@ -28,12 +30,15 @@
                             </ul>
                         </li>
                         <li><a href="#">Profilim</a></li>
-                    </ul>
+                      <% } %>
+                      </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="#">Yeni Şikayet</a>
-                        <li><a href="#signup" data-toggle="modal" data-target=".bs-modal-sm">Kayit Ol/Giriş Yap</a>
 
-                        </li>
+                        <li><% if (session.kullaniciDetay==null) {%><a href="#signup" data-toggle="modal" data-target=".bs-modal-sm"> Kayit Ol/Giriş Yap  </a>  </li> <% } else {%>
+                         <li><a href="/logout">Çıkış Yap</a>
+
+                      <%}%>
 
                     </ul>
 

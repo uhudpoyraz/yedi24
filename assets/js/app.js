@@ -82,4 +82,33 @@ $(function(){
   });
 
 
+  $('#signin').click(function(){
+
+
+    var email=$('#signinEmail').val();
+    var password = $('#passwordinput').val();
+
+    $.ajax({
+      type:'GET',
+      data:'email='+email+'&password='+password,
+      dataType:'json',
+      url:'/ajax/dologin/',
+      success: function(data ) {
+
+        if(data.success==true){
+
+
+          location.reload();
+        }else {
+
+          alert(data.message);
+
+        }
+      }
+    });
+    return false;
+  });
+
+
+
 });

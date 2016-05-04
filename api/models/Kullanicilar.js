@@ -5,6 +5,7 @@
  * @docs        :: http://sailsjs.org/documentation/concepts/models-and-orm/models
  */
 
+var bcrypt = require('bcrypt');
 module.exports = {
 
   attributes: {
@@ -50,7 +51,9 @@ module.exports = {
     bloklar: {
       collection: 'blok',
       via: 'kullaniciId'
-    },
+    }
   }
+
+
 };
 

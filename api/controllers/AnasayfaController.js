@@ -9,7 +9,7 @@ module.exports = {
 
 
   index: function (req, res) {
-
+  
     var binalar = Bina.find(function (err, binalar) {
       if (err) {
         return res.serverError(err);

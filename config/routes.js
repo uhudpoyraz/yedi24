@@ -36,7 +36,8 @@ module.exports.routes = {
   'get /ajax/bloklist/':'AnasayfaController.blokList',
   'get /ajax/birimlist/':'AnasayfaController.birimList',
   'get /ajax/user/register/':'AnasayfaController.userRegister',
-
+  'get /ajax/dologin/':'LoginController.doLogin',
+  'get /logout':'LoginController.logout',
 
 
   '/admin': {
