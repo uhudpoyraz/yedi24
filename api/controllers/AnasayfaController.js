@@ -10,14 +10,17 @@ module.exports = {
 
   index: function (req, res) {
 
-    var binalar = Bina.find(function (err, binalar) {
-      if (err) {
-        return res.serverError(err);
-      }
+        Bina.find(function (err, binalar) {
+          if (err) {
+            return res.serverError(err);
+          }
 
-      return res.view("index", {binalar: binalar});
 
-    });
+          res.view("index", {binalar: binalar});
+
+        });
+
+
 
   },
 
@@ -73,7 +76,7 @@ module.exports = {
     });
   },
 
-  userRegister:function (req,res) {1
+  userRegister:function (req,res) {
 
     var name= req.param("name");
     var surname=req.param("surname");
@@ -90,9 +93,55 @@ module.exports = {
       return res.json({succes:true,message:'Kayit Başarıyla Tamamlanmıştır.'});
 
     });
+  },
 
 
+  sikayetKayit:function (req,res) {
 
+    var complainSubject= req.param("complainSubject");
+    var complainContent=req.param("complainContent");
+    var birimId=req.param("birimId");
+
+    if(req.session.kullaniciDetay!=null){
+      var kullaniciId=req.session.kullaniciDetay.id;
+    }else {
+      var kullaniciId=1;
+
+    }
+    Sikayetler.create({aciklama: complainContent,birimId:birimId,kullaniciId:kullaniciId }).exec(function createCB(err, created){
+      console.log('Created sikayet with birimId ' + created.birimId);
+      if(err) {
+        return res.json({succes:false,message:'Sorun Oluştur.'});
+      }
+      return res.json({succes:true,message:'Kayit Başarıyla Tamamlanmıştır.'});
+
+    });
+  },
+
+
+  sikayetListesi:function (req,res) {
+
+    //burada nested ilislileri çekmek gerekcek ayrıca bina blok ve birim e gore where sartı koyulması gerekiyor
+
+    var limit=req.param("limit");
+    var offset=req.param("offset");
+    var binaId=req.param("binaId");
+    var birimId=req.param("birimId");
+    var blokId=req.param("blokId");
+
+    Sikayetler.find({skip:offset,limit:limit}).populate("birimId").exec(function(err, sikayetler) {
+
+        if (err) {return res.serverError(err);}
+
+
+      Sikayetler.count().exec(function countCB(error, found) {
+        return res.json({"total":found,"rows":sikayetler});
+
+
+      });
+
+      });
   }
 
-}
+
+};

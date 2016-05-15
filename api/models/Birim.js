@@ -14,7 +14,7 @@ module.exports = {
       autoIncrement: true,
       primaryKey: true
     },
-    
+
 
      isim:{
 
@@ -30,6 +30,11 @@ module.exports = {
     blokId: {
       model: 'blok'
     },
+
+    sikayetler: {
+      collection: 'sikayetler',
+      via: 'birimId'
+    }
   }
 };
 

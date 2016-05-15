@@ -24,7 +24,7 @@ module.exports = {
 
     birimId:{
 
-      type:'integer'
+      model: 'Birim'
 
     },
 

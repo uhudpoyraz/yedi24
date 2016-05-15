@@ -33,7 +33,7 @@
                       <% } %>
                       </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#">Yeni Şikayet</a>
+                        <li><a href="#" data-toggle="modal" data-target="#yenisikayet">Yeni Şikayet</a>
 
                         <li><% if (session.kullaniciDetay==null) {%><a href="#signup" data-toggle="modal" data-target=".bs-modal-sm"> Kayit Ol/Giriş Yap  </a>  </li> <% } else {%>
                          <li><a href="/logout">Çıkış Yap</a>
@@ -51,11 +51,11 @@
 
         <div class="row">
             <div class="col-md-12">
-                <div class="panel panel-default">
+                <div class="panel panel-default"  id="toolbar">
                     <div class="panel-body">
                         <form role="form">
                             <div class="form-group">
-                                <label for="sel1">Binalar:</label>
+
                               <label id="sonuc" for="sel1">Binalar:</label>
                               <select class="form-control" name="binaid" id="binaId">
                                 <option value="0">Seçiniz</option>
@@ -86,60 +86,34 @@
             </div>
         </div>
         <div class="row">
+
+
             <div class="col-md-12">
-                <table data-toggle="table">
+              <div id="toolbar1">
+                <div class="form-inline" role="form">
+                  <button id="kayitlistele" type="submit" class="btn btn-default">Kayitları Listele</button>
+                </div>
+
+
+              </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+
+                <table id="sikayetTable" >
                     <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Stars</th>
-                        <th>Forks</th>
-                        <th>Description</th>
+                        <th data-field="id">Bina</th>
+                        <th data-field="id">Blok</th>
+                        <th data-field="birimId.isim">Birim</th>
+                        <th data-field="aciklama">Aciklama</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr id="tr-id-1" class="tr-class-1">
-                        <td id="td-id-1" class="td-class-1">
-                            <a href="https://github.com/wenzhixin/bootstrap-table">bootstrap-table</a>
-                        </td>
-                        <td>526</td>
-                        <td>122</td>
-                        <td>An extended Bootstrap table with radio, checkbox, sort, pagination, and other added
-                            features. (supports twitter bootstrap v2 and v3)
-                        </td>
-                    </tr>
-                    <tr id="tr-id-2" class="tr-class-2">
-                        <td id="td-id-2" class="td-class-2">
-                            <a href="https://github.com/wenzhixin/multiple-select">multiple-select</a>
-                        </td>
-                        <td>288</td>
-                        <td>150</td>
-                        <td>A jQuery plugin to select multiple elements with checkboxes :)
-                        </td>
-                    </tr>
-                    <tr id="tr-id-3" class="tr-class-3">
-                        <td id="td-id-3" class="td-class-3">
-                            <a href="https://github.com/wenzhixin/bootstrap-show-password">bootstrap-show-password</a>
-                        </td>
-                        <td>32</td>
-                        <td>11</td>
-                        <td>Show/hide password plugin for twitter bootstrap.
-                        </td>
-                    </tr>
-                    <tr id="tr-id-4" class="tr-class-4">
-                        <td id="td-id-4" class="td-class-4">
-                            <a href="https://github.com/wenzhixin/blog">blog</a>
-                        </td>
-                        <td>13</td>
-                        <td>4</td>
-                        <td>my blog</td>
-                    </tr>
-                    <tr id="tr-id-5" class="tr-class-5">
-                        <td id="td-id-5" class="td-class-5">
-                            <a href="https://github.com/wenzhixin/scutech-redmine">scutech-redmine</a>
-                        <td>6</td>
-                        <td>3</td>
-                        <td>Redmine notification tools for chrome extension.</td>
-                    </tr>
+
+
                     </tbody>
                 </table>
 
@@ -288,3 +262,142 @@
         </div>
     </div>
 </div>
+
+<!-- Şikayet Kayit-->
+<div class="modal fade" id="yenisikayet" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <button type="button" class="close"
+                data-dismiss="modal">
+          <span aria-hidden="true">&times;</span>
+          <span class="sr-only">Close</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">
+          Yeni Şikayet
+        </h4>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="modal-body">
+
+        <form role="form">
+          <div class="form-group">
+            <label for="complainSubject">Şikayet Konusu</label>
+            <input type="text" class="form-control" name="complainSubject" id="complainSubject" placeholder="Şikayetin Konusu"/>
+          </div>
+          <div class="form-group">
+            <label for="sel1">Binalar:</label>
+            <label id="sonuc" for="sel1">Binalar:</label>
+            <select class="form-control" name="binaid" id="complainBinaId">
+              <option value="0">Seçiniz</option>
+
+              <% _.each(binalar, function(bina) {%>
+              <option value="<%=bina.id%>"><%=bina.isim%></option>
+              <% }) %>
+
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="sel1">Blok:</label>
+            <select class="form-control" name="blokid" id="complainBlokId">
+              <option value="0">Seçiniz</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="sel1">Mekan: </label>
+            <select class="form-control" name="birimid" id="complainBirimId">
+              <option value="0">Seçiniz</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="compainContent">Şikayet İçeriği</label>
+
+            <textarea class="form-control" rows="5" id="compainContent" name="compainContent"></textarea>
+
+          </div>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox"/> Check me out
+            </label>
+          </div>
+          <button id="complainSave" type="submit" class="btn btn-default">Gönder</button>
+        </form>
+
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="modal-footer"> <button type="button" class="btn btn-default"  data-dismiss="modal">      Close     </button>
+        <button type="button" class="btn btn-primary"> Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  $(function () {
+
+
+
+    $('#sikayetTable').bootstrapTable({
+
+      method: 'get',
+      url: 'http://localhost:1337/ajax/sikayet/list/',
+      cache: false,
+      striped: true,
+      pagination: true,
+      queryParams: function (p) {
+        return {
+          binaId: $('#binaId').val() ,
+          blokId: $('#blokId').val(),
+          birimId: $('#birimId').val(),
+          limit: p.limit,
+          offset: p.offset
+        };
+      },
+      sidePagination:'server',
+      pageSize: 10,
+      pageList: [10, 25, 50, 100, 200],
+      search: false,
+      toolbar:"#toolbar1",
+      showColumns: false,
+      showRefresh: true,
+      minimumCountColumns: 2,
+      clickToSelect: false,
+      columns: [ {
+        field: 'id',
+        title: 'Bina',
+        align: 'center',
+        valign: 'middle',
+        sortable: true
+      },{
+        field: 'blok',
+        title: 'Blok',
+        align: 'center',
+        valign: 'middle',
+        sortable: true
+      },  {
+        field: 'birimId.isim',
+        title: 'Birim',
+        align: 'center',
+        valign: 'middle',
+        sortable: true
+      },  {
+        field: 'aciklama',
+        title: 'Açiklama',
+        align: 'left',
+        valign: 'middle',
+        sortable: true
+      }
+      ]
+    });
+
+    $('#blokId').change(function(){
+
+      $('#sikayetTable').bootstrapTable('refresh');
+    });
+  });
+
+ </script>

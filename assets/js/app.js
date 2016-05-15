@@ -109,6 +109,78 @@ $(function(){
     return false;
   });
 
+ //Şikayet Ekleme
+  $('#complainBinaId').change(function(){
+    var binaId = $('#complainBinaId').val();
+    var $blokId = $('#complainBlokId');
+    /* Ajax Baslasin */
+    $.ajax({
+      type:'GET',
+      data:'binaid='+binaId,
+      dataType:'json',
+      url:'/ajax/bloklist/',
+      success: function(data ) {
+        $('#complainBlokId').empty();
+        $blokId.html('');
+        $blokId.append('<option id="0">Seçiniz</option>');
+        $.each(data.bloklar, function(key, val){
+          $blokId.append('<option value="' + val.id + '">' + val.isim +'</option>');
+        })
+      }
+    });
+    return false;
+  });
+
+  $('#complainBlokId').change(function(){
+    var blokId = $('#complainBlokId').val();
+    var $birimId = $('#complainBirimId');
+    /* Ajax Baslasin */
+    $.ajax({
+      type:'GET',
+      data:'blokid='+blokId,
+      dataType:'json',
+      url:'/ajax/birimlist/',
+      success: function(data ) {
+        $('#complainBirimId').empty();
+        $birimId.html('');
+        $birimId.append('<option id="0">Seçiniz</option>');
+        $.each(data.birimler, function(key, val){
+          $birimId.append('<option value="' + val.id + '">' + val.isim +'</option>');
+        })
+      }
+    });
+    return false;
+  });
 
 
+
+  $('#complainSave').click(function(){
+
+
+    var $birimId = $('#complainBirimId').val();
+    var $compainContent = $('#compainContent').val();
+
+    $.ajax({
+      type:'GET',
+      data:'birimId='+$birimId+'&complainContent='+$compainContent,
+      dataType:'json',
+      url:'/ajax/sikayet/register/',
+      success: function(data ) {
+
+        if(data.success==true){
+
+
+          location.reload();
+        }else {
+
+          alert(data.message);
+
+        }
+      }
+    });
+    return false;
+  });
+
+
+  
 });

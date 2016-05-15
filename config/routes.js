@@ -40,6 +40,9 @@ module.exports.routes = {
   'get /logout':'LoginController.logout',
 
 
+  'get /ajax/sikayet/register/':'AnasayfaController.sikayetKayit',
+  'get /ajax/sikayet/list/':'AnasayfaController.sikayetListesi',
+
   '/admin': {
     view: 'admin/index/homepage',
     locals: {

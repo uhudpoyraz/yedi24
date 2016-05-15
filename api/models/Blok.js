@@ -33,7 +33,7 @@ module.exports = {
     birimler: {
       collection: 'birim',
       via: 'blokId'
-    },
+    }
   }
 };
 
