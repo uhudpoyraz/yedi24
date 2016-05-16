@@ -37,7 +37,8 @@ module.exports = {
         req.flash('message','Kayit Başarılı.');
         req.flash('type','success');
         req.flash('icon', 'check');
-      }es.redirect('/admin/bina/add')
+      }
+      res.redirect('/admin/bina/add')
     });
 
   },
