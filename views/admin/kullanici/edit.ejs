@@ -41,14 +41,24 @@
             <label>Şifre</label>
             <input type="text" name="password"  id="password" value="<%=kayıt.sifre%>" required="required" class="form-control">
           </div>
+
           <div class="form-group">
-              <label>Aktiflik</label>
-              <select class="form-control" name="status" id="status">
-                <option value="0">Seçiniz</option>
-                 <option <% if (kayıt.hesapDurum == true) {%> selected="selected" <%}%> value="true"> Aktif </option>
-                 <option <% if (kayıt.hesapDurum == false) {%> selected="selected" <%}%> value="false"> Pasif </option>
-              </select>
+            <label for="name">Hesap Durumu</label>
+            <div class="checkbox">
+              <label>
+                <input type="radio" <% if (kayıt.hesapDurum == false) {%> checked <%}%> name="status" value="0" class="form-control"> Pasif
+
+              </label>
+            </div>
+
+            <div class="checkbox">
+              <label>
+                <input type="radio" <% if (kayıt.hesapDurum == true) {%> checked <%}%> name="status" value="1"  class="form-control"> Aktif
+              </label>
+            </div>
+
           </div>
+
           <div class="form-group">
               <label>Görev</label>
               <select class="form-control" name="duty" id="duty">
