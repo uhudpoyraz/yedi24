@@ -41,12 +41,13 @@ module.exports = {
     Iletisim.create({kullaniciId: param.kullaniciId, iletisimTipId: param.iletisimTipId, deger: param.deger}).exec(function createCB(err, created){
       //console.log('Created iletisim with deger ' + created.kullaniciId + created.iletisimTipId + created.deger);
       if(err) {
-        return res.json({
-          todo: 'hata olustu'
-        });
-      }
-      if (err) {
-        //Handle Error
+        req.flash('message','Sorun Oluştu');
+        req.flash('type','danger');
+        req.flash('icon', 'ban');
+      }else {
+        req.flash('message','Kayit Başarılı.');
+        req.flash('type','success');
+        req.flash('icon', 'check');
       }
       return res.redirect('/admin/iletisim/add')
     });
@@ -134,9 +135,13 @@ module.exports = {
 
       iletisim.save(function(error) {
         if(error) {
-          // do something with the error.
+          req.flash('message','Sorun Oluştu.');
+          req.flash('type','danger');
+          req.flash('icon', 'ban');
         } else {
-          // value saved!
+          req.flash('message','Güncelleme Başarılı.');
+          req.flash('type','success');
+          req.flash('icon', 'check');
           return res.redirect('/admin/iletisim/edit/'+req.body.id);
         }
       });

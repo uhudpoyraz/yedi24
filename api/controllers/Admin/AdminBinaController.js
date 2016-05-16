@@ -29,15 +29,15 @@ module.exports = {
     var code=req.param('code');
     Bina.create({isim:name,kod:code}).exec(function createCB(err, created){
       console.log('Created user with name ' + created.isim);
-            if(err) {
-              return res.json({
-                todo: 'hata olustu'
-              });
-            }
-      if (err) {
-        //Handle Error
-      }
-      return res.redirect('/admin/bina/add')
+      if(err) {
+        req.flash('message','Sorun Oluştu');
+        req.flash('type','danger');
+        req.flash('icon', 'ban');
+      }else {
+        req.flash('message','Kayit Başarılı.');
+        req.flash('type','success');
+        req.flash('icon', 'check');
+      }es.redirect('/admin/bina/add')
     });
 
   },
@@ -109,10 +109,14 @@ module.exports = {
         }
 
         bina.save(function(error) {
-        if(error) {
-          // do something with the error.
-        } else {
-          // value saved!
+          if(error) {
+            req.flash('message','Sorun Oluştu.');
+            req.flash('type','danger');
+            req.flash('icon', 'ban');
+          } else {
+            req.flash('message','Güncelleme Başarılı.');
+            req.flash('type','success');
+            req.flash('icon', 'check');
           return res.redirect('/admin/bina/edit/'+req.body.id);
         }
       });

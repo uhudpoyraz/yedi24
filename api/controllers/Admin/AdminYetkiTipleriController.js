@@ -31,13 +31,16 @@ module.exports = {
     YetkiTipi.create({gorev:gorev,yetkiDerecesi:yetkiDerecesi}).exec(function createCB(err, created){
       console.log('Created yetkilendirme with name ' + created.gorev);
       if(err) {
-        return res.json({
-          todo: 'hata olustu'
-        });
-      }
-      if (err) {
-        //Handle Error
-      }
+        req.flash('message','Sorun Oluştu');
+        req.flash('type','danger');
+        req.flash('icon', 'ban');
+      }else {
+        
+      
+      req.flash('message','Kayit Başarılı.');
+      req.flash('type','success');
+      req.flash('icon', 'check');
+    }
       return res.redirect('/admin/yetkitipi/add')
     });
 
@@ -111,9 +114,13 @@ module.exports = {
 
       yetki.save(function(error) {
         if(error) {
-          // do something with the error.
+          req.flash('message','Sorun Oluştu.');
+          req.flash('type','danger');
+          req.flash('icon', 'ban');
         } else {
-          // value saved!
+          req.flash('message','Güncelleme Başarılı.');
+          req.flash('type','success');
+          req.flash('icon', 'check');
           return res.redirect('/admin/yetkitipi/edit/'+req.body.id);
         }
       });

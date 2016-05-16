@@ -14,7 +14,9 @@ module.exports = {
    */
   add: function (req, res) {
 
+
     req.flash('sikayetDurumTipi', 'active');
+
     res.view('admin/sikayetdurumtipi/add', {layout: 'admin/layout'});
 
   },
@@ -30,14 +32,15 @@ module.exports = {
     DurumTipi.create({isim:name,surec:surec}).exec(function createCB(err, created){
       console.log('Created sikayetdurumtipi with deger ' + created.isim);
       if(err) {
-        return res.json({
-          todo: 'hata olustu'
-        });
+        req.flash('message','Sorun Oluştu');
+        req.flash('type','danger');
+        req.flash('icon', 'ban');
       }
-      if (err) {
-        //Handle Error
-      }
-      req.flash('message', 'Sikayet Durum Tipi Eklendi');
+
+      req.flash('message','Kayit Başarılı.');
+      req.flash('type','success');
+      req.flash('icon', 'check');
+
       return res.redirect('/admin/sikayetdurumtipi/add')
     });
 
@@ -72,13 +75,14 @@ module.exports = {
       id:id
     }).exec(function (err, sikayetdurumtipi){
       if (err) {
-        return res.negotiate(err);
+        req.flash('message','Sorun Oluştu');
+        req.flash('type','danger');
+        req.flash('icon', 'ban');
       }
       if (!sikayetdurumtipi) {
         return res.notFound('Could not find Finn, sorry.');
       }
 
-      req.flash('sikayetDurumTipi', 'active');
       res.view('admin/sikayetdurumtipi/edit',{layout:'admin/layout',sikayetdurumtipi:sikayetdurumtipi});
     });
   },
@@ -110,9 +114,14 @@ module.exports = {
 
       sikayetdurumtipi.save(function(error) {
         if(error) {
-          // do something with the error.
+          req.flash('message','Sorun Oluştu.');
+          req.flash('type','danger');
+          req.flash('icon', 'ban');
         } else {
-          // value saved!
+          req.flash('message','Güncelleme Başarılı.');
+          req.flash('type','success');
+          req.flash('icon', 'check');
+
           return res.redirect('/admin/sikayetdurumtipi/edit/'+req.body.id);
         }
       });

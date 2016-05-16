@@ -31,12 +31,13 @@ module.exports = {
     IletisimTipi.create({deger:value}).exec(function createCB(err, created){
       console.log('Created iletisimtipi with deger ' + created.deger);
       if(err) {
-        return res.json({
-          todo: 'hata olustu'
-        });
-      }
-      if (err) {
-        //Handle Error
+        req.flash('message','Sorun Oluştu');
+        req.flash('type','danger');
+        req.flash('icon', 'ban');
+      }else {
+        req.flash('message','Kayit Başarılı.');
+        req.flash('type','success');
+        req.flash('icon', 'check');
       }
       return res.redirect('/admin/iletisimtipi/add')
     });
@@ -112,9 +113,13 @@ module.exports = {
 
       iletisimtipi.save(function(error) {
         if(error) {
-          // do something with the error.
+          req.flash('message','Sorun Oluştu.');
+          req.flash('type','danger');
+          req.flash('icon', 'ban');
         } else {
-          // value saved!
+          req.flash('message','Güncelleme Başarılı.');
+          req.flash('type','success');
+          req.flash('icon', 'check');
           return res.redirect('/admin/iletisimtipi/edit/'+req.body.id);
         }
       });

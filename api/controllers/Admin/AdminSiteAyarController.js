@@ -29,13 +29,14 @@ module.exports = {
     var value=req.param('value');
     Parametre.create({isim:name,deger:value}).exec(function createCB(err, created){
       console.log('Created parameter with name ' + created.isim);
-            if(err) {
-              return res.json({
-                todo: 'hata olustu'
-              });
-            }
-      if (err) {
-        //Handle Error
+      if(err) {
+        req.flash('message','Sorun Oluştu');
+        req.flash('type','danger');
+        req.flash('icon', 'ban');
+      }else {
+        req.flash('message','Kayit Başarılı.');
+        req.flash('type','success');
+        req.flash('icon', 'check');
       }
       return res.redirect('/admin/ayar/add')
     });
@@ -101,10 +102,14 @@ module.exports = {
         }
 
         parametre.save(function(error) {
-        if(error) {
-          // do something with the error.
-        } else {
-          // value saved!
+          if(error) {
+            req.flash('message','Sorun Oluştu.');
+            req.flash('type','danger');
+            req.flash('icon', 'ban');
+          } else {
+            req.flash('message','Güncelleme Başarılı.');
+            req.flash('type','success');
+            req.flash('icon', 'check');
           return res.redirect('/admin/ayar/edit/'+req.body.id);
         }
       });

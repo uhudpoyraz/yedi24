@@ -12,6 +12,16 @@
   <section class="content">
     <div class="box box" style="width: 50%;">
       <div class="box-body">
+        <% if (req.session.flash.message) {%>
+        <div class="box-body">
+          <div class="alert alert-<%- req.flash('type') %> alert-dismissable">
+            <i class="fa fa-<%- req.flash('icon') %>"></i>
+            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+            <b><%- req.flash('message') %></b>
+          </div>
+        </div>
+        <%}%>
+
         <form role="form" onsubmit="return check();" action="/admin/kullanici/update" method="post">
           <!-- text input -->
           <input type="hidden" name="id" value="<%=kayıt.id%>">
@@ -61,12 +71,12 @@
 
 
 <script type="text/javascript">
-  function check(input) {  
-    if(input.validity.typeMismatch){  
-        input.setCustomValidity('Bu email adresi "' + input.value + '" geçerli değildir. Geçerli bir email adresi giriniz.');  
-    }  
-    else {  
-        input.setCustomValidity("");  
-    }                 
-  } 
+  function check(input) {
+    if(input.validity.typeMismatch){
+        input.setCustomValidity('Bu email adresi "' + input.value + '" geçerli değildir. Geçerli bir email adresi giriniz.');
+    }
+    else {
+        input.setCustomValidity("");
+    }
+  }
 </script>

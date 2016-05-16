@@ -33,14 +33,14 @@ module.exports = {
 
     Kullanicilar.create({isim: name, soyIsim: surname, email:email, sifre:passwordHash, hesapDurum: status, gorevId:duty}).exec(function createCB(err, created){
       console.log('Created email with name ' + created.email);
-            if(err) {
-              return res.json({
-
-
-               });
-            }
-      if (err) {
-        //Handle Error
+      if(err) {
+        req.flash('message','Sorun Oluştu');
+        req.flash('type','danger');
+        req.flash('icon', 'ban');
+      }else {
+        req.flash('message','Kayit Başarılı.');
+        req.flash('type','success');
+        req.flash('icon', 'check');
       }
       return res.redirect('/admin/kullanici/add')
     });
@@ -110,10 +110,14 @@ module.exports = {
 		}
 
         kayıt.save(function(error) {
-        if(error) {
-          // do something with the error.
-        } else {
-          // value saved!
+          if(error) {
+            req.flash('message','Sorun Oluştu.');
+            req.flash('type','danger');
+            req.flash('icon', 'ban');
+          } else {
+            req.flash('message','Güncelleme Başarılı.');
+            req.flash('type','success');
+            req.flash('icon', 'check');
           return res.redirect('/admin/kullanici/edit/'+req.body.id);
         }
       });

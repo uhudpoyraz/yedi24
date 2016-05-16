@@ -46,12 +46,13 @@ module.exports = {
     Blok.create({isim:name,kod:code,binaId:binaId,kullaniciId:kullaniciId}).exec(function createCB(err, created){
       console.log('Created blok with name ' + created.isim);
       if(err) {
-        return res.json({
-          todo: 'hata olustu'
-        });
-      }
-      if (err) {
-        //Handle Error
+        req.flash('message','Sorun Oluştu');
+        req.flash('type','danger');
+        req.flash('icon', 'ban');
+      }else {
+        req.flash('message','Kayit Başarılı.');
+        req.flash('type','success');
+        req.flash('icon', 'check');
       }
       return res.redirect('/admin/blok/add')
     });
@@ -147,9 +148,13 @@ module.exports = {
       }
       blok.save(function(error) {
         if(error) {
-          // do something with the error.
+          req.flash('message','Sorun Oluştu.');
+          req.flash('type','danger');
+          req.flash('icon', 'ban');
         } else {
-          // value saved!
+          req.flash('message','Güncelleme Başarılı.');
+          req.flash('type','success');
+          req.flash('icon', 'check');
           return res.redirect('/admin/blok/edit/'+req.body.id);
         }
       });
