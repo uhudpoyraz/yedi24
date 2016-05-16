@@ -16,7 +16,7 @@ $(function(){
       success: function(data ) {
         $('#blokId').empty();
         $blokId.html('');
-        $blokId.append('<option id="0">Seçiniz</option>');
+        $blokId.append('<option value="0">Seçiniz</option>');
         $.each(data.bloklar, function(key, val){
           $blokId.append('<option value="' + val.id + '">' + val.isim +'</option>');
         })
@@ -37,7 +37,7 @@ $(function(){
       success: function(data ) {
         $('#birimId').empty();
         $birimId.html('');
-        $birimId.append('<option id="0">Seçiniz</option>');
+        $birimId.append('<option value="0">Seçiniz</option>');
         $.each(data.birimler, function(key, val){
           $birimId.append('<option value="' + val.id + '">' + val.isim +'</option>');
         })
@@ -182,5 +182,5 @@ $(function(){
   });
 
 
-  
+
 });

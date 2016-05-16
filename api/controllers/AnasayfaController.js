@@ -121,26 +121,60 @@ module.exports = {
 
   sikayetListesi:function (req,res) {
 
-    //burada nested ilislileri çekmek gerekcek ayrıca bina blok ve birim e gore where sartı koyulması gerekiyor
-
     var limit=req.param("limit");
     var offset=req.param("offset");
     var binaId=req.param("binaId");
     var birimId=req.param("birimId");
     var blokId=req.param("blokId");
 
-    Sikayetler.find({skip:offset,limit:limit}).populate("birimId").exec(function(err, sikayetler) {
+    var where='';
 
-        if (err) {return res.serverError(err);}
+    if(binaId!=0 || birimId!=0 || blokId!=0|| req.session.kullaniciDetay!=null){
 
+      where='where '
+    }
+
+     if(binaId!=0){
+
+      where+='bina.id='+binaId+" and ";
+
+    }
+    if(birimId!=0){
+      where+='birim.id='+birimId+" and ";
+    }
+     if(blokId!=0){
+       where+='blok.id='+blokId+" and ";
+    }
+
+    if(req.session.kullaniciDetay!=null){
+      where+='s."kullaniciId"='+req.session.kullaniciDetay.id+" and ";
+    }
+
+    if(binaId!=0 || birimId!=0 || blokId!=0|| req.session.kullaniciDetay!=null){
+
+      where=where.substr(0,where.length-5);
+    }
+
+    var query='SELECT s.id as sikayetlerid,aciklama,bina.isim as binaIsmi,blok.isim as blokIsmi,birim.isim as birimIsmi FROM sikayetler s INNER JOIN birim ON birim.id = s."birimId"' +
+      '    INNER JOIN blok ON blok.id = birim."blokId"' +
+      '    INNER JOIN bina ON bina.id = blok."binaId"'+where+' limit '+limit+' offset '+offset;
+
+
+    Sikayetler.query(query, function(err, sikayetler) {
+
+      if (err) {return res.serverError(err);}
 
       Sikayetler.count().exec(function countCB(error, found) {
-        return res.json({"total":found,"rows":sikayetler});
+      //  sikayetler.rows=sikayetler.rows.rows;
+      var result={};
+        result.total=found;
+        result.rows=sikayetler.rows;
+        return res.json(result);
 
 
       });
+    });
 
-      });
   }
 
 

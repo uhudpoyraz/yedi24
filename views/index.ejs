@@ -366,20 +366,26 @@
       showRefresh: true,
       minimumCountColumns: 2,
       clickToSelect: false,
-      columns: [ {
-        field: 'id',
+      columns: [{
+        field: 'sikayetlerid',
+        title: 'id',
+        align: 'center',
+        valign: 'middle',
+        sortable: true
+      }, {
+        field: 'binaismi',
         title: 'Bina',
         align: 'center',
         valign: 'middle',
         sortable: true
       },{
-        field: 'blok',
+        field: 'blokismi',
         title: 'Blok',
         align: 'center',
         valign: 'middle',
         sortable: true
       },  {
-        field: 'birimId.isim',
+        field: 'birimismi',
         title: 'Birim',
         align: 'center',
         valign: 'middle',
@@ -394,7 +400,15 @@
       ]
     });
 
+    $('#binaId').change(function(){
+
+      $('#sikayetTable').bootstrapTable('refresh');
+    });
     $('#blokId').change(function(){
+
+      $('#sikayetTable').bootstrapTable('refresh');
+    });
+    $('#birimId').change(function(){
 
       $('#sikayetTable').bootstrapTable('refresh');
     });
