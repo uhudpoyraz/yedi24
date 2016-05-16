@@ -13,6 +13,7 @@ module.exports = {
    * `Admin/AdminBlokController.add()`
    */
   add: function (req, res) {
+    req.flash('blok', 'active');
 
     Bina.find(function(err, binalar) {
       if (err) {return res.serverError(err);}
@@ -62,6 +63,7 @@ module.exports = {
    * `Admin/AdminBlokController.list()`
    */
   list: function (req, res) {
+    req.flash('blok', 'active');
 
     Blok.find()
       .populate('binaId')
@@ -79,6 +81,7 @@ module.exports = {
    * `Admin/AdminBlokController.edit()`
    */
   edit: function (req, res) {
+    req.flash('blok', 'active');
 
 
     var id=req.param('id');

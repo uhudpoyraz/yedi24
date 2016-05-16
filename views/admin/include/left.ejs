@@ -26,7 +26,7 @@
                     <ul class="sidebar-menu">
 
 
-                      <li class="treeview">
+                      <li class="treeview <%- req.flash('kullanici') %>" >
                         <a href="#">
                           <i class="fa fa-users"></i> <span>Kullanici Modulü</span>
                           <i class="fa fa-angle-left pull-right"></i>
@@ -37,7 +37,7 @@
                         </ul>
                       </li>
 
-                      <li class="treeview">
+                      <li class="treeview <%- req.flash('iletisimtipi') %>">
                         <a href="#">
                           <i class="fa fa-edit"></i> <span>İletisim Modulü</span>
                           <i class="fa fa-angle-left pull-right"></i>
@@ -47,7 +47,7 @@
                           <li><a href="http://localhost:1337/admin/iletisimtipi/"><i class="fa fa-angle-double-right"></i> Listele</a></li>
                         </ul>
                       </li>
-                      <li class="treeview">
+                      <li class="treeview <%- req.flash('bina') %>">
                         <a href="#">
                           <i class="fa fa-edit"></i> <span>Bina Modulü</span>
                           <i class="fa fa-angle-left pull-right"></i>
@@ -57,17 +57,17 @@
                           <li><a href="http://localhost:1337/admin/bina/"><i class="fa fa-angle-double-right"></i> Listele</a></li>
                         </ul>
                       </li>
-                      <li class="treeview">
+                      <li class="treeview <%- req.flash('blok') %>">
                         <a href="#">
                           <i class="fa fa-edit"></i> <span>Blok Modulü</span>
                           <i class="fa fa-angle-left pull-right"></i>
                         </a>
-                        <ul class="treeview-menu">
+                        <ul class="treeview-menu <%- req.flash('active') %>">
                           <li><a href="http://localhost:1337/admin/blok/add"><i class="fa fa-angle-double-right"></i> Ekle</a></li>
                           <li><a href="http://localhost:1337/admin/blok"><i class="fa fa-angle-double-right"></i> Listele</a></li>
                         </ul>
                       </li>
-                        <li class="treeview">
+                        <li class="treeview <%- req.flash('birim') %>">
                             <a href="#">
                                 <i class="fa fa-edit"></i> <span>Birim Modulü</span>
                                 <i class="fa fa-angle-left pull-right"></i>
@@ -78,7 +78,7 @@
                             </ul>
                         </li>
 
-                      <li class="treeview">
+                      <li class="treeview <%- req.flash('sikayetDurumTipi') %>">
                         <a href="#">
                           <i class="fa fa-edit"></i> <span>Şikayet Durum Modulü</span>
                           <i class="fa fa-angle-left pull-right"></i>
@@ -88,7 +88,7 @@
                           <li><a href="http://localhost:1337/admin/sikayetdurumtipi/"><i class="fa fa-angle-double-right"></i> Listele</a></li>
                         </ul>
                       </li>
-                      <li class="treeview">
+                      <li class="treeview <%- req.flash('yetkitipleri') %>">
                         <a href="#">
                           <i class="fa fa-edit"></i> <span>Yetki Tipi Modulü</span>
                           <i class="fa fa-angle-left pull-right"></i>
@@ -98,7 +98,7 @@
                           <li><a href="http://localhost:1337/admin/yetkitipi/"><i class="fa fa-angle-double-right"></i> Listele</a></li>
                         </ul>
                       </li>
-                      <li class="treeview">
+                      <li class="treeview <%- req.flash('siteayar') %>">
                         <a href="#">
                           <i class="fa fa-gear"></i> <span>Genel Ayar Modulü</span>
                           <i class="fa fa-angle-left pull-right"></i>
@@ -109,7 +109,7 @@
                         </ul>
                       </li>
 
-                      <li class="treeview">
+                      <li class="treeview <%- req.flash('karaliste') %>">
                         <a href="#">
                           <i class="fa fa-gear"></i> <span>Karaliste Modulü</span>
                           <i class="fa fa-angle-left pull-right"></i>
@@ -120,7 +120,7 @@
                         </ul>
                       </li>
 
-                      <li class="treeview">
+                      <li class="treeview <%- req.flash('iletisim') %>">
                         <a href="#">
                           <i class="fa fa-gear"></i> <span>İletişim Modulü</span>
                           <i class="fa fa-angle-left pull-right"></i>

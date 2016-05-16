@@ -13,7 +13,8 @@
 
       <div class="box-body">
         <table class="table table-bordered">
-          <tbody><tr>
+          <tbody>
+          <tr>
             <th style="width: 10px">id</th>
             <th>İsim</th>
             <th>Soyisim</th>
@@ -27,12 +28,12 @@
           <% _.each(kullanicilar, function(kullanici) {%>
           <tr>
             <td><%=kullanici.id %></td>
-            <th><%=kullanici.isim%></th>
-            <th><%=kullanici.soyIsim%></th>
-            <th><%=kullanici.email%></th>
-            <th><%=kullanici.sifre%></th>
-            <th><%=kullanici.hesapDurum%></th>
-            <th><%=kullanici.gorevId%></th>
+            <td><%=kullanici.isim%></td>
+            <td><%=kullanici.soyIsim%></td>
+            <td><%=kullanici.email%></td>
+            <td><%=kullanici.sifre%></td>
+            <td><%=kullanici.hesapDurum%></td>
+            <td><%=kullanici.gorevId%></td>
             <td><a href="/admin/kullanici/edit/<%=kullanici.id %>"><span class="badge bg-green">düzenle</span></a></td>
             <td><a onclick="return confirm('Silmek İstediğinizden Eminmisiniz ?');" href="/admin/kullanici/delete/<%=kullanici.id %>"><span class="badge bg-red">sil</span></a></td>
           </tr>

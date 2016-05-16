@@ -13,6 +13,7 @@ module.exports = {
    * `IletisimTipiController.add()`
    */
   add: function (req, res) {
+    req.flash('iletisimtipi', 'active');
 
 
     res.view('admin/iletisimtipi/add', {layout: 'admin/layout'});
@@ -47,6 +48,7 @@ module.exports = {
    * `IletisimTipiController.list()`
    */
   list: function (req, res) {
+    req.flash('iletisimtipi', 'active');
 
 
     IletisimTipi.find(function(err, iletisimtipleri) {
@@ -66,6 +68,7 @@ module.exports = {
    * `IletisimTipiController.edit()`
    */
   edit: function (req, res) {
+    req.flash('iletisimtipi', 'active');
 
 
     var id=req.param('id');
@@ -98,7 +101,7 @@ module.exports = {
         return res.json({
           todo: 'hata olustu'
         });
-       
+
       }
 
       if(req.body.deger) {

@@ -21,14 +21,14 @@ module.exports = {
 
     },
     surec:{
-      
+
       type:'integer'
-      
+
     },
 
-    durumtipi:{
-      model:'durumlar',
-      unique: true
+    durumlar: {
+      collection:'durumlar',
+      via: 'durumTipId'
     }
 
   }

@@ -13,6 +13,7 @@ module.exports = {
    * `Admin/AdminSiteAyarController.add()`
    */
   add: function (req, res) {
+    req.flash('siteayar', 'active');
 
     res.view('admin/ayar/add', {layout: 'admin/layout'});
 
@@ -45,6 +46,7 @@ module.exports = {
    * `Admin/AdminSiteAyarController.list()`
    */
   list: function (req, res) {
+    req.flash('siteayar', 'active');
 
     Parametre.find(function(err, parametreler) {
       if (err) {return res.serverError(err);}
@@ -59,6 +61,7 @@ module.exports = {
    * `Admin/AdminSiteAyarController.edit()`
    */
   edit: function (req, res) {
+    req.flash('siteayar', 'active');
 
     var id=req.param('id');
 

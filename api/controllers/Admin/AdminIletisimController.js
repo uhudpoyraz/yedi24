@@ -13,6 +13,9 @@ module.exports = {
    * `IletisimController.add()`
    */
   add: function (req, res) {
+    req.flash('iletisim', 'active');
+
+
     var users;
     var comm;
     Kullanicilar.find(function(err, kullanicilar) {
@@ -55,6 +58,7 @@ module.exports = {
    * `IletisimController.list()`
    */
   list: function (req, res) {
+    req.flash('iletisim', 'active');
 
 
     Iletisim.find(function(err, iletisim) {
@@ -74,6 +78,9 @@ module.exports = {
    * `IletisimController.edit()`
    */
   edit: function (req, res) {
+    req.flash('iletisim', 'active');
+
+
     var id=req.param('id');
 
     Iletisim.findOne({

@@ -9,7 +9,9 @@ module.exports = {
    * `Admin/AdminKullaniciController.add()`
    */
   add: function (req, res) {
-	  YetkiTipi.find(function(err, görevtipleri) {
+    req.flash('kullanici', 'active');
+
+    YetkiTipi.find(function(err, görevtipleri) {
 	    if (err) {return res.serverError(err);}
 	    return res.view('admin/kullanici/add',{layout:'admin/layout', görevtipleri: görevtipleri});
 	  });
@@ -47,6 +49,7 @@ module.exports = {
    * `Admin/AdminKullaniciController.list()`
    */
   list: function (req, res) {
+    req.flash('kullanici', 'active');
 
     Kullanicilar.find(function(err, kullanicilar) {
       if (err) {return res.serverError(err);}
@@ -59,6 +62,7 @@ module.exports = {
    * `Admin/AdminKullaniciController.edit()`
    */
   edit: function (req, res) {
+    req.flash('kullanici', 'active');
 
     var id=req.param('id');
     YetkiTipi.find(function(err, görevtipleri) {

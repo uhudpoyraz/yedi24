@@ -13,6 +13,7 @@ module.exports = {
    * `Admin/AdminKaralisteController.add()`
    */
   add: function (req, res) {
+    req.flash('karaliste', 'active');
 
     res.view('admin/karaliste/add', {layout: 'admin/layout'});
 
@@ -44,6 +45,7 @@ module.exports = {
    * `Admin/AdminKaraListeController.list()`
    */
   list: function (req, res) {
+    req.flash('karaliste', 'active');
 
     KaraListe.find(function(err, karaliste) {
       if (err) {return res.serverError(err);}
@@ -58,6 +60,7 @@ module.exports = {
    * `Admin/AdminKaraListeController.edit()`
    */
   edit: function (req, res) {
+    req.flash('karaliste', 'active');
 
     var id=req.param('id');
 

@@ -26,7 +26,7 @@ module.exports = {
     bloklar: {
       collection: 'blok',
       via: 'binaId'
-    },
+    }
   }
 };
 

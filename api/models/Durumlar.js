@@ -25,7 +25,7 @@ module.exports = {
 
     durumTipId:{
 
-      type:'integer'
+      model:'durumtipi'
 
     },
     durumBitis:{
@@ -42,10 +42,7 @@ module.exports = {
       collection: 'eklentiler',
       via: 'durumId'
     },
-    durumtipi: {
-      collection:'durumTipi',
-      via: 'durumtipi'
-    }
+  
 
   }
 };

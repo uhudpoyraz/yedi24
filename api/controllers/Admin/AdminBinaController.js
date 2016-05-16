@@ -14,7 +14,7 @@ module.exports = {
    */
   add: function (req, res) {
 
-
+    req.flash('bina', 'active');
     res.view('admin/bina/add', {layout: 'admin/layout'});
 
   },
@@ -50,6 +50,7 @@ module.exports = {
 
     Bina.find(function(err, binalar) {
       if (err) {return res.serverError(err);}
+      req.flash('bina', 'active');
 
       return res.view('admin/bina/list',{layout:'admin/layout',binalar: binalar});
 
@@ -79,6 +80,7 @@ module.exports = {
           return res.notFound('Could not find Finn, sorry.');
         }
 
+      req.flash('bina', 'active');
 
     res.view('admin/bina/edit',{layout:'admin/layout',bina:bina});
     });

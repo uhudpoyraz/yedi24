@@ -15,10 +15,25 @@
         <form role="form" action="/admin/sikayetdurumtipi/save" method="post">
         <!-- text input -->
         <div class="form-group">
-          <label>Şikayet Durum Tipi</label>
+          <label>Şikayet Durum Tipi </label>
           <input type="text" name="name" id="name" class="form-control">
         </div>
+          <div class="form-group">
+            <label for="name">Tipin Durumu</label>
+            <div class="checkbox">
+              <label>
+            <input type="radio" name="surec" value="0" class="form-control"> Durağan
 
+              </label>
+            </div>
+
+                <div class="checkbox">
+                  <label>
+            <input type="radio" name="surec" value="1"  class="form-control"> Sürdürülebilir
+                  </label>
+                </div>
+
+          </div>
         <div class="form-group">
           <button class="btn btn-primary btn-sm">Ekle</button>
         </div>

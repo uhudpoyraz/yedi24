@@ -13,6 +13,7 @@ module.exports = {
    * `Admin/AdminYetkiTipleriController.add()`
    */
   add: function (req, res) {
+    req.flash('yetkitipleri', 'active');
 
 
     res.view('admin/yetkitipi/add', {layout: 'admin/layout'});
@@ -47,6 +48,7 @@ module.exports = {
    * `Admin/AdminYetkiTipleriController.list()`
    */
   list: function (req, res) {
+    req.flash('yetkitipleri', 'active');
 
     YetkiTipi.find(function(err, yetkitipleri) {
       if (err) {return res.serverError(err);}
@@ -65,6 +67,7 @@ module.exports = {
    * `Admin/AdminYetkiTipleriController.edit()`
    */
   edit: function (req, res) {
+    req.flash('yetkitipleri', 'active');
 
 
     var id=req.param('id');

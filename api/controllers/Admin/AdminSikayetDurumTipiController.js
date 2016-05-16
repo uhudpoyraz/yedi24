@@ -14,7 +14,7 @@ module.exports = {
    */
   add: function (req, res) {
 
-
+    req.flash('sikayetDurumTipi', 'active');
     res.view('admin/sikayetdurumtipi/add', {layout: 'admin/layout'});
 
   },
@@ -26,8 +26,8 @@ module.exports = {
   save: function (req, res) {
 
     var name=req.param('name');
-
-    DurumTipi.create({isim:name}).exec(function createCB(err, created){
+    var surec=req.param('surec');
+    DurumTipi.create({isim:name,surec:surec}).exec(function createCB(err, created){
       console.log('Created sikayetdurumtipi with deger ' + created.isim);
       if(err) {
         return res.json({
@@ -37,6 +37,7 @@ module.exports = {
       if (err) {
         //Handle Error
       }
+      req.flash('message', 'Sikayet Durum Tipi Eklendi');
       return res.redirect('/admin/sikayetdurumtipi/add')
     });
 
@@ -51,7 +52,7 @@ module.exports = {
 
     DurumTipi.find(function(err, durumtipleri) {
       if (err) {return res.serverError(err);}
-
+      req.flash('sikayetDurumTipi', 'active');
       return res.view('admin/sikayetdurumtipi/list',{layout:'admin/layout',durumtipleri: durumtipleri});
 
     });
@@ -77,7 +78,7 @@ module.exports = {
         return res.notFound('Could not find Finn, sorry.');
       }
 
-
+      req.flash('sikayetDurumTipi', 'active');
       res.view('admin/sikayetdurumtipi/edit',{layout:'admin/layout',sikayetdurumtipi:sikayetdurumtipi});
     });
   },
@@ -102,7 +103,10 @@ module.exports = {
 
         sikayetdurumtipi.isim= req.body.name;
       }
+      if(req.body.surec) {
 
+        sikayetdurumtipi.surec= req.body.surec;
+      }
 
       sikayetdurumtipi.save(function(error) {
         if(error) {

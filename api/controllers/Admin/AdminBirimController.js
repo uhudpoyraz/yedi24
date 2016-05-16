@@ -13,6 +13,7 @@ module.exports = {
    * `Admin/AdminBlokController.add()`
    */
   add: function (req, res) {
+    req.flash('birim', 'active');
 
     Blok.find(function(err, bloklar) {
       if (err) {return res.serverError(err);}
@@ -59,6 +60,7 @@ module.exports = {
    * `Admin/AdminBlokController.list()`
    */
   list: function (req, res) {
+    req.flash('birim', 'active');
 
     Birim.find()
       .populate('blokId')
@@ -76,6 +78,7 @@ module.exports = {
    * `Admin/AdminBlokController.edit()`
    */
   edit: function (req, res) {
+    req.flash('birim', 'active');
 
 
     var id=req.param('id');
