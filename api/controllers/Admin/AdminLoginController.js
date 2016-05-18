@@ -10,12 +10,20 @@
 module.exports = {
 
 
+
+  login: function (req, res) {
+
+
+    return res.view('admin/login/login',{layout:'admin/login/loginLayout'});
+
+  },
+
   doLogin: function (req, res) {
 
     var email = req.param("email");
     var password = req.param("password");
 
-    var kullanici = Kullanicilar.findOne({
+     var kullanici = Kullanicilar.findOne({
       email: email
     }).exec(function afterwards(err, kullanici) {
       // Error handling
@@ -30,8 +38,8 @@ module.exports = {
         if (kullanici.sifre == hash) {
             if(kullanici.hesapDurum==1){
 
-              req.session.kullaniciDetay =kullanici;
-              return res.json({"success": true,message:"Giriş Başarılı."});
+              req.session.AdminkullaniciDetay =kullanici;
+              return res.redirect('/admin/');
             }else{
 
               return res.json({"success": false,message:"Hesabınız onaylanmamıstır.Lütfen Hesabınızı onaylayınız."});
@@ -41,7 +49,7 @@ module.exports = {
 
 
         } else {
-          return res.json({"success": false,message:"Şifre veya Email Hatalı."});
+          return res.redirect('/admin/login');
 
         }
 
@@ -53,7 +61,7 @@ module.exports = {
   },
   logout: function (req, res) {
 
-    req.session.kullaniciDetay =null;
+    req.session.AdminkullaniciDetay =null;
      return  res.redirect('/');
 
 
