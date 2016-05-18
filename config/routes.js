@@ -137,10 +137,15 @@ module.exports.routes = {
   'post /admin/sikayet/save':'Admin/AdminSikayetController.save',
   'get /admin/sikayet/delete/:id':'Admin/AdminSikayetController.delete',
 
-
+/*login*/
   'get /admin/login':'Admin/AdminLoginController.login',
   'post /admin/dologin':'Admin/AdminLoginController.doLogin',
-   'get /admin/logout':'Admin/AdminLoginController.logout'
+   'get /admin/logout':'Admin/AdminLoginController.logout',
+  /*Admin Bilgi guncelle*/
+
+  'get /admin/profil':'Admin/AdminProfilController.edit',
+  'post /admin/profil/update':'Admin/AdminProfilController.update'
+
 
   /***************************************************************************
   *                                                                          *
