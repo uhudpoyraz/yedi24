@@ -28,7 +28,7 @@ module.exports.policies = {
 
   // '*': true,
   //'*': "sessionAuth",
-
+/*
    "Admin/AdminIndexController": {
     "*": "sessionAuth"
   },
@@ -64,7 +64,7 @@ module.exports.policies = {
   },
   "Admin/AdminYetkiTipleriController": {
     "*": "sessionAuth"
-  },
+  }*/
   /***************************************************************************
   *                                                                          *
   * Here's an example of mapping some policies to run before a controller    *
