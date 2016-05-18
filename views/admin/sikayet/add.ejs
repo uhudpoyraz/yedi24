@@ -2,7 +2,7 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      Kullanıcı Kayıt Ekle
+      Sikayeti Aktar
 
     </h1>
 
@@ -22,51 +22,40 @@
         </div>
         <%}%>
 
-        <form role="form" action="/admin/kullanici/save" method="post">
+        <form role="form" action="/admin/sikayet/save" method="post">
           <!-- text input -->
+          <input type="hidden" name="sikayetId" value="<%=sikayetler.rows[0].sikayetlerid%>">
            <div class="form-group">
-            <label>İsim</label>
-            <input type="text" name="name"  id="name" required="required" class="form-control" required placeholder="İsim">
+            <label>Birim</label>
+            <p><%=sikayetler.rows[0].birimismi%></p>
           </div>
           <div class="form-group">
-            <label>Soyisim</label>
-            <input type="text" name="surname"  id="surname" required="required" class="form-control" required placeholder="Soyisim">
+            <label>Açıklama</label>
+            <p><%=sikayetler.rows[0].aciklama%></p>
           </div>
           <div class="form-group">
-            <label>Email</label>
-            <input type="email" name="email"  id="email" required="required" class="form-control" required placeholder="Geçerli bir email adresi giriniz.">
+            <label>Durum Tipi</label>
+            <select class="form-control" name="durumTipiId" id="category">
+              <option value="0">Seçiniz</option>
+              <% _.each(durumtipleri, function(durumtipi) {%>
+              <option value="<%=durumtipi.id%>"><%=durumtipi.isim%></option>
+              <% }) %>
+            </select>
           </div>
           <div class="form-group">
-            <label>Şifre</label>
-            <input type="text" name="password"  id="password" required="required" class="form-control">
+            <label>Kullanıcıya Aktar</label>
+            <select class="form-control" name="kullaniciId" id="category">
+              <option value="0">Seçiniz</option>
+              <% _.each(kullanicilar, function(kullanici) {%>
+              <option value="<%=kullanici.id%>"><%=kullanici.isim%>-<%=kullanici.soyIsim%></option>
+              <% }) %>
+            </select>
           </div>
-          <div class="form-group">
-              <label for="name">Hesap Durumu</label>
-            <div class="checkbox">
-              <label>
-                <input type="radio" name="status" value="0" class="form-control"> Pasif
 
-              </label>
-            </div>
 
-            <div class="checkbox">
-              <label>
-                <input type="radio" name="status" value="1"  class="form-control"> Aktif
-              </label>
-            </div>
 
-          </div>
           <div class="form-group">
-              <label>Görev</label>
-              <select class="form-control" name="duty" id="duty">
-                <option value="0">Seçiniz</option>
-                <% _.each(görevtipleri, function(görev) {%>
-                <option value="<%=görev.id%>"> <%=görev.gorev%> </option>
-                <% }) %>
-              </select>
-          </div>
-          <div class="form-group">
-          <button class="btn btn-primary btn-sm">Ekle</button>
+          <button class="btn btn-primary btn-sm">Aktar</button>
         </div>
         </form>
       </div>

@@ -1,128 +1,131 @@
 /**
- * KullaniciController
+ * SikayetController
  *
  * @description :: Server-side logic for managing kullanicis
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 module.exports = {
-  /**
-   * `Admin/AdminKullaniciController.add()`
-   */
-  add: function (req, res) {
-    req.flash('kullanici', 'active');
 
-    YetkiTipi.find(function(err, görevtipleri) {
-	    if (err) {return res.serverError(err);}
-	    return res.view('admin/kullanici/add',{layout:'admin/layout', görevtipleri: görevtipleri});
-	  });
+
+  /**
+   * `Admin/AdminSikayetController.aktar()`
+   */
+
+  aktar: function (req, res) {
+    req.flash('sikayet', 'active');
+
+    var id=req.param('id');
+    var users;
+    var durumtipleri;
+    Kullanicilar.find(function(err, kullanicilar) {
+      if (err) {return res.serverError(err);}
+      users = kullanicilar;
+    });
+    DurumTipi.find(function(err, durumtipi) {
+      if (err) {return res.serverError(err);}
+      durumtipleri = durumtipi;
+    });
+    var blokId=5;
+    var ilgiliId=9;
+    var query='SELECT s.id as sikayetlerid,aciklama,birim.isim as birimismi FROM sikayetler s ' +
+      '    INNER JOIN birim ON birim.id = s."birimId"' +
+      '    INNER JOIN durumlar ON s.id = durumlar."sikayetId"' +
+      '     where durumlar."sikayetIlgiliId"='+ilgiliId+' and s.id='+id;
+
+
+
+    Sikayetler.query(query, function(err, sikayetler) {
+
+      if (err) {return res.serverError(err);}
+
+      //  return res.json(sikayetler);
+      return res.view('admin/sikayet/add',{layout:'admin/layout',sikayetler: sikayetler,kullanicilar:users,durumtipleri:durumtipleri});
+
+
+    });
+
+
   },
 
-  /**
-   * `Admin/AdminKullaniciController.save()`
-   */
+
+
   save: function (req, res) {
-  	var name = req.param('name');
-  	var surname = req.param('surname');
-    var email=req.param('email');
-    var password = req.param('password');
-    var status = req.param('status');
-    var duty = req.param('duty');
-    var crypto = require('crypto');
-    var passwordHash= crypto.createHash('sha1').update(password).digest('hex');
-    console.log(name,surname,email,password, status, duty, passwordHash);    
-    Kullanicilar.create({isim: name, soyIsim: surname, email:email, sifre:passwordHash, hesapDurum: status, gorevId:duty}).exec(function createCB(err, created){
+    var sikayetId   = req.param('sikayetId');
+    var durumTipiId = req.param('durumTipiId');
+    var kullaniciId = req.param('kullaniciId');
+
+
+
+    Durumlar.create({sikayetIlgiliId: kullaniciId, durumTipId: durumTipiId, sikayetId:sikayetId,durumBitis:null}).exec(function createCB(err, created){
       console.log(err);
       if(err) {
         req.flash('message','Sorun Oluştu');
         req.flash('type','danger');
         req.flash('icon', 'ban');
       }else {
+
+        Durumlar.findOne().where({durumBitis:null}).sort({createdAt: 'asc'}) .exec(function(error, durumlar) {
+          if(error) {
+
+          }else {
+            durumlar.durumBitis="2017-05-18 19:57:41+03";
+
+            durumlar.save(function(error) {
+            if(error) {
+              req.flash('message','Sorun Oluştu.');
+              req.flash('type','danger');
+              req.flash('icon', 'ban');
+            } else {
+              req.flash('message','Güncelleme Başarılı.');
+              req.flash('type','success');
+              req.flash('icon', 'check');
+            }
+          });
+
+          }
+        });
+
         console.log('Created email with name ' + created.email);
         req.flash('message','Kayit Başarılı.');
         req.flash('type','success');
         req.flash('icon', 'check');
+
+
       }
-      return res.redirect('/admin/kullanici/add');
+      return res.redirect('/admin/sikayet/aktar/'+sikayetId);
     });
   },
+
+
   /**
-   * `Admin/AdminKullaniciController.list()`
+   * `Admin/AdminSikayetController.list()`
    */
   list: function (req, res) {
-    req.flash('kullanici', 'active');
+    req.flash('sikayet', 'active');
 
-    Kullanicilar.find(function(err, kullanicilar) {
+    var blokId=5;
+    var ilgiliId=5;
+    var query='SELECT s.id as sikayetlerid,aciklama,birim.isim as birimismi,durumlar.id as durumid,durumtipi.isim as durumtipisim FROM sikayetler s ' +
+      '    INNER JOIN birim ON birim.id = s."birimId"' +
+      '    INNER JOIN durumlar ON s.id = durumlar."sikayetId"' +
+      '    INNER JOIN durumtipi ON durumtipi.id = durumlar."durumTipId"' +
+      '     where durumlar."sikayetIlgiliId"='+ilgiliId+' and durumlar."durumBitis"  IS NULL';
+
+
+
+    Sikayetler.query(query, function(err, sikayetler) {
+
       if (err) {return res.serverError(err);}
 
-      return res.view('admin/kullanici/list',{layout:'admin/layout',kullanicilar: kullanicilar});
+     //  return res.json(sikayetler);
+        return res.view('admin/sikayet/list',{layout:'admin/layout',sikayetler: sikayetler});
+
 
     });
+
+
   },
-  /**
-   * `Admin/AdminKullaniciController.edit()`
-   */
-  edit: function (req, res) {
-    req.flash('kullanici', 'active');
 
-    var id=req.param('id');
-    YetkiTipi.find(function(err, görevtipleri) {
-      if (err) {return res.serverError(err);}
-
-      Kullanicilar.findOne({
-	      id:id
-	    }).exec(function (err, kayıt){
-	        if (err) {
-	          return res.negotiate(err);
-	        }
-	        if (!kayıt) {
-	          return res.notFound('Could not find Finn, sorry.');
-	        }
-
-	     return res.view('admin/kullanici/edit',{layout:'admin/layout',kayıt:kayıt, görevtipleri:görevtipleri});
-	    });
-	});
-  },
-  /**
-   * `Admin/AdminKullaniciController.update()`
-   */
-  update: function (req, res) {
-    Kullanicilar.findOne(req.body.id).exec(function(error, kayıt) {
-		if(error) {
-		// do something with the error.
-		}
-		if(req.body.name) {
-			kayıt.isim = req.body.name;
-		}
-		if(req.body.surname) {
-			kayıt.soyIsim = req.body.surname;
-		}
-		if(req.body.email) {
-			kayıt.email = req.body.email;
-		}
-		if(req.body.password) {
-			kayıt.sifre = req.body.password;
-		}
-		if(req.body.status) {
-			kayıt.hesapDurum = req.body.status;
-		}
-		if(req.body.duty) {
-			kayıt.gorevId = req.body.duty;
-		}
-
-        kayıt.save(function(error) {
-          if(error) {
-            req.flash('message','Sorun Oluştu.');
-            req.flash('type','danger');
-            req.flash('icon', 'ban');
-          } else {
-            req.flash('message','Güncelleme Başarılı.');
-            req.flash('type','success');
-            req.flash('icon', 'check');
-          return res.redirect('/admin/kullanici/edit/'+req.body.id);
-        }
-      });
-    });
-  },
   /**
    * `Admin/AdminSitekaralisteController.show()`
    */
@@ -131,12 +134,13 @@ module.exports = {
       todo: 'show() is not implemented yet!'
     });
   },
+
   delete: function (req, res) {
     var id=req.param('id');
-    Kullanicilar.destroy({id: id})
+    Sikayetler.destroy({id: id})
       .exec(function(e,r){
 
-        return res.redirect('/admin/kullanici/');
+        return res.redirect('/admin/sikayet/');
       });
   }
 };

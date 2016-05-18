@@ -43,13 +43,6 @@ module.exports.routes = {
   'get /ajax/sikayet/register/':'AnasayfaController.sikayetKayit',
   'get /ajax/sikayet/list/':'AnasayfaController.sikayetListesi',
 
-  '/admin': {
-    view: 'admin/index/homepage',
-    locals: {
-      layout: 'admin/layout'
-    }
-  },
-
   'get /admin':'Admin/AdminIndexController.index',
 
   /*Bina*/
@@ -134,6 +127,21 @@ module.exports.routes = {
   'get /admin/kullanici/edit/:id':'Admin/AdminKullaniciController.edit',
   'post /admin/kullanici/update':'Admin/AdminKullaniciController.update',
   'get /admin/kullanici/delete/:id':'Admin/AdminKullaniciController.delete',
+
+
+  /*Sikayet*/
+
+
+  'get /admin/sikayet':'Admin/AdminSikayetController.list',
+  'get /admin/sikayet/aktar/:id':'Admin/AdminSikayetController.aktar',
+  'post /admin/sikayet/save':'Admin/AdminSikayetController.save',
+  'get /admin/sikayet/delete/:id':'Admin/AdminSikayetController.delete',
+
+
+  'get /admin/login':'Admin/AdminLoginController.login',
+  'post /admin/dologin':'Admin/AdminLoginController.doLogin',
+   'get /admin/logout':'Admin/AdminLoginController.logout'
+
   /***************************************************************************
   *                                                                          *
   * Custom routes here...                                                    *

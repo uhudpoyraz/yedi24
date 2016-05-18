@@ -16,26 +16,23 @@
           <tbody>
           <tr>
             <th style="width: 10px">id</th>
-            <th>İsim</th>
-            <th>Soyisim</th>
-            <th>Email</th>
-            <th>Şifre</th>
-            <th>Durum</th>
-            <th>GörevId</th>
-            <th style="width: 40px">Düzenle</th>
+            <th>Durum id</th>
+            <th>Durum Tipi</th>
+            <th>Birim</th>
+            <th>Açıklama</th>
+
+            <th style="width: 40px">Aktar</th>
             <th style="width: 40px">Sil</th>
           </tr>
-          <% _.each(kullanicilar, function(kullanici) {%>
+          <% _.each(sikayetler.rows, function(sikayet) {%>
           <tr>
-            <td><%=kullanici.id %></td>
-            <td><%=kullanici.isim%></td>
-            <td><%=kullanici.soyIsim%></td>
-            <td><%=kullanici.email%></td>
-            <td><%=kullanici.sifre%></td>
-            <td><%=kullanici.hesapDurum%></td>
-            <td><%=kullanici.gorevId%></td>
-            <td><a href="/admin/kullanici/edit/<%=kullanici.id %>"><span class="badge bg-green">düzenle</span></a></td>
-            <td><a onclick="return confirm('Silmek İstediğinizden Eminmisiniz ?');" href="/admin/kullanici/delete/<%=kullanici.id %>"><span class="badge bg-red">sil</span></a></td>
+            <td><%=sikayet.durumid %></td>
+            <td><%=sikayet.sikayetlerid %></td>
+            <td><%=sikayet.durumtipisim %></td>
+            <td><%=sikayet.birimismi %></td>
+            <td><%=sikayet.aciklama%></td>
+            <td><a href="/admin/sikayet/aktar/<%=sikayet.sikayetlerid %>"><span class="badge bg-green">Aktar</span></a></td>
+            <td><a onclick="return confirm('Silmek İstediğinizden Eminmisiniz ?');" href="/admin/sikayet/delete/<%=sikayet.sikayetlerid %>"><span class="badge bg-red">sil</span></a></td>
           </tr>
           <% }) %>
 

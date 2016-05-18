@@ -30,7 +30,8 @@ module.exports = {
     },
     durumBitis:{
 
-      type:'datetime'
+      type:'datetime',
+      required: false
 
     }
     ,
@@ -42,7 +43,7 @@ module.exports = {
       collection: 'eklentiler',
       via: 'durumId'
     },
-  
+
 
   }
 };
