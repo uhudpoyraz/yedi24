@@ -33,7 +33,9 @@
               <option value="0">Seçiniz</option>
 
               <% _.each(kullanicilar, function(kullanici) {%>
-              <option <% if (kullanici.id==iletisim.kullaniciId) {%> selected="selected" <% } %>  value="<%=kullanici.id%>"><%=kullanici.isim%>-<%=kullanici.soyIsim%></option>
+              <option <% if (kullanici.id==iletisim.kullaniciId) {%> selected="selected" <% } %>  value="<%=kullanici.id%>"><%=kullanici.isim%>-<%=kullanici.soyIsim%>
+
+              </option>
               <% }) %>
             </select>
           </div>
@@ -44,7 +46,7 @@
               <option value="0">Seçiniz</option>
 
               <% _.each(iletisimtipleri, function(tip) {%>
-              <option <% if (tip.id==iletisim.iletisimTipId) {%> selected="selected" <% } %> value="<%=tip.deger%>"></option>
+              <option <% if (tip.id==iletisim.iletisimTipId) {%> selected="selected" <% } %> value="<%=tip.id%>"><%=tip.deger%>  </option>
               <% }) %>
 
             </select>
