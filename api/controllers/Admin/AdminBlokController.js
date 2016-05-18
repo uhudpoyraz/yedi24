@@ -105,7 +105,7 @@ module.exports = {
           if (err) {return res.serverError(err);}
 
 
-          return res.view('admin/blok/add',{layout:'admin/layout',binalar: binalar,kullanicilar: kullanicilar});
+          return res.view('admin/blok/edit',{layout:'admin/layout',blok:blok,binalar: binalar,kullanicilar: kullanicilar});
 
         });
 
