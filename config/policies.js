@@ -27,7 +27,44 @@ module.exports.policies = {
   ***************************************************************************/
 
   // '*': true,
+  //'*': "sessionAuth",
 
+   "Admin/AdminIndexController": {
+    "*": "sessionAuth"
+  },
+  "Admin/AdminBinaController": {
+    "*": "sessionAuth"
+  },
+  "Admin/AdminBirimController": {
+    "*": "sessionAuth"
+  },
+  "Admin/AdminBlokController": {
+    "*": "sessionAuth"
+  },
+  "Admin/AdminIletisimController": {
+    "*": "sessionAuth"
+  },
+  "Admin/AdminIletisimTipiController": {
+    "*": "sessionAuth"
+  },
+  "Admin/AdminKaralisteController": {
+    "*": "sessionAuth"
+  },
+  "Admin/AdminKullaniciController": {
+    "*": "sessionAuth"
+  },
+  "Admin/AdminSikayetController": {
+    "*": "sessionAuth"
+  },
+  "Admin/AdminSikayetDurumTipiController": {
+    "*": "sessionAuth"
+  },
+  "Admin/AdminSiteAyarController": {
+    "*": "sessionAuth"
+  },
+  "Admin/AdminYetkiTipleriController": {
+    "*": "sessionAuth"
+  },
   /***************************************************************************
   *                                                                          *
   * Here's an example of mapping some policies to run before a controller    *
