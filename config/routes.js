@@ -37,7 +37,7 @@ module.exports.routes = {
   'get /ajax/birimlist/':'AnasayfaController.birimList',
   'post /ajax/user/register/':'AnasayfaController.userRegister',
   'post /ajax/dologin/':'LoginController.doLogin',
-  'post /logout':'LoginController.logout',
+  'get /logout':'LoginController.logout',
 
   'post /ajax/sikayet/register/':'AnasayfaController.sikayetKayit',
   'get /ajax/sikayet/list/':'AnasayfaController.sikayetListesi',
