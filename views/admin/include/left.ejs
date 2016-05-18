@@ -24,7 +24,16 @@
                     <!-- /.search form -->
                     <!-- sidebar menu: : style can be found in sidebar.less -->
                     <ul class="sidebar-menu">
+                      <li class="treeview <%- req.flash('sikayetlistesi') %>" >
+                        <a href="#">
+                          <i class="fa fa-users"></i> <span>Gelen Sikayetler</span>
+                          <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
 
+                          <li><a href="http://localhost:1337/admin/sikayet/"><i class="fa fa-angle-double-right"></i> Listele</a></li>
+                        </ul>
+                      </li>
 
                       <li class="treeview <%- req.flash('kullanici') %>" >
                         <a href="#">

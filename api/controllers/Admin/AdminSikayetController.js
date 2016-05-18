@@ -12,11 +12,13 @@ module.exports = {
    */
 
   aktar: function (req, res) {
-    req.flash('sikayet', 'active');
+    req.flash('sikayetlistesi', 'active');
 
     var id=req.param('id');
     var users;
     var durumtipleri;
+    
+    
     Kullanicilar.find(function(err, kullanicilar) {
       if (err) {return res.serverError(err);}
       users = kullanicilar;
@@ -26,7 +28,8 @@ module.exports = {
       durumtipleri = durumtipi;
     });
     var blokId=5;
-    var ilgiliId=9;
+    var ilgiliId=req.session.AdminkullaniciDetay.id;
+    
     var query='SELECT s.id as sikayetlerid,aciklama,birim.isim as birimismi FROM sikayetler s ' +
       '    INNER JOIN birim ON birim.id = s."birimId"' +
       '    INNER JOIN durumlar ON s.id = durumlar."sikayetId"' +
@@ -104,7 +107,7 @@ module.exports = {
     req.flash('sikayet', 'active');
 
     var blokId=5;
-    var ilgiliId=5;
+    var ilgiliId=req.session.AdminkullaniciDetay.id;
     var query='SELECT s.id as sikayetlerid,aciklama,birim.isim as birimismi,durumlar.id as durumid,durumtipi.isim as durumtipisim FROM sikayetler s ' +
       '    INNER JOIN birim ON birim.id = s."birimId"' +
       '    INNER JOIN durumlar ON s.id = durumlar."sikayetId"' +

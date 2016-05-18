@@ -23,7 +23,7 @@ module.exports = {
     var email = req.param("email");
     var password = req.param("password");
 
-     var kullanici = Kullanicilar.findOne({
+     Kullanicilar.findOne({
       email: email
     }).exec(function afterwards(err, kullanici) {
       // Error handling
