@@ -30,7 +30,7 @@ module.exports = {
 
     hesapDurum: {
 
-      type: 'boolean'
+      type: 'integer'
 
     },
 

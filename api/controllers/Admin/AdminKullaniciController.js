@@ -27,22 +27,22 @@ module.exports = {
     var password = req.param('password');
     var status = req.param('status');
     var duty = req.param('duty');
-
     var crypto = require('crypto');
     var passwordHash= crypto.createHash('sha1').update(password).digest('hex');
-
+    console.log(name,surname,email,password, status, duty, passwordHash);    
     Kullanicilar.create({isim: name, soyIsim: surname, email:email, sifre:passwordHash, hesapDurum: status, gorevId:duty}).exec(function createCB(err, created){
-      console.log('Created email with name ' + created.email);
+      console.log(err);
       if(err) {
         req.flash('message','Sorun Oluştu');
         req.flash('type','danger');
         req.flash('icon', 'ban');
       }else {
+        console.log('Created email with name ' + created.email);
         req.flash('message','Kayit Başarılı.');
         req.flash('type','success');
         req.flash('icon', 'check');
       }
-      return res.redirect('/admin/kullanici/add')
+      return res.redirect('/admin/kullanici/add');
     });
   },
   /**
