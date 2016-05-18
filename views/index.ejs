@@ -53,7 +53,7 @@
             <div class="col-md-12">
                 <div class="panel panel-default"  id="toolbar">
                     <div class="panel-body">
-                        <form role="form">
+                        <form role="form" method="post">
                             <div class="form-group">
 
                               <label id="sonuc" for="sel1">Binalar:</label>
@@ -90,7 +90,7 @@
 
             <div class="col-md-12">
               <div id="toolbar1">
-                <div class="form-inline" role="form">
+                <div class="form-inline" role="form" method="post">
                   <button id="kayitlistele" type="submit" class="btn btn-default">Kayitları Listele</button>
                 </div>
 
@@ -140,7 +140,7 @@
                 <div id="myTabContent" class="tab-content">
 
                     <div class="tab-pane fade active in" id="signinTab">
-                        <form role="form">
+                        <form role="form" method="post">
 
                                 <!-- Sign In Form -->
                                 <!-- Text input-->
@@ -187,7 +187,7 @@
                         </form>
                     </div>
                     <div class="tab-pane fade" id="signup">
-                        <form  role="form">
+                        <form  role="form" method="post">
 
                                 <!-- Sign Up Form -->
                                 <!-- Text input-->
@@ -283,7 +283,7 @@
       <!-- Modal Body -->
       <div class="modal-body">
 
-        <form role="form">
+        <form role="form" method="post">
           <div class="form-group">
             <label for="complainSubject">Şikayet Konusu</label>
             <input type="text" class="form-control" name="complainSubject" id="complainSubject" placeholder="Şikayetin Konusu"/>
@@ -293,11 +293,9 @@
             <label id="sonuc" for="sel1">Binalar:</label>
             <select class="form-control" name="binaid" id="complainBinaId">
               <option value="0">Seçiniz</option>
-
               <% _.each(binalar, function(bina) {%>
               <option value="<%=bina.id%>"><%=bina.isim%></option>
               <% }) %>
-
             </select>
           </div>
           <div class="form-group">
@@ -312,17 +310,13 @@
               <option value="0">Seçiniz</option>
             </select>
           </div>
-
           <div class="form-group">
             <label for="compainContent">Şikayet İçeriği</label>
-
             <textarea class="form-control" rows="5" id="compainContent" name="compainContent"></textarea>
-
           </div>
-          <div class="checkbox">
-            <label>
-              <input type="checkbox"/> Check me out
-            </label>
+          <div class="form-group">
+            <label for="compainAttachments">Şikayet Eki</label>
+            <input type="file" id="ek" name="ek"/>
           </div>
           <button id="complainSave" type="submit" class="btn btn-default">Gönder</button>
         </form>
@@ -338,9 +332,6 @@
 </div>
 <script type="text/javascript">
   $(function () {
-
-
-
     $('#sikayetTable').bootstrapTable({
 
       method: 'get',

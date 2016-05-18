@@ -9,7 +9,7 @@ $(function(){
     var $blokId = $('#blokId');
     /* Ajax Baslasin */
     $.ajax({
-      type:'GET',
+      type:'POST',
       data:'binaid='+binaId,
       dataType:'json',
       url:'/ajax/bloklist/',
@@ -30,7 +30,7 @@ $(function(){
     var $birimId = $('#birimId');
     /* Ajax Baslasin */
     $.ajax({
-      type:'GET',
+      type:'POST',
       data:'blokid='+blokId,
       dataType:'json',
       url:'/ajax/birimlist/',
@@ -63,7 +63,7 @@ $(function(){
     }
 
     $.ajax({
-      type:'GET',
+      type:'POST',
       data:'name='+name+'&surname='+surname+'&email='+email+'&password='+password,
       dataType:'json',
       url:'/ajax/user/register/',
@@ -89,7 +89,7 @@ $(function(){
     var password = $('#passwordinput').val();
 
     $.ajax({
-      type:'GET',
+      type:'POST',
       data:'email='+email+'&password='+password,
       dataType:'json',
       url:'/ajax/dologin/',
@@ -115,7 +115,7 @@ $(function(){
     var $blokId = $('#complainBlokId');
     /* Ajax Baslasin */
     $.ajax({
-      type:'GET',
+      type:'POST',
       data:'binaid='+binaId,
       dataType:'json',
       url:'/ajax/bloklist/',
@@ -136,7 +136,7 @@ $(function(){
     var $birimId = $('#complainBirimId');
     /* Ajax Baslasin */
     $.ajax({
-      type:'GET',
+      type:'POST',
       data:'blokid='+blokId,
       dataType:'json',
       url:'/ajax/birimlist/',
@@ -161,7 +161,7 @@ $(function(){
     var $compainContent = $('#compainContent').val();
 
     $.ajax({
-      type:'GET',
+      type:'POST',
       data:'birimId='+$birimId+'&complainContent='+$compainContent,
       dataType:'json',
       url:'/ajax/sikayet/register/',
