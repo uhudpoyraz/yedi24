@@ -9,7 +9,7 @@ $(function(){
     var $blokId = $('#blokId');
     /* Ajax Baslasin */
     $.ajax({
-      type:'POST',
+      type:'GET',
       data:'binaid='+binaId,
       dataType:'json',
       url:'/ajax/bloklist/',
@@ -30,7 +30,7 @@ $(function(){
     var $birimId = $('#birimId');
     /* Ajax Baslasin */
     $.ajax({
-      type:'POST',
+      type:'GET',
       data:'blokid='+blokId,
       dataType:'json',
       url:'/ajax/birimlist/',
@@ -115,7 +115,7 @@ $(function(){
     var $blokId = $('#complainBlokId');
     /* Ajax Baslasin */
     $.ajax({
-      type:'POST',
+      type:'GET',
       data:'binaid='+binaId,
       dataType:'json',
       url:'/ajax/bloklist/',
@@ -136,7 +136,7 @@ $(function(){
     var $birimId = $('#complainBirimId');
     /* Ajax Baslasin */
     $.ajax({
-      type:'POST',
+      type:'GET',
       data:'blokid='+blokId,
       dataType:'json',
       url:'/ajax/birimlist/',
@@ -156,7 +156,7 @@ $(function(){
 
   $('#complainSave').click(function(){
 
-
+  /*  
     var $birimId = $('#complainBirimId').val();
     var $compainContent = $('#compainContent').val();
 
@@ -178,9 +178,22 @@ $(function(){
         }
       }
     });
-    return false;
+    return false;*/
+    var formData = new FormData($('#sikayetEklemeFormu')[0]);
+  
+          $.ajax({
+          url: '/ajax/sikayet/register/',
+          type: 'POST',
+          data: formData,
+          async: false,
+          cache: false,
+          contentType: false,
+          processData: false,
+          success: function (returndata)
+          {
+            console.log(returndata);
+            location.reload();
+          }
+          });
   });
-
-
-
 });

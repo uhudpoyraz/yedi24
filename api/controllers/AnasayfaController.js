@@ -96,7 +96,6 @@ module.exports = {
   },
 
   sikayetKayit:function (req,res) {
-    res.setTimeout(240000);
     //Upload
     // e.g.
     // 0 => infinite
@@ -104,60 +103,66 @@ module.exports = {
     // etc.
     //
     // Node defaults to 2 minutes.
-    req.file('ek').upload({ maxBytes: 10000000, dirname: '../../../assets/images/upload/ek' }, function (error, uploadedFiles) 
+    console.log(req.params.all());
+    req.file('ek').upload({dirname: '../../assets/images/upload/ek' }, function (error, uploadedFiles) 
       {
+        console.log(error);
         if (!error)
         {
+          console.log(uploadedFiles);
           if ( uploadedFiles.length > 0) 
           {
-            if (err) 
-              return res.serverError(err);
-            else 
-              console.log(uploadedFiles[0].fd);
+              console.log(uploadedFiles[0].fd+"bura mı?");
+
+              var complainSubject= req.param("complainSubject");
+              var complainContent=req.param("complainContent");
+              var birimId=req.param("birimid");
+              var kullaniciId=-1;
+              var birimSorumluId=-1;
+              
+              if(req.session.kullaniciDetay!=null){
+                var kullaniciId=req.session.kullaniciDetay.id;
+              }
+
+              Sikayetler.create({aciklama: complainContent,birimId:birimId,kullaniciId:kullaniciId }).exec(function createCB(err, created){
+                console.log('Created sikayet with birimId ' + created.birimId);
+                if(err) {
+                  return res.json({succes:false,message:'Sorun Oluştur.'});
+                }
+                
+
+                Birim.findOne({id: created.birimId}).exec(function (err, record){
+                  if(err) {
+                    console.log("Birim eklenmesinde hata oluştu.");
+                  }
+                  Blok.findOne({id: record.blokId}).exec(function (err, blok){
+                    if(err) {
+                      console.log("Birim eklenmesinde hata oluştu.");
+                    }
+                    // Yeni Şikayet 1
+                    // Alındı 2
+                    // Yetkiliye Aktarıldı 3
+                    // Yedek Parça 4
+                    // Tamamlandı 5
+                      Durumlar.create({sikayetIlgiliId: blok.kullaniciId, durumTipId:1, durumBitis:null, sikayetId:created.id }).exec(function createCB(err, created){
+                      if(err) {
+                        console.log("Yeni Şikayet Durum eklenmesinde hata oluştu.");
+                        return res.serverError(err);
+                      }else{
+                        console.log("Yeni Şikayet Durum eklendi.");
+                        return res.json({succes:true,message:'Kayit Başarıyla Tamamlanmıştır.'});
+                      }
+                    });
+                  });
+                });
+              });
+          }
+          else{
+            return res.json(error);
           }
         }
     });
     
-    var complainSubject= req.param("complainSubject");
-    var complainContent=req.param("complainContent");
-    var birimId=req.param("birimId");
-    var kullaniciId=-1;
-    var birimSorumluId=-1;
-    
-    if(req.session.kullaniciDetay!=null){
-      var kullaniciId=req.session.kullaniciDetay.id;
-    }
-
-    Sikayetler.create({aciklama: complainContent,birimId:birimId,kullaniciId:kullaniciId }).exec(function createCB(err, created){
-      console.log('Created sikayet with birimId ' + created.birimId);
-      if(err) {
-        res.json({succes:false,message:'Sorun Oluştur.'});
-      }
-      res.json({succes:true,message:'Kayit Başarıyla Tamamlanmıştır.'});
-
-      Birim.findOne({id: birimId}).exec(function (err, record){
-        if(err) {
-          console.log("Birim eklenmesinde hata oluştu.");
-        }
-        Blok.findOne({id: record.blokId}).exec(function (err, blok){
-          if(err) {
-            console.log("Birim eklenmesinde hata oluştu.");
-          }
-          // Yeni Şikayet 1
-          // Alındı 2
-          // Yetkiliye Aktarıldı 3
-          // Yedek Parça 4
-          // Tamamlandı 5
-            Durumlar.create({sikayetIlgiliId: blok.kullaniciId, durumTipId:1, durumBitis:null, sikayetId:created.id }).exec(function createCB(err, created){
-            if(err) {
-              console.log("Yeni Şikayet Durum eklenmesinde hata oluştu.");
-            }else{
-              console.log("Yeni Şikayet Durum eklendi.");
-            }
-          });
-        });
-      });
-    });
   },
 
   sikayetListesi:function (req,res) {

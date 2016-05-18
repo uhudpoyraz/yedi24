@@ -283,7 +283,7 @@
       <!-- Modal Body -->
       <div class="modal-body">
 
-        <form role="form" method="post">
+        <form role="form" method="post" id="sikayetEklemeFormu" enctype="multipart/form-data">
           <div class="form-group">
             <label for="complainSubject">Şikayet Konusu</label>
             <input type="text" class="form-control" name="complainSubject" id="complainSubject" placeholder="Şikayetin Konusu"/>
@@ -318,7 +318,7 @@
             <label for="compainAttachments">Şikayet Eki</label>
             <input type="file" id="ek" name="ek"/>
           </div>
-          <button id="complainSave" type="submit" class="btn btn-default">Gönder</button>
+          <button id="complainSave" type="button" class="btn btn-default">Gönder</button>
         </form>
 
       </div>

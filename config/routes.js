@@ -33,14 +33,14 @@ module.exports.routes = {
   ***************************************************************************/
   'get /':'AnasayfaController.index',
 
-  'post /ajax/bloklist/':'AnasayfaController.blokList',
-  'post /ajax/birimlist/':'AnasayfaController.birimList',
+  'get /ajax/bloklist/':'AnasayfaController.blokList',
+  'get /ajax/birimlist/':'AnasayfaController.birimList',
   'post /ajax/user/register/':'AnasayfaController.userRegister',
   'post /ajax/dologin/':'LoginController.doLogin',
   'post /logout':'LoginController.logout',
 
   'post /ajax/sikayet/register/':'AnasayfaController.sikayetKayit',
-  'post /ajax/sikayet/list/':'AnasayfaController.sikayetListesi',
+  'get /ajax/sikayet/list/':'AnasayfaController.sikayetListesi',
 
   'get /admin':'Admin/AdminIndexController.index',
 
