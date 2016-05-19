@@ -38,11 +38,16 @@ module.exports.routes = {
   'post /ajax/user/register/':'AnasayfaController.userRegister',
   'post /ajax/dologin/':'LoginController.doLogin',
   'get /logout':'LoginController.logout',
-
   'post /ajax/sikayet/register/':'AnasayfaController.sikayetKayit',
   'get /ajax/sikayet/list/':'AnasayfaController.sikayetListesi',
-
   'get /admin':'Admin/AdminIndexController.index',
+
+  /*idari*/
+  'get /ajax/idari/sikayet/list':'AnasayfaController.idariSikayetList',
+  'get /ajax/idari/sikayet/aktar/:id':'AnasayfaController.aktar',
+  'post /ajax/idari/sikayet/save':'AnasayfaController.save',
+  'get /ajax/idari/sikayet/delete/:id':'AnasayfaController.delete',
+
 
   /*Bina*/
   'get /admin/bina/add':'Admin/AdminBinaController.add',

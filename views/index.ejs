@@ -17,9 +17,8 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="#">Şikayet Listesi <span class="sr-only">(current)</span></a></li>
-                      <% if (session.kullaniciDetay!=null) {%>
-
+                      <% if (session.kullaniciDetay!=null && session.kullaniciDetay.gorevId==0) {%>
+                      <li class="active"><a href="#">Yaptıgım Şikayetler<span class="sr-only">(current)</span></a></li>
                       <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                aria-haspopup="true" aria-expanded="false">Aktif Şikayetler <span
@@ -30,10 +29,35 @@
                             </ul>
                         </li>
                         <li><a href="#">Profilim</a></li>
+                      <% } else  if (session.kullaniciDetay!=null && session.kullaniciDetay.gorevId!=0) {%>
+                      <li class="active"><a href="#">Gelen Şikayet Listesi <span class="sr-only">(current)</span></a></li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                           aria-haspopup="true" aria-expanded="false">Aktif Şikayetler <span
+                            class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                          <li><a href="#">Aktif Şikayetlerim</a></li>
+                          <li><a href="#">Eski Şikayetlerim</a></li>
+                        </ul>
+                      </li>
+                      <li><a href="#">Profilim</a></li>
+
                       <% } %>
+
+
+
                       </ul>
+
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#" data-toggle="modal" data-target="#yenisikayet">Yeni Şikayet</a>
+
+                      <% if (session.kullaniciDetay!=null && session.kullaniciDetay.gorevId!=0) {%>
+                        <li><a href="#" data-toggle="modal" data-target="#yenisikayet">İdari Sayfası</a></li>
+
+                      <%} else {%>
+
+                        <li><a href="#" data-toggle="modal" data-target="#yenisikayet">Yeni Şikayet</a></li>
+
+                      <%}%>
 
                         <li><% if (session.kullaniciDetay==null) {%><a href="#signup" data-toggle="modal" data-target=".bs-modal-sm"> Kayit Ol/Giriş Yap  </a>  </li> <% } else {%>
                          <li><a href="/logout">Çıkış Yap</a>
@@ -105,10 +129,7 @@
                 <table id="sikayetTable" >
                     <thead>
                     <tr>
-                        <th data-field="id">Bina</th>
-                        <th data-field="id">Blok</th>
-                        <th data-field="birimId.isim">Birim</th>
-                        <th data-field="aciklama">Aciklama</th>
+
                     </tr>
                     </thead>
                     <tbody>
@@ -149,7 +170,7 @@
                               <div class="form-group">
                                     <label class="control-label" for="signinEmail">Email:</label>
                                     <div class="controls">
-                                        <input required="" id="signinEmail" name="email" type="text"
+                                        <input required="" id="signinEmail" name="email" type="text" value="dn@gmail.com"
                                                class="form-control" placeholder="Email Adresiniz" class="input-medium"
                                                required="">
                                     </div>
@@ -160,7 +181,7 @@
                                     <label class="control-label" for="passwordinput">Şifre:</label>
                                     <div class="controls">
                                         <input required="" id="passwordinput" name="password" class="form-control"
-                                               type="password" placeholder="Şifreniz" class="input-medium">
+                                               type="password" placeholder="Şifreniz" value="123456" class="input-medium">
                                     </div>
                                 </div>
 
@@ -331,7 +352,14 @@
   </div>
 </div>
 <script type="text/javascript">
+
+
+
+
+
   $(function () {
+
+    <% if (session.kullaniciDetay==null || session.kullaniciDetay.gorevId==0) {%>
     $('#sikayetTable').bootstrapTable({
 
       method: 'get',
@@ -403,6 +431,63 @@
 
       $('#sikayetTable').bootstrapTable('refresh');
     });
-  });
 
+<%} else {%>
+  $('#sikayetTable').bootstrapTable({
+
+    method: 'get',
+    url: 'http://localhost:1337/ajax/idari/sikayet/list/',
+    cache: false,
+    striped: true,
+    pagination: true,
+    queryParams: function (p) {
+      return {
+        binaId: $('#binaId').val() ,
+        blokId: $('#blokId').val(),
+        birimId: $('#birimId').val(),
+        limit: p.limit,
+        offset: p.offset
+      };
+    },
+    sidePagination:'server',
+    pageSize: 10,
+    pageList: [10, 25, 50, 100, 200],
+    search: false,
+    toolbar:"#toolbar1",
+    showColumns: false,
+    showRefresh: true,
+    minimumCountColumns: 2,
+    clickToSelect: false,
+    columns: [{
+      field: 'sikayetlerid',
+      title: 'id',
+      align: 'center',
+      valign: 'middle',
+      sortable: true,
+      width: "5%"
+    },  {
+      field: 'birimismi',
+      title: 'Birim',
+      align: 'center',
+      valign: 'middle',
+      sortable: true,
+      width: "15%"
+    },  {
+      field: 'aciklama',
+      title: 'Açiklama',
+      align: 'left',
+      valign: 'middle',
+      sortable: true,
+      width: "60%"
+    },  {
+      field: 'durumtipisim',
+      title: 'Durum Tipi',
+      align: 'center',
+      valign: 'middle',
+      sortable: true
+    }
+    ]
+  });
+  <% } %>
+  });
  </script>
