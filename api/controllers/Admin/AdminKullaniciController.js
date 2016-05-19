@@ -154,6 +154,24 @@ module.exports = {
           }
         }
     });
+  },
+
+  ban: function (req, res) {
+    var email=req.param('email');
+      KaraListe.create({email:email}).exec(function createCB(err, created){  
+        if(err) {
+          req.flash('message','Sorun oluştu.');
+          req.flash('type','danger');
+          req.flash('icon', 'ban');
+          return res.json(err);
+        }else {
+          req.flash('message','Karalisteye alındı.');
+          req.flash('type','success');
+          req.flash('icon', 'check');
+          console.log('Email banned: ' + created.email);
+          return res.redirect('/admin/kullanici/');
+        }
+     });
   }
 };
 

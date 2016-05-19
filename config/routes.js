@@ -134,6 +134,7 @@ module.exports.routes = {
   'get /admin/kullanici/edit/:id': 'Admin/AdminKullaniciController.edit',
   'post /admin/kullanici/update': 'Admin/AdminKullaniciController.update',
   'get /admin/kullanici/delete/:id': 'Admin/AdminKullaniciController.delete',
+  'get /admin/kullanici/ban/:email': 'Admin/AdminKullaniciController.ban',
 
   /*Sikayet*/
 

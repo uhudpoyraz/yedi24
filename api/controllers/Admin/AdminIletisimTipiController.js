@@ -14,9 +14,9 @@ module.exports = {
    */
   add: function (req, res) {
     req.flash('iletisimtipi', 'active');
+    
 
-
-    res.view('admin/iletisimtipi/add', {layout: 'admin/layout'});
+    return res.view('admin/iletisimtipi/add', {layout: 'admin/layout'});
 
   },
 
