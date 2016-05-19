@@ -21,7 +21,7 @@ module.exports = {
   },
 
 
-  
+
   /**
    * `Admin/AdminSikayetController.aktar()`
    */
@@ -164,14 +164,22 @@ console.log(query);
 
     var limit=req.param("limit");
     var offset=req.param("offset");
+    var order=req.param("order");
+    var sort=req.param("sort");
 
+
+    if(!sort){
+
+      sort='s."createdAt"';
+      order="desc"
+    }
     var blokId=5;
     var ilgiliId=req.session.kullaniciDetay.id;
     var query='SELECT s.id as sikayetlerid,aciklama,birim.isim as birimismi,durumlar.id as durumid,durumtipi.isim as durumtipisim FROM sikayetler s ' +
       '    INNER JOIN birim ON birim.id = s."birimId"' +
       '    INNER JOIN durumlar ON s.id = durumlar."sikayetId"' +
       '    INNER JOIN durumtipi ON durumtipi.id = durumlar."durumTipId"' +
-      '     where durumlar."sikayetIlgiliId"='+ilgiliId+' and durumlar."durumBitis"  IS NULL'+' limit '+limit+' offset '+offset;
+      '     where durumlar."sikayetIlgiliId"='+ilgiliId+' and durumlar."durumBitis"  IS NULL'+ ' order by '+sort+' '+order+' limit '+limit+' offset '+offset;
 
 
 

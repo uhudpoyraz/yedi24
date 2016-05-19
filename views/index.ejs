@@ -278,7 +278,6 @@
 
   $(function () {
 
-    <% if (session.kullaniciDetay==null || session.kullaniciDetay.gorevId==0) {%>
     $('#sikayetTable').bootstrapTable({
 
       method: 'get',
@@ -292,7 +291,9 @@
           blokId: $('#blokId').val(),
           birimId: $('#birimId').val(),
           limit: p.limit,
-          offset: p.offset
+          offset: p.offset,
+          sort:p.sort,
+          order:p.order
         };
       },
       sidePagination:'server',
@@ -350,90 +351,6 @@
 
       $('#sikayetTable').bootstrapTable('refresh');
     });
-
-<%} else {%>
-    $table=$('#sikayetTable');
-    $remove = $('#remove');
-      selections = [];
-  $('#sikayetTable').bootstrapTable({
-
-    method: 'get',
-    url: 'http://localhost:1337/ajax/idari/sikayet/list/',
-    cache: false,
-    striped: true,
-    pagination: true,
-    queryParams: function (p) {
-      return {
-        binaId: $('#binaId').val() ,
-        blokId: $('#blokId').val(),
-        birimId: $('#birimId').val(),
-        limit: p.limit,
-        offset: p.offset
-      };
-    },
-    sidePagination:'server',
-    pageSize: 10,
-    pageList: [10, 25, 50, 100, 200],
-    search: false,
-    toolbar:"#toolbar1",
-    showColumns: false,
-    showRefresh: true,
-    minimumCountColumns: 2,
-    clickToSelect: false,
-    columns: [{
-      field: 'sikayetlerid',
-      title: 'id',
-      align: 'center',
-      valign: 'middle',
-      sortable: true,
-      width: "5%"
-    },  {
-      field: 'birimismi',
-      title: 'Birim',
-      align: 'center',
-      valign: 'middle',
-      sortable: true,
-      width: "15%"
-    },  {
-      field: 'aciklama',
-      title: 'Açiklama',
-      align: 'left',
-      valign: 'middle',
-      sortable: true,
-      width: "60%"
-    },  {
-      field: 'durumtipisim',
-      title: 'Durum Tipi',
-      align: 'center',
-      valign: 'middle',
-      sortable: true
-    },
-      {
-        field: 'operate',
-        title: 'İşlem',
-        align: 'center',
-        events: window.operateEvents,
-        formatter: operateFormatter
-      }
-    ]
-  });
-
-    function operateFormatter(value, row, index) {
-      return [
-        '<a class="like" href="/idari/sikayet/aktar/'+row.sikayetlerid+'" title="Like">',
-        '<i class="">Aktar</i>',
-        '</a>  '
-
-      ].join('');
-    }
-
-     window.operateEvents = {
-      'click .like': function (e, value, row, index) {
-        alert('You click like action, row: ' + JSON.stringify(row));
-      }
-    };
-
-    <% } %>
 
 
   });
