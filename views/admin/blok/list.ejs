@@ -14,6 +14,16 @@
     <div class="box">
 
       <div class="box-body">
+      <% if (req.session.flash.message) {%>
+        <div class="box-body">
+          <div class="alert alert-<%- req.flash('type') %> alert-dismissable">
+            <i class="fa fa-<%- req.flash('icon') %>"></i>
+            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+            <b><%- req.flash('message') %></b>
+          </div>
+        </div>
+        <%}%>
+        
         <table class="table table-bordered">
           <tbody><tr>
             <th style="width: 10px">id</th>

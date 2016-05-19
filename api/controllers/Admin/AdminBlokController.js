@@ -174,12 +174,28 @@ module.exports = {
   delete: function (req, res) {
 
     var id=req.param('id');
-
-    Blok.destroy({id: id})
-      .exec(function(e,r){
-
-        return res.redirect('/admin/blok/');
-      });
+      
+      Birim.findOne({
+        blokId:id
+      }).exec(function (err, birim){
+        if (err) {
+          return res.negotiate(err);
+        }else {
+          if (birim !=null) {
+              req.flash('message','Kullanılan kaydı silemezsiniz.');
+              req.flash('type','danger');
+              req.flash('icon', 'ban');
+              return res.redirect('/admin/blok/');
+          }else{
+            req.flash('message','Güncelleme Başarılı.');
+            req.flash('type','success');
+            req.flash('icon', 'check');
+            Blok.destroy({id: id}).exec(function(e,r){
+              return res.redirect('/admin/blok/'); 
+            });
+          }
+        }
+    });
   }
 
 

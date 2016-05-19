@@ -135,16 +135,30 @@ module.exports = {
   },
 
   delete: function (req, res) {
-
     var id=req.param('id');
-
-    Bina.destroy({id: id})
-      .exec(function(e,r){
-
-        return res.redirect('/admin/bina/');
-      });
-  }
-
-
+    
+    Blok.findOne({
+      binaId:id
+    }).exec(function (err, blok){
+      if (err) {
+        return res.negotiate(err);
+      }else {
+        if (blok !=null) {
+            //console.log(blok);
+            req.flash('message','Kullanılan kaydı silemezsiniz.');
+            req.flash('type','danger');
+            req.flash('icon', 'ban');
+            return res.redirect('/admin/bina/');
+        }else{
+          req.flash('message','Güncelleme Başarılı.');
+          req.flash('type','success');
+          req.flash('icon', 'check');
+          Bina.destroy({id: id}).exec(function(e,r){
+            return res.redirect('/admin/bina/'); 
+          });
+        }
+      }
+  });
+}
 };
 

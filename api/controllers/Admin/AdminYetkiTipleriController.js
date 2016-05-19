@@ -140,12 +140,27 @@ module.exports = {
   delete: function (req, res) {
 
     var id=req.param('id');
-
-    YetkiTipi.destroy({id: id})
-      .exec(function(e,r){
-
-        return res.redirect('/admin/yetkitipi/');
-      });
+      Kullanicilar.findOne({
+        gorevId:id
+      }).exec(function (err, kullanici){
+        if (err) {
+          return res.negotiate(err);
+        }else {
+          if (kullanici !=null) {
+              req.flash('message','Kullanılan kaydı silemezsiniz.');
+              req.flash('type','danger');
+              req.flash('icon', 'ban');
+              return res.redirect('/admin/yetkitipi/');
+          }else{
+            req.flash('message','Güncelleme Başarılı.');
+            req.flash('type','success');
+            req.flash('icon', 'check');
+            YetkiTipi.destroy({id: id}).exec(function(e,r){
+              return res.redirect('/admin/yetkitipi/'); 
+            });
+          }
+        }
+    });
   }
 
 

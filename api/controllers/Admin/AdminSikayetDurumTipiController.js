@@ -142,11 +142,27 @@ module.exports = {
 
     var id=req.param('id');
 
-    DurumTipi.destroy({id: id})
-      .exec(function(e,r){
-
-        return res.redirect('/admin/sikayetdurumtipi/');
-      });
+      Durumlar.findOne({
+        durumTipId:id
+      }).exec(function (err, durum){
+        if (err) {
+          return res.negotiate(err);
+        }else {
+          if (durum !=null) {
+              req.flash('message','Kullanılan kaydı silemezsiniz.');
+              req.flash('type','danger');
+              req.flash('icon', 'ban');
+              return res.redirect('/admin/sikayetdurumtipi/');
+          }else{
+            req.flash('message','Güncelleme Başarılı.');
+            req.flash('type','success');
+            req.flash('icon', 'check');
+            DurumTipi.destroy({id: id}).exec(function(e,r){
+              return res.redirect('/admin/sikayetdurumtipi/'); 
+            });
+          }
+        }
+    });
   }
 
 

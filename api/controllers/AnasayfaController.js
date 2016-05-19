@@ -19,9 +19,11 @@ module.exports = {
           res.view("index", {binalar: binalar});
 
         });
-
-
-
+        /* Sessiondan path çekmek için denedik
+        Parametre.findOne({isim:'imagesPath'}).exec(function (err, path){
+            req.session.imagesPath = path.deger;
+            console.log(req.session.imagesPath );
+        });*/
   },
 
   /**
@@ -96,23 +98,17 @@ module.exports = {
   },
 
   sikayetKayit:function (req,res) {
-    //Upload
-    // e.g.
-    // 0 => infinite
-    // 240000 => 4 minutes (240,000 miliseconds)
-    // etc.
-    //
-    // Node defaults to 2 minutes.
     console.log(req.params.all());
-    req.file('ek').upload({dirname: '../../assets/images/upload/ek' }, function (error, uploadedFiles)
+
+    req.file('ek').upload({dirname: '../../assets/images/upload/ek'}, function (error, uploadedFiles)
       {
-        console.log(error);
+        //console.log(error);
         if (!error)
         {
           console.log(uploadedFiles);
           if ( uploadedFiles.length > 0)
           {
-              console.log(uploadedFiles[0].fd+"bura mı?");
+              console.log("File description: " + uploadedFiles[0].fd +"\n");
 
               var complainSubject= req.param("complainSubject");
               var complainContent=req.param("complainContent");
@@ -144,13 +140,20 @@ module.exports = {
                     // Yetkiliye Aktarıldı 3
                     // Yedek Parça 4
                     // Tamamlandı 5
-                      Durumlar.create({sikayetIlgiliId: blok.kullaniciId, durumTipId:1, durumBitis:null, sikayetId:created.id }).exec(function createCB(err, created){
+                      Durumlar.create({sikayetIlgiliId: blok.kullaniciId, durumTipId:1, durumBitis:null, sikayetId:created.id }).exec(function createCB(err, durum){
                       if(err) {
                         console.log("Yeni Şikayet Durum eklenmesinde hata oluştu.");
                         return res.serverError(err);
                       }else{
-                        console.log("Yeni Şikayet Durum eklendi.");
-                        return res.json({succes:true,message:'Kayit Başarıyla Tamamlanmıştır.'});
+                        Eklentiler.create({sikayetId: created.id , dosyaAdi: uploadedFiles[0].filename, durumId:durum.id}).exec(function createCB(err, eklenti){
+                        if(err) {
+                          console.log("Yeni Eklenti girişinde hata oluştu.");
+                          return res.serverError(err);
+                        }else{
+                          console.log("Şikayet eklendi.");
+                          return res.json({succes:true,message:'Kayit Başarıyla Tamamlanmıştır.'});
+                        }
+                      });
                       }
                     });
                   });

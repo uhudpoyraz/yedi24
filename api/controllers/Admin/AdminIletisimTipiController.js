@@ -139,12 +139,27 @@ module.exports = {
   delete: function (req, res) {
 
     var id=req.param('id');
-
-    IletisimTipi.destroy({id: id})
-      .exec(function(e,r){
-
-        return res.redirect('/admin/iletisimtipi/');
-      });
+      Iletisim.findOne({
+        iletisimTipId:id
+      }).exec(function (err, iletisim){
+        if (err) {
+          return res.negotiate(err);
+        }else {
+          if (iletisim !=null) {
+              req.flash('message','Kullanılan kaydı silemezsiniz.');
+              req.flash('type','danger');
+              req.flash('icon', 'ban');
+              return res.redirect('/admin/iletisimtipi/');
+          }else{
+            req.flash('message','Güncelleme Başarılı.');
+            req.flash('type','success');
+            req.flash('icon', 'check');
+            IletisimTipi.destroy({id: id}).exec(function(e,r){
+              return res.redirect('/admin/iletisimtipi/'); 
+            });
+          }
+        }
+    });
   }
 
 
