@@ -1,0 +1,224 @@
+<div class="container">
+  <% include include/head %>
+
+  <div class="container-fluid modal-content">
+
+
+    <div class="row">
+
+
+      <div class="col-md-12">
+        <div id="toolbar1">
+          <div class="form-inline" role="form" method="post">
+            <button id="kayitlistele" type="submit" class="btn btn-default">Kayitları Listele</button>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+
+        <table id="sikayetTable">
+          <thead>
+          <tr>
+
+          </tr>
+          </thead>
+          <tbody>
+
+
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- Login-->
+<div class="modal fade bs-modal-sm" id="myModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <br>
+      <div class="bs-example bs-example-tabs">
+        <ul id="myTab" class="nav nav-tabs">
+          <li class="active"><a href="#signinTab" data-toggle="tab">Giriş Yap</a></li>
+          <li class=""><a href="#signup" data-toggle="tab">Kayit Ol</a></li>
+        </ul>
+      </div>
+      <div class="modal-body">
+        <div id="myTabContent" class="tab-content">
+
+          <div class="tab-pane fade active in" id="signinTab">
+            <form role="form" method="post">
+
+              <!-- Sign In Form -->
+              <!-- Text input-->
+
+
+              <div class="form-group">
+                <label class="control-label" for="signinEmail">Email:</label>
+                <div class="controls">
+                  <input required="" id="signinEmail" name="email" type="text" value="dn@gmail.com"
+                         class="form-control" placeholder="Email Adresiniz" class="input-medium"
+                         required="">
+                </div>
+              </div>
+
+              <!-- Password input-->
+              <div class="form-group">
+                <label class="control-label" for="passwordinput">Şifre:</label>
+                <div class="controls">
+                  <input required="" id="passwordinput" name="password" class="form-control"
+                         type="password" placeholder="Şifreniz" value="123456" class="input-medium">
+                </div>
+              </div>
+
+              <!-- Multiple Checkboxes (inline) -->
+              <div class="checkbox">
+                <label class="control-label" for="rememberme"></label>
+                <div class="controls">
+                  <label class="checkbox inline" for="rememberme">
+                    <input type="checkbox" name="rememberme" id="rememberme"
+                           value="rrememberme">
+                    Beni Hatirla
+                  </label>
+                </div>
+              </div>
+
+              <!-- Button -->
+              <div class="form-group">
+                <label class="control-label" for="signin"></label>
+                <div class="controls">
+                  <button id="signin" name="signin" class="btn btn-success">Giriş Yap</button>
+                </div>
+              </div>
+
+            </form>
+          </div>
+
+        </div>
+      </div>
+      <div class="modal-footer">
+
+        <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+
+
+  $(function () {
+    $table = $('#sikayetTable');
+    $remove = $('#remove');
+    selections = [];
+    $('#sikayetTable').bootstrapTable({
+
+      method: 'get',
+      url: 'http://localhost:1337/ajax/idari/sikayet/list/',
+      cache: false,
+      striped: true,
+      pagination: true,
+      queryParams: function (p) {
+        return {
+          binaId: $('#binaId').val(),
+          blokId: $('#blokId').val(),
+          birimId: $('#birimId').val(),
+          limit: p.limit,
+          offset: p.offset
+        };
+      },
+      sidePagination: 'server',
+      pageSize: 10,
+      pageList: [10, 25, 50, 100, 200],
+      search: false,
+      toolbar: "#toolbar1",
+      showColumns: false,
+      showRefresh: true,
+      minimumCountColumns: 2,
+      clickToSelect: false,
+      columns: [{
+        field: 'sikayetlerid',
+        title: 'id',
+        align: 'center',
+        valign: 'middle',
+        sortable: true,
+        width: "5%"
+      }, {
+        field: 'birimismi',
+        title: 'Birim',
+        align: 'center',
+        valign: 'middle',
+        sortable: true,
+        width: "15%"
+      }, {
+        field: 'aciklama',
+        title: 'Açiklama',
+        align: 'left',
+        valign: 'middle',
+        sortable: true,
+        width: "60%"
+      }, {
+        field: 'durumtipisim',
+        title: 'Durum Tipi',
+        align: 'center',
+        valign: 'middle',
+        sortable: true
+      },
+        {
+          field: 'operate',
+          title: 'İşlem',
+          align: 'center',
+          events: window.operateEvents,
+          formatter: operateFormatter
+        }
+      ]
+    });
+    $table.on('expand-row.bs.table', function (e, index, row, $detail) {
+      if (index % 2 == 1) {
+        $detail.html('Loading from ajax request...');
+        $.get('LICENSE', function (res) {
+          $detail.html(res.replace(/\n/g, '<br>'));
+        });
+      }
+    });
+    $table.on('all.bs.table', function (e, name, args) {
+      console.log(name, args);
+    });
+    $remove.click(function () {
+      var ids = getIdSelections();
+      $table.bootstrapTable('remove', {
+        field: 'id',
+        values: ids
+      });
+      $remove.prop('disabled', true);
+    });
+
+    function operateFormatter(value, row, index) {
+      return [
+        '<a class="like" href="/idari/sikayet/aktar/' + row.sikayetlerid + '" title="Like">',
+        '<i class="">Aktar</i>',
+        '</a>  '
+
+      ].join('');
+    }
+
+    window.operateEvents = {
+      'click .like': function (e, value, row, index) {
+        alert('You click like action, row: ' + JSON.stringify(row));
+      }
+    };
+
+
+  });
+</script>

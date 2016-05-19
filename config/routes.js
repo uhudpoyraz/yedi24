@@ -23,14 +23,14 @@
 module.exports.routes = {
 
   /***************************************************************************
-  *                                                                          *
-  * Make the view located at `views/homepage.ejs` (or `views/homepage.jade`, *
-  * etc. depending on your default view engine) your home page.              *
-  *                                                                          *
-  * (Alternatively, remove this and add an `index.html` file in your         *
-  * `assets` directory)                                                      *
-  *                                                                          *
-  ***************************************************************************/
+   *                                                                          *
+   * Make the view located at `views/homepage.ejs` (or `views/homepage.jade`, *
+   * etc. depending on your default view engine) your home page.              *
+   *                                                                          *
+   * (Alternatively, remove this and add an `index.html` file in your         *
+   * `assets` directory)                                                      *
+   *                                                                          *
+   ***************************************************************************/
   'get /':'AnasayfaController.index',
 
   'get /ajax/bloklist/':'AnasayfaController.blokList',
@@ -43,11 +43,14 @@ module.exports.routes = {
   'get /admin':'Admin/AdminIndexController.index',
 
   /*idari*/
-  'get /ajax/idari/sikayet/list':'SikayetController.idariSikayetList',
-  'get /ajax/idari/sikayet/durumlar/list':'SikayetController.durumlarList',
-  'get /idari/sikayet/aktar/:id':'SikayetController.aktar',
-  'post /idari/sikayet/save':'SikayetController.save',
-  'get /ajax/idari/sikayet/delete/:id':'SikayetController.delete',
+  'get /idare':'IdareController.index',
+  
+  
+  'get /ajax/idari/sikayet/list':'IdareController.idariSikayetList',
+  'get /ajax/idari/sikayet/durumlar/list':'IdareController.durumlarList',
+  'get /idari/sikayet/aktar/:id':'IdareController.aktar',
+  'post /idari/sikayet/save':'IdareController.save',
+ 
 
 
   /*Bina*/
@@ -142,10 +145,10 @@ module.exports.routes = {
   'post /admin/sikayet/save':'Admin/AdminSikayetController.save',
   'get /admin/sikayet/delete/:id':'Admin/AdminSikayetController.delete',
 
-/*login*/
+  /*login*/
   'get /admin/login':'Admin/AdminLoginController.login',
   'post /admin/dologin':'Admin/AdminLoginController.doLogin',
-   'get /admin/logout':'Admin/AdminLoginController.logout',
+  'get /admin/logout':'Admin/AdminLoginController.logout',
   /*Admin Bilgi guncelle*/
 
   'get /admin/profil':'Admin/AdminProfilController.edit',
@@ -153,12 +156,12 @@ module.exports.routes = {
 
 
   /***************************************************************************
-  *                                                                          *
-  * Custom routes here...                                                    *
-  *                                                                          *
-  * If a request to a URL doesn't match any of the custom routes above, it   *
-  * is matched against Sails route blueprints. See `config/blueprints.js`    *
-  * for configuration options and examples.                                  *
-  *                                                                          *
-  ***************************************************************************/
+   *                                                                          *
+   * Custom routes here...                                                    *
+   *                                                                          *
+   * If a request to a URL doesn't match any of the custom routes above, it   *
+   * is matched against Sails route blueprints. See `config/blueprints.js`    *
+   * for configuration options and examples.                                  *
+   *                                                                          *
+   ***************************************************************************/
 };

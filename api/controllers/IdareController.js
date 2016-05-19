@@ -7,6 +7,21 @@
 module.exports = {
 
 
+
+
+
+
+
+  index: function (req, res) {
+
+
+      res.view("front/idare/index");
+
+
+  },
+
+
+  
   /**
    * `Admin/AdminSikayetController.aktar()`
    */
@@ -29,7 +44,7 @@ module.exports = {
     });
     var blokId=5;
     var ilgiliId=req.session.kullaniciDetay.id;
-  
+
     var query='SELECT  durumtipi.isim as durumtipismi,s.id as sikayetlerid,aciklama,birim.isim as birimismi FROM sikayetler s ' +
       '    INNER JOIN birim ON birim.id = s."birimId"' +
       '    INNER JOIN durumlar ON s.id = durumlar."sikayetId"' +
@@ -42,8 +57,8 @@ module.exports = {
 
       if (err) {return res.serverError(err);}
 
-         
-      return res.view('front/sikayet/add',{sikayetler: sikayetler,kullanicilar:users,durumtipleri:durumtipleri});
+
+      return res.view('front/idare/sikayet/add',{sikayetler: sikayetler,kullanicilar:users,durumtipleri:durumtipleri});
 
 
     });
@@ -106,7 +121,7 @@ module.exports = {
     var limit=req.param("limit");
     var offset=req.param("offset");
     var sikayetId=req.param("sikayetId");
-    
+
 
     var query='select *,durumtipi.isim as durumtipisim,durumlar."createdAt" as durumkayit,kullanicilar.isim as kullaniciisim from durumlar ' +
       '    INNER JOIN durumtipi ON durumlar."durumTipId" = durumtipi.id' +
@@ -186,63 +201,6 @@ console.log(query);
     });
 
 
-  },
-
-
-
-
-
-
-
-
-
-
-
-  /**
-   * `Admin/AdminSikayetController.list()`
-   */
-  list: function (req, res) {
-    req.flash('sikayet', 'active');
-
-    var blokId=5;
-    var ilgiliId=req.session.AdminkullaniciDetay.id;
-    var query='SELECT s.id as sikayetlerid,aciklama,birim.isim as birimismi,durumlar.id as durumid,durumtipi.isim as durumtipisim FROM sikayetler s ' +
-      '    INNER JOIN birim ON birim.id = s."birimId"' +
-      '    INNER JOIN durumlar ON s.id = durumlar."sikayetId"' +
-      '    INNER JOIN durumtipi ON durumtipi.id = durumlar."durumTipId"' +
-      '     where durumlar."sikayetIlgiliId"='+ilgiliId+' and durumlar."durumBitis"  IS NULL';
-
-
-
-    Sikayetler.query(query, function(err, sikayetler) {
-
-      if (err) {return res.serverError(err);}
-
-     //  return res.json(sikayetler);
-        return res.view('admin/sikayet/list',{layout:'admin/layout',sikayetler: sikayetler});
-
-
-    });
-
-
-  },
-
-  /**
-   * `Admin/AdminSitekaralisteController.show()`
-   */
-  show: function (req, res) {
-    return res.json({
-      todo: 'show() is not implemented yet!'
-    });
-  },
-
-  delete: function (req, res) {
-    var id=req.param('id');
-    Sikayetler.destroy({id: id})
-      .exec(function(e,r){
-
-        return res.redirect('/admin/sikayet/');
-      });
   }
 };
 

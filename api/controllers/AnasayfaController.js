@@ -9,7 +9,12 @@ module.exports = {
 
 
   index: function (req, res) {
-
+ 
+    if(req.session.kullaniciDetay!=null && req.session.kullaniciDetay.gorevId!=0){
+      
+     return res.redirect("/idare");
+    }
+    
         Bina.find(function (err, binalar) {
           if (err) {
             return res.serverError(err);
@@ -26,22 +31,7 @@ module.exports = {
         });*/
   },
 
-  /**
-   * `AnasayfaController.binaList()`
-   */
-  binaList: function () {
-    Bina.find(function (err, binalar) {
-      if (err) {
-        return res.serverError(err);
-      }
-
-      return binalar;
-
-    });
-
-  },
-
-
+  
   /**
    * `AnasayfaController.blokList()`
    */
@@ -64,8 +54,7 @@ module.exports = {
    * `AnasayfaController.birimList()`
    */
   birimList: function (req, res) {
-
-
+    
     var blokId = req.param('blokid');
     console.log("blokId" + blokId);
     Birim.find({blokId: blokId}).exec(function (err, birimByBlok) {
