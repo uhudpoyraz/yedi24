@@ -185,6 +185,7 @@ $(function(){
     var compainContent = $('#compainContent').val();
     var blokId = $('#complainBlokId').val();
     var birimId = $('#complainBirimId').val();
+    var fileName = $('#ek').val();
     if(binaId==0){
 
       alert("Lutfen Bina seçiniz");
@@ -201,13 +202,18 @@ $(function(){
         alert("Lutfen Birim seçiniz");
         return false;
       }
-        
+
+
     if(compainContent.length==0){
 
       alert("Lutfen şikayet mesajını giriniz");
       return false;
     }
+    if(fileName.length==0){
 
+      alert("Lutfen dosya seçiniz");
+      return false;
+    }
           $.ajax({
           url: '/ajax/sikayet/register/',
           type: 'POST',
