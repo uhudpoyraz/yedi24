@@ -40,7 +40,10 @@ module.exports.routes = {
   'post /ajax/sikayet/register/': 'AnasayfaController.sikayetKayit',
   'get /ajax/sikayet/list/': 'AnasayfaController.sikayetListesi',
 
-
+  'get /bilgiguncelle': 'AnasayfaController.bilgiGuncelle',
+  'post /bilgiguncelle/save': 'AnasayfaController.bilgiGuncelleSave',
+  
+  
   /*****************----IDARE-----------************/
 
   'get /idare': 'IdareController.index',

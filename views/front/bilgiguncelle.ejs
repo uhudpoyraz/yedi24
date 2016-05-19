@@ -1,75 +1,65 @@
 <div class="container">
-  <% include /front/include/head %>
 
+  <%if(session.kullaniciDetay.gorevId==0){%>
+  <% include /include/head %>
+    <%} else {%>
+  <% include idare/include/head %>
+  <%} %>
     <div class="container-fluid modal-content">
 
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default"  id="toolbar">
                     <div class="panel-body">
-                        <form role="form" method="post">
-                            <div class="form-group">
+                      <div class="tab-pane fade active in" id="signinTab">
+                        <form role="form" method="post" action="/bilgiguncelle/save">
+                          <input required="" name="id" type="hidden" value="<%=kullanicilar.id %>" class="form-control input-medium" />
 
-                              <label id="sonuc" for="sel1">Binalar:</label>
-                              <select class="form-control" name="binaid" id="binaId">
-                                <option value="0">Seçiniz</option>
+                          <!-- Sign In Form -->
+                          <!-- Text input-->
+                          <div class="form-group">
+                              <label class="control-label" for="signinEmail">İsim:</label> <div class="controls">
+                              <input required="" name="name" type="text" value="<%=kullanicilar.isim %>" class="form-control input-medium" />
+                            </div>
+                          </div>
 
-                                <% _.each(binalar, function(bina) {%>
-                                <option value="<%=bina.id%>"><%=bina.isim%></option>
-                                <% }) %>
 
-                              </select>
+                          <div class="form-group">
+                            <label class="control-label" for="signinEmail">Soyisim:</label> <div class="controls">
+                              <input required="" name="surname" type="text" value="<%=kullanicilar.soyIsim %>" class="form-control input-medium" />
                             </div>
-                            <div class="form-group">
-                                <label for="sel1">Blok:</label>
-                                <select class="form-control" name="blokid" id="blokId">
-                                  <option value="0">Seçiniz</option>
-                                </select>
+                          </div>
+
+                          <div class="form-group">
+                            <label class="control-label" for="signinEmail">Email:</label> <div class="controls">
+                              <input required="" name="email" type="emal" value="<%=kullanicilar.email %>" class="form-control input-medium" />
                             </div>
-                            <div class="form-group">
-                                <label for="sel1">Mekan: </label>
-                                <select class="form-control" name="birimid" id="birimId">
-                                  <option value="0">Seçiniz</option>
-                                </select>
+                          </div>
+
+                          <div class="form-group">
+                            <label class="control-label" for="signinEmail">Şifre:</label> <div class="controls">
+                              <input   name="password" type="password" value="" class="form-control input-medium" />
                             </div>
+                          </div>
+                          <!-- Button -->
+                          <div class="form-group">
+                            <label class="control-label" for="update"></label>
+                            <div class="controls">
+                              <button id="update" name="update" class="btn btn-success">Güncelle</button>
+                            </div>
+                          </div>
+
                         </form>
+                      </div>
                     </div>
                 </div>
 
 
             </div>
         </div>
-        <div class="row">
 
 
-            <div class="col-md-12">
-              <div id="toolbar1">
-                <div class="form-inline" role="form" method="post">
-                  <button id="kayitlistele" type="submit" class="btn btn-default">Kayitları Listele</button>
-                </div>
 
-
-              </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-12">
-
-                <table id="sikayetTable" >
-                    <thead>
-                    <tr>
-
-                    </tr>
-                    </thead>
-                    <tbody>
-
-
-                    </tbody>
-                </table>
-
-            </div>
-        </div>
 
     </div>
 
@@ -115,6 +105,17 @@
                                     </div>
                                 </div>
 
+                                <!-- Multiple Checkboxes (inline) -->
+                                <div class="checkbox">
+                                    <label class="control-label" for="rememberme"></label>
+                                    <div class="controls">
+                                        <label class="checkbox inline" for="rememberme">
+                                            <input type="checkbox" name="rememberme" id="rememberme"
+                                                   value="rrememberme">
+                                            Beni Hatirla
+                                        </label>
+                                    </div>
+                                </div>
 
                                 <!-- Button -->
                                 <div class="form-group">
@@ -203,155 +204,4 @@
     </div>
 </div>
 
-<!-- Şikayet Kayit-->
-<div class="modal fade" id="yenisikayet" tabindex="-1" role="dialog"
-     aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <!-- Modal Header -->
-      <div class="modal-header">
-        <button type="button" class="close"
-                data-dismiss="modal">
-          <span aria-hidden="true">&times;</span>
-          <span class="sr-only">Close</span>
-        </button>
-        <h4 class="modal-title" id="myModalLabel">
-          Yeni Şikayet
-        </h4>
-      </div>
 
-      <!-- Modal Body -->
-      <div class="modal-body">
-
-        <form role="form" method="post" id="sikayetEklemeFormu" enctype="multipart/form-data">
-          <div class="form-group">
-            <label for="complainSubject">Şikayet Konusu</label>
-            <input type="text" class="form-control" name="complainSubject" id="complainSubject" placeholder="Şikayetin Konusu"/>
-          </div>
-          <div class="form-group">
-            <label for="sel1">Binalar:</label>
-            <label id="sonuc" for="sel1">Binalar:</label>
-            <select class="form-control" name="binaid" id="complainBinaId" required>
-              <option value="0">Seçiniz</option>
-              <% _.each(binalar, function(bina) {%>
-              <option value="<%=bina.id%>"><%=bina.isim%></option>
-              <% }) %>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="sel1">Blok:</label>
-            <select class="form-control" name="blokid" id="complainBlokId" required>
-              <option value="0">Seçiniz</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="sel1">Mekan: </label>
-            <select class="form-control" name="birimid" id="complainBirimId" required>
-              <option value="0">Seçiniz</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="compainContent">Şikayet İçeriği</label>
-            <textarea class="form-control" name="complainContent" id="complainContent" required></textarea>
-          </div>
-          <div class="form-group">
-            <label for="compainAttachments">Şikayet Eki</label>
-            <input type="file" id="ek" name="ek"/>
-          </div>
-          <button id="complainSave" type="button" class="btn btn-default">Gönder</button>
-        </form>
-
-      </div>
-
-      <!-- Modal Footer -->
-      <div class="modal-footer"> <button type="button" class="btn btn-default"  data-dismiss="modal">      Close     </button>
-        <button type="button" class="btn btn-primary"> Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-<script type="text/javascript">
-
-
-
-
-
-  $(function () {
-
-    $('#sikayetTable').bootstrapTable({
-
-      method: 'get',
-      url: 'http://localhost:1337/ajax/sikayet/list/',
-      cache: false,
-      striped: true,
-      pagination: true,
-      queryParams: function (p) {
-        return {
-          binaId: $('#binaId').val() ,
-          blokId: $('#blokId').val(),
-          birimId: $('#birimId').val(),
-          limit: p.limit,
-          offset: p.offset,
-          sort:p.sort,
-          order:p.order
-        };
-      },
-      sidePagination:'server',
-      pageSize: 10,
-      pageList: [10, 25, 50, 100, 200],
-      search: false,
-      toolbar:"#toolbar1",
-      showColumns: false,
-      showRefresh: true,
-      minimumCountColumns: 2,
-      clickToSelect: false,
-      columns: [{
-        field: 'sikayetlerid',
-        title: 'id',
-        align: 'center',
-        valign: 'middle',
-        sortable: true
-      }, {
-        field: 'binaismi',
-        title: 'Bina',
-        align: 'center',
-        valign: 'middle',
-        sortable: true
-      },{
-        field: 'blokismi',
-        title: 'Blok',
-        align: 'center',
-        valign: 'middle',
-        sortable: true
-      },  {
-        field: 'birimismi',
-        title: 'Birim',
-        align: 'center',
-        valign: 'middle',
-        sortable: true
-      },  {
-        field: 'aciklama',
-        title: 'Açiklama',
-        align: 'left',
-        valign: 'middle',
-        sortable: true
-      }
-      ]
-    });
-
-    $('#binaId').change(function(){
-
-      $('#sikayetTable').bootstrapTable('refresh');
-    });
-    $('#blokId').change(function(){
-
-      $('#sikayetTable').bootstrapTable('refresh');
-    });
-    $('#birimId').change(function(){
-
-      $('#sikayetTable').bootstrapTable('refresh');
-    });
-
-
-  });
- </script>

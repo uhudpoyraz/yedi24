@@ -9,12 +9,12 @@ module.exports = {
 
 
   index: function (req, res) {
- 
+
     if(req.session.kullaniciDetay!=null && req.session.kullaniciDetay.gorevId!=0){
-      
+
      return res.redirect("/idare");
     }
-    
+
         Bina.find(function (err, binalar) {
           if (err) {
             return res.serverError(err);
@@ -31,7 +31,7 @@ module.exports = {
         });*/
   },
 
-  
+
   /**
    * `AnasayfaController.blokList()`
    */
@@ -54,7 +54,7 @@ module.exports = {
    * `AnasayfaController.birimList()`
    */
   birimList: function (req, res) {
-    
+
     var blokId = req.param('blokid');
     console.log("blokId" + blokId);
     Birim.find({blokId: blokId}).exec(function (err, birimByBlok) {
@@ -85,86 +85,92 @@ module.exports = {
 
     });
   },
-
   sikayetKayit:function (req,res) {
     console.log(req.params.all());
 
     req.file('ek').upload({dirname: '../../assets/images/upload/ek'}, function (error, uploadedFiles)
+    {
+      //console.log(error);
+      if (!error)
       {
-        //console.log(error);
-        if (!error)
+        console.log(uploadedFiles);
+        if ( uploadedFiles.length > 0)
         {
-          console.log(uploadedFiles);
-          if ( uploadedFiles.length > 0)
-          {
-              console.log("File description: " + uploadedFiles[0].fd +"\n");
+          console.log("File description: " + uploadedFiles[0].fd +"\n");
 
-              var complainSubject= req.param("complainSubject");
-              var complainContent=req.param("complainContent");
-              //console.log(req.param("compaincontent"));
-              var birimId=req.param("birimid");
-              var kullaniciId=-1;
-              var birimSorumluId=-1;
+          var complainSubject= req.param("complainSubject");
+          var complainContent=req.param("complainContent");
+          //console.log(req.param("compaincontent"));
+          var birimId=req.param("birimid");
+          var kullaniciId=-1;
+          var birimSorumluId=-1;
 
-              if(req.session.kullaniciDetay!=null){
-                var kullaniciId=req.session.kullaniciDetay.id;
+          if(req.session.kullaniciDetay!=null){
+            var kullaniciId=req.session.kullaniciDetay.id;
+          }
+
+          Sikayetler.create({aciklama: complainContent, birimId:birimId,kullaniciId:kullaniciId }).exec(function createCB(err, created){
+            console.log('Created sikayet with birimId ' + created.aciklama);
+            if(err) {
+              return res.json({succes:false,message:'Sorun Oluştur.'});
+            }
+
+
+            Birim.findOne({id: created.birimId}).exec(function (err, record){
+              if(err) {
+                console.log("Birim eklenmesinde hata oluştu.");
               }
-
-              Sikayetler.create({aciklama: complainContent, birimId:birimId,kullaniciId:kullaniciId }).exec(function createCB(err, created){
-                console.log('Created sikayet with birimId ' + created.aciklama);
+              Blok.findOne({id: record.blokId}).exec(function (err, blok){
                 if(err) {
-                  return res.json({succes:false,message:'Sorun Oluştur.'});
+                  console.log("Birim eklenmesinde hata oluştu.");
                 }
-
-
-                Birim.findOne({id: created.birimId}).exec(function (err, record){
+                // Yeni Şikayet 1
+                // Alındı 2
+                // Yetkiliye Aktarıldı 3
+                // Yedek Parça 4
+                // Tamamlandı 5
+                Durumlar.create({sikayetIlgiliId: blok.kullaniciId, durumTipId:1, durumBitis:null, sikayetId:created.id }).exec(function createCB(err, durum){
                   if(err) {
-                    console.log("Birim eklenmesinde hata oluştu.");
-                  }
-                  Blok.findOne({id: record.blokId}).exec(function (err, blok){
-                    if(err) {
-                      console.log("Birim eklenmesinde hata oluştu.");
-                    }
-                    // Yeni Şikayet 1
-                    // Alındı 2
-                    // Yetkiliye Aktarıldı 3
-                    // Yedek Parça 4
-                    // Tamamlandı 5
-                      Durumlar.create({sikayetIlgiliId: blok.kullaniciId, durumTipId:1, durumBitis:null, sikayetId:created.id }).exec(function createCB(err, durum){
+                    console.log("Yeni Şikayet Durum eklenmesinde hata oluştu.");
+                    return res.serverError(err);
+                  }else{
+                    Eklentiler.create({sikayetId: created.id , dosyaAdi: uploadedFiles[0].filename, durumId:durum.id}).exec(function createCB(err, eklenti){
                       if(err) {
-                        console.log("Yeni Şikayet Durum eklenmesinde hata oluştu.");
+                        console.log("Yeni Eklenti girişinde hata oluştu.");
                         return res.serverError(err);
                       }else{
-                        Eklentiler.create({sikayetId: created.id , dosyaAdi: uploadedFiles[0].filename, durumId:durum.id}).exec(function createCB(err, eklenti){
-                        if(err) {
-                          console.log("Yeni Eklenti girişinde hata oluştu.");
-                          return res.serverError(err);
-                        }else{
-                          console.log("Şikayet eklendi.");
-                          return res.json({succes:true,message:'Kayit Başarıyla Tamamlanmıştır.'});
-                        }
-                      });
+                        console.log("Şikayet eklendi.");
+                        return res.json({succes:true,message:'Kayit Başarıyla Tamamlanmıştır.'});
                       }
                     });
-                  });
+                  }
                 });
               });
-          }
-          else{
-            return res.json(error);
-          }
+            });
+          });
         }
+        else{
+          return res.json(error);
+        }
+      }
     });
 
   },
-
   sikayetListesi:function (req,res) {
 
     var limit=req.param("limit");
     var offset=req.param("offset");
+    var order=req.param("order");
+    var sort=req.param("sort");
     var binaId=req.param("binaId");
     var birimId=req.param("birimId");
     var blokId=req.param("blokId");
+
+    if(!sort){
+
+      sort='s."createdAt"';
+      order="desc"
+    }
 
     var where='';
 
@@ -196,7 +202,7 @@ module.exports = {
 
     var query='SELECT s.id as sikayetlerid,aciklama,bina.isim as binaIsmi,blok.isim as blokIsmi,birim.isim as birimIsmi FROM sikayetler s INNER JOIN birim ON birim.id = s."birimId"' +
       '    INNER JOIN blok ON blok.id = birim."blokId"' +
-      '    INNER JOIN bina ON bina.id = blok."binaId"'+where+' limit '+limit+' offset '+offset;
+      '    INNER JOIN bina ON bina.id = blok."binaId" '+where+ ' order by '+sort+' '+order +' limit '+limit+' offset '+offset;
 
 
     console.log(query);
@@ -217,13 +223,67 @@ module.exports = {
         result.rows=sikayetler.rows;
         return res.json(result);
 
+      });
+    });
 
+  },
+
+
+  bilgiGuncelle: function (req, res) {
+
+       Kullanicilar.findOne({id:req.session.kullaniciDetay.id}).exec(function (err, kullanicilar) {
+
+      if (err) {
+
+
+      }  else {
+
+         return res.view("front/bilgiguncelle", {kullanicilar: kullanicilar});
+      }
+    });
+
+
+  },
+  bilgiGuncelleSave: function (req, res) {
+
+
+    Kullanicilar.findOne(req.session.kullaniciDetay.id).exec(function(error, kullanici) {
+      if(error) {
+        // do something with the error.
+      }
+
+      if(req.body.name) {
+
+        kullanici.isim = req.body.name;
+      }
+      if(req.body.surname) {
+
+        kullanici.soyIsim = req.body.surname;
+      }
+      if(req.body.email) {
+
+        kullanici.email = req.body.email;
+      }
+      if(req.body.password.length!=0) {
+        var crypto = require('crypto');
+        var passwordHash= crypto.createHash('sha1').update(req.body.password).digest('hex');
+        kullanici.sifre = passwordHash;
+      }
+      kullanici.save(function(error) {
+        if(error) {
+          req.flash('message','Sorun Oluştu.');
+          req.flash('type','danger');
+          req.flash('icon', 'ban');
+        } else {
+          req.flash('message','Güncelleme Başarılı.');
+          req.flash('type','success');
+          req.flash('icon', 'check');
+          return res.redirect('bilgiguncelle');
+        }
       });
     });
 
   }
-
-
 
 
 };

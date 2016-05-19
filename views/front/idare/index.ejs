@@ -135,7 +135,9 @@
           blokId: $('#blokId').val(),
           birimId: $('#birimId').val(),
           limit: p.limit,
-          offset: p.offset
+          offset: p.offset,
+          sort:p.sort,
+          order:p.order
         };
       },
       sidePagination: 'server',
@@ -176,6 +178,7 @@
         sortable: true
       },
         {
+          sortable: false,
           field: 'operate',
           title: 'İşlem',
           align: 'center',
