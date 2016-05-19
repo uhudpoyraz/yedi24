@@ -72,9 +72,7 @@ module.exports = {
     var sikayetId   = req.param('sikayetId');
     var durumTipiId = req.param('durumTipiId');
     var kullaniciId = req.param('kullaniciId');
-
-
-
+ 
     Durumlar.create({sikayetIlgiliId: kullaniciId, durumTipId: durumTipiId, sikayetId:sikayetId,durumBitis:null}).exec(function createCB(err, created){
       console.log(err);
       if(err) {
@@ -87,9 +85,11 @@ module.exports = {
           if(error) {
 
           }else {
-
-            durumlar.durumBitis="2017-05-18 19:57:41+03";
-
+            var d = new Date();
+            console.log(d.toLocaleString().toString());
+            durumlar.durumBitis=d.toLocaleString().toString();
+            
+            console.log(d.toLocaleString().toString());
             durumlar.save(function(error) {
             if(error) {
               req.flash('message','Sorun Oluştu.');
