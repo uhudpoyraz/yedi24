@@ -122,7 +122,7 @@ $(function(){
       success: function(data ) {
         $('#complainBlokId').empty();
         $blokId.html('');
-        $blokId.append('<option id="0">Seçiniz</option>');
+        $blokId.append('<option value="0">Seçiniz</option>');
         $.each(data.bloklar, function(key, val){
           $blokId.append('<option value="' + val.id + '">' + val.isim +'</option>');
         })
@@ -143,7 +143,7 @@ $(function(){
       success: function(data ) {
         $('#complainBirimId').empty();
         $birimId.html('');
-        $birimId.append('<option id="0">Seçiniz</option>');
+        $birimId.append('<option value="0">Seçiniz</option>');
         $.each(data.birimler, function(key, val){
           $birimId.append('<option value="' + val.id + '">' + val.isim +'</option>');
         })
@@ -156,7 +156,7 @@ $(function(){
 
   $('#complainSave').click(function(){
 
-  /*  
+  /*
     var $birimId = $('#complainBirimId').val();
     var $compainContent = $('#compainContent').val();
 
@@ -180,7 +180,34 @@ $(function(){
     });
     return false;*/
     var formData = new FormData($('#sikayetEklemeFormu')[0]);
-  
+
+    var binaId = $('#complainBinaId').val();
+    var compainContent = $('#compainContent').val();
+    var blokId = $('#complainBlokId').val();
+    var birimId = $('#complainBirimId').val();
+    if(binaId==0){
+
+      alert("Lutfen Bina seçiniz");
+      return false;
+    }
+
+    if(blokId==0){
+
+      alert("Lutfen Blok seçiniz");
+      return false;
+    }
+      if(birimId==0){
+
+        alert("Lutfen Birim seçiniz");
+        return false;
+      }
+        
+    if(compainContent.length==0){
+
+      alert("Lutfen şikayet mesajını giriniz");
+      return false;
+    }
+
           $.ajax({
           url: '/ajax/sikayet/register/',
           type: 'POST',
@@ -192,8 +219,9 @@ $(function(){
           success: function (returndata)
           {
             console.log(returndata);
-            location.reload();
+             location.reload();
           }
           });
+
   });
 });
