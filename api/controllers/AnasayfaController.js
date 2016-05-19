@@ -102,6 +102,7 @@ module.exports = {
 
               var complainSubject= req.param("complainSubject");
               var complainContent=req.param("complainContent");
+              //console.log(req.param("compaincontent"));
               var birimId=req.param("birimid");
               var kullaniciId=-1;
               var birimSorumluId=-1;
@@ -110,8 +111,8 @@ module.exports = {
                 var kullaniciId=req.session.kullaniciDetay.id;
               }
 
-              Sikayetler.create({aciklama: complainContent,birimId:birimId,kullaniciId:kullaniciId }).exec(function createCB(err, created){
-                console.log('Created sikayet with birimId ' + created.birimId);
+              Sikayetler.create({aciklama: complainContent, birimId:birimId,kullaniciId:kullaniciId }).exec(function createCB(err, created){
+                console.log('Created sikayet with birimId ' + created.aciklama);
                 if(err) {
                   return res.json({succes:false,message:'Sorun Oluştur.'});
                 }
