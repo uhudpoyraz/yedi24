@@ -1,0 +1,245 @@
+<div class="container">
+  <div class="header">
+    <nav class="navbar-inverse navbar-default radius">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                  data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Yedi24</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Şikayet Listesi <span class="sr-only">(current)</span></a></li>
+            <% if (session.kullaniciDetay!=null && session.kullaniciDetay.gorevId==0) {%>
+            <li class="active"><a href="#">Yaptıgım Şikayetler<span class="sr-only">(current)</span></a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                 aria-haspopup="true" aria-expanded="false">Aktif Şikayetler <span
+                  class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Aktif Şikayetlerim</a></li>
+                <li><a href="#">Eski Şikayetlerim</a></li>
+              </ul>
+            </li>
+            <li><a href="#">Profilim</a></li>
+            <% } else  if (session.kullaniciDetay!=null && session.kullaniciDetay.gorevId!=0) {%>
+            <li class="active"><a href="#">Gelen Şikayet Listesi <span class="sr-only">(current)</span></a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                 aria-haspopup="true" aria-expanded="false">Aktif Şikayetler <span
+                  class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Aktif Şikayetlerim</a></li>
+                <li><a href="#">Eski Şikayetlerim</a></li>
+              </ul>
+            </li>
+            <li><a href="#">Profilim</a></li>
+
+            <% } %>
+
+
+
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+
+            <% if (session.kullaniciDetay!=null && session.kullaniciDetay.gorevId!=0) {%>
+            <li><a href="#" data-toggle="modal" data-target="#yenisikayet">İdari Sayfası</a></li>
+
+            <%} else {%>
+
+            <li><a href="#" data-toggle="modal" data-target="#yenisikayet">Yeni Şikayet</a></li>
+
+            <%}%>
+
+            <li><% if (session.kullaniciDetay==null) {%><a href="#signup" data-toggle="modal" data-target=".bs-modal-sm"> Kayit Ol/Giriş Yap  </a>  </li> <% } else {%>
+            <li><a href="/logout">Çıkış Yap</a>
+
+              <%}%>
+
+          </ul>
+
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </div>
+
+  <div class="container-fluid modal-content">
+
+    <div class="row">
+      <div class="panel panel-success">
+
+        <div class="panel-heading">Sikayet Bilgileri</div>
+
+        <div class="panel-body">
+
+          <dl class="dl-horizontal">
+            <dt>Son hareket </dt>
+            <dd><%=sikayetler.rows[0].durumtipismi%></dd>
+            <dt>Birim</dt>
+            <dd><%=sikayetler.rows[0].birimismi%></dd>
+
+            <dt>Açıklama</dt>
+            <dd><%=sikayetler.rows[0].aciklama%></dd>
+
+
+          </dl>
+
+          <div class="btn-toolbar text-center" role="toolbar">
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="panel panel-warning">
+
+        <div class="panel-heading">Şikayeti Aktar</div>
+         <div class="panel-body">
+
+
+          <form role="form" action="/idari/sikayet/save" method="post">
+            <!-- text input -->
+            <input type="hidden" id="sikayetId" name="sikayetId" value="<%=sikayetler.rows[0].sikayetlerid%>">
+
+            <div class="form-group">
+              <label>Durum Tipi</label>
+              <select class="form-control" name="durumTipiId" id="category">
+                <option value="0">Seçiniz</option>
+                <% _.each(durumtipleri, function(durumtipi) {%>
+                <option value="<%=durumtipi.id%>"><%=durumtipi.isim%></option>
+                <% }) %>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Kullanıcıya Aktar</label>
+              <select class="form-control" name="kullaniciId" id="category">
+                <option value="0">Seçiniz</option>
+                <% _.each(kullanicilar, function(kullanici) {%>
+                <option value="<%=kullanici.id%>"><%=kullanici.isim%>-<%=kullanici.soyIsim%></option>
+                <% }) %>
+              </select>
+            </div>
+
+
+
+            <div class="form-group">
+              <button class="btn btn-primary btn-sm">Aktar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+
+    </div>
+    <div class="row">
+
+
+      <div class="col-md-12">
+        <div id="toolbar1">
+          <div class="form-inline" role="form" method="post">
+            <button id="kayitlistele" type="submit" class="btn btn-default">Kayitları Listele</button>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+
+        <table id="sikayetTable" >
+          <thead>
+          <tr>
+
+          </tr>
+          </thead>
+          <tbody>
+
+
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<script type="text/javascript">
+
+
+
+
+
+  $(function () {
+
+
+    $('#sikayetTable').bootstrapTable({
+
+      method: 'get',
+      url: 'http://localhost:1337/ajax/idari/sikayet/durumlar/list',
+      cache: false,
+      striped: true,
+      pagination: true,
+      queryParams: function (p) {
+        return {
+
+          sikayetId: $('#sikayetId').val(),
+          limit: p.limit,
+          offset: p.offset
+        };
+      },
+      sidePagination:'server',
+      pageSize: 10,
+      pageList: [10, 25, 50, 100, 200],
+      search: false,
+      toolbar:"#toolbar1",
+      showColumns: false,
+      showRefresh: true,
+      minimumCountColumns: 2,
+      clickToSelect: false,
+      columns: [{
+        field: 'durumtipisim',
+        title: 'Durum Ismi',
+        align: 'center',
+        valign: 'middle',
+        sortable: true
+      }, {
+        field: 'durumkayit',
+        title: 'Durum Oluşturulma Tarihi',
+        align: 'center',
+        valign: 'middle',
+        sortable: true
+      },{
+        field: 'durumBitis',
+        title: 'Durum Kapanış Tarih',
+        align: 'center',
+        valign: 'middle',
+        sortable: true
+      },   {
+        field: 'kullaniciisim',
+        title: 'Durum İlgilisi',
+        align: 'left',
+        valign: 'middle',
+        sortable: true
+      }
+      ]
+    });
+
+
+
+
+  });
+</script>

@@ -231,54 +231,9 @@ module.exports = {
       });
     });
 
-  },
+  }
 
 
-
-
-
-  idariSikayetList: function (req, res) {
-    
-    var limit=req.param("limit");
-    var offset=req.param("offset");
-    
-    var blokId=5;
-    var ilgiliId=req.session.kullaniciDetay.id;
-    var query='SELECT s.id as sikayetlerid,aciklama,birim.isim as birimismi,durumlar.id as durumid,durumtipi.isim as durumtipisim FROM sikayetler s ' +
-      '    INNER JOIN birim ON birim.id = s."birimId"' +
-      '    INNER JOIN durumlar ON s.id = durumlar."sikayetId"' +
-      '    INNER JOIN durumtipi ON durumtipi.id = durumlar."durumTipId"' +
-      '     where durumlar."sikayetIlgiliId"='+ilgiliId+' and durumlar."durumBitis"  IS NULL'+' limit '+limit+' offset '+offset;
-
-
-
-    Sikayetler.query(query, function(err, sikayetler) {
-
-      if (err) {return res.serverError(err);}
-
-      var query2='SELECT count(*) as toplam FROM sikayetler s ' +
-        '    INNER JOIN birim ON birim.id = s."birimId"' +
-        '    INNER JOIN durumlar ON s.id = durumlar."sikayetId"' +
-        '    INNER JOIN durumtipi ON durumtipi.id = durumlar."durumTipId"' +
-        '     where durumlar."sikayetIlgiliId"='+ilgiliId+' and durumlar."durumBitis"  IS NULL';
-
-      Sikayetler.query(query2, function(err, found) {
-
-        var result={};
-
-        result.total=found.rows[0].toplam;
-        result.rows=sikayetler.rows;
-       
-        return res.json(result);
-
-
-      });
-
-
-    });
-
-
-  },
 
 
 };

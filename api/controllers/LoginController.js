@@ -15,7 +15,8 @@ module.exports = {
     var email = req.param("email");
     var password = req.param("password");
 
-    var kullanici = Kullanicilar.findOne({
+
+     Kullanicilar.findOne({
       email: email
     }).exec(function afterwards(err, kullanici) {
       // Error handling
@@ -25,7 +26,7 @@ module.exports = {
         var crypto = require('crypto');
         var hash = crypto.createHash('sha1').update(password).digest('hex');
 
-
+ ;
 
         if (kullanici.sifre == hash) {
             if(kullanici.hesapDurum==1){

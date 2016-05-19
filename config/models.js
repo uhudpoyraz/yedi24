@@ -30,5 +30,5 @@ module.exports.models = {
      migrate: 'safe',
      connection: 'localPostgresqlServer',
      autoCreatedAt: true,
-     autoUpdatedAt: true,
+     autoUpdatedAt: true
 };

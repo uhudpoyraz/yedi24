@@ -434,6 +434,9 @@
     });
 
 <%} else {%>
+    $table=$('#sikayetTable');
+    $remove = $('#remove');
+      selections = [];
   $('#sikayetTable').bootstrapTable({
 
     method: 'get',
@@ -486,9 +489,57 @@
       align: 'center',
       valign: 'middle',
       sortable: true
-    }
+    },
+      {
+        field: 'operate',
+        title: 'Item Operate',
+        align: 'center',
+        events: window.operateEvents,
+        formatter: operateFormatter
+      }
     ]
   });
-  <% } %>
+    $table.on('expand-row.bs.table', function (e, index, row, $detail) {
+      if (index % 2 == 1) {
+        $detail.html('Loading from ajax request...');
+        $.get('LICENSE', function (res) {
+          $detail.html(res.replace(/\n/g, '<br>'));
+        });
+      }
+    });
+    $table.on('all.bs.table', function (e, name, args) {
+      console.log(name, args);
+    });
+    $remove.click(function () {
+      var ids = getIdSelections();
+      $table.bootstrapTable('remove', {
+        field: 'id',
+        values: ids
+      });
+      $remove.prop('disabled', true);
+    });
+    $(window).resize(function () {
+      $table.bootstrapTable('resetView', {
+        height: getHeight()
+      });
+    });
+    function operateFormatter(value, row, index) {
+      return [
+        '<a class="like" href="/idari/sikayet/aktar/'+row.sikayetlerid+'" title="Like">',
+        '<i class="glyphicon glyphicon-pencil">Aktar</i>',
+        '</a>  '
+
+      ].join('');
+    }
+
+     window.operateEvents = {
+      'click .like': function (e, value, row, index) {
+        alert('You click like action, row: ' + JSON.stringify(row));
+      }
+    };
+
+    <% } %>
+
+
   });
  </script>

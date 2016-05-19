@@ -43,10 +43,11 @@ module.exports.routes = {
   'get /admin':'Admin/AdminIndexController.index',
 
   /*idari*/
-  'get /ajax/idari/sikayet/list':'AnasayfaController.idariSikayetList',
-  'get /ajax/idari/sikayet/aktar/:id':'AnasayfaController.aktar',
-  'post /ajax/idari/sikayet/save':'AnasayfaController.save',
-  'get /ajax/idari/sikayet/delete/:id':'AnasayfaController.delete',
+  'get /ajax/idari/sikayet/list':'SikayetController.idariSikayetList',
+  'get /ajax/idari/sikayet/durumlar/list':'SikayetController.durumlarList',
+  'get /idari/sikayet/aktar/:id':'SikayetController.aktar',
+  'post /idari/sikayet/save':'SikayetController.save',
+  'get /ajax/idari/sikayet/delete/:id':'SikayetController.delete',
 
 
   /*Bina*/
