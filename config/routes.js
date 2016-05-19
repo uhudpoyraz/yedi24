@@ -48,6 +48,7 @@ module.exports.routes = {
   'get /ajax/idari/sikayet/durumlar/list': 'IdareController.durumlarList',
   'get /idari/sikayet/aktar/:id': 'IdareController.aktar',
   'post /idari/sikayet/save': 'IdareController.save',
+  'get /idari/rapor': 'IdareController.rapor',
 
 
   /*****************----ADMIN-----------************/

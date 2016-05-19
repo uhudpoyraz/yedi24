@@ -182,7 +182,7 @@ $(function(){
     var formData = new FormData($('#sikayetEklemeFormu')[0]);
 
     var binaId = $('#complainBinaId').val();
-    var compainContent = $('#compainContent').val();
+    var compainContent = $('#complainContent').val();
     var blokId = $('#complainBlokId').val();
     var birimId = $('#complainBirimId').val();
     var fileName = $('#ek').val();
