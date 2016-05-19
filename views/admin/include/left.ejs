@@ -4,27 +4,27 @@
                     <!-- Sidebar user panel -->
                     <div class="user-panel">
                         <div class="pull-left image">
-                            <img src="img/avatar3.png" class="img-circle" alt="User Image" />
+                            <img src="/../admin/img/avatar5.png" class="img-circle" alt="User Image" />
                         </div>
                         <div class="pull-left info">
-                            <p>Hello, Jane</p>
+                            <p>Hello, Admin</p>
 
-                            <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                            <i class="fa fa-circle text-success"></i> Online
                         </div>
                     </div>
                     <!-- search form -->
-                    <form action="#" method="get" class="sidebar-form">
+                    <!-- <form action="#" method="get" class="sidebar-form">
                         <div class="input-group">
                             <input type="text" name="q" class="form-control" placeholder="Search..."/>
                             <span class="input-group-btn">
                                 <button type='submit' name='seach' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
                             </span>
                         </div>
-                    </form>
+                    </form> -->
                     <!-- /.search form -->
                     <!-- sidebar menu: : style can be found in sidebar.less -->
                     <ul class="sidebar-menu">
-                      <li class="treeview <%- req.flash('sikayetlistesi') %>" >
+                      <!-- <li class="treeview <%- req.flash('sikayetlistesi') %>" >
                         <a href="#">
                           <i class="fa fa-users"></i> <span>Gelen Sikayetler</span>
                           <i class="fa fa-angle-left pull-right"></i>
@@ -33,7 +33,7 @@
 
                           <li><a href="http://localhost:1337/admin/sikayet/"><i class="fa fa-angle-double-right"></i> Listele</a></li>
                         </ul>
-                      </li>
+                      </li> -->
 
                       <li class="treeview <%- req.flash('kullanici') %>" >
                         <a href="#">
@@ -43,17 +43,6 @@
                         <ul class="treeview-menu">
                           <li><a href="http://localhost:1337/admin/kullanici/add"><i class="fa fa-angle-double-right"></i> Ekle</a></li>
                           <li><a href="http://localhost:1337/admin/kullanici/"><i class="fa fa-angle-double-right"></i> Listele</a></li>
-                        </ul>
-                      </li>
-
-                      <li class="treeview <%- req.flash('iletisimtipi') %>">
-                        <a href="#">
-                          <i class="fa fa-edit"></i> <span>İletisim Modulü</span>
-                          <i class="fa fa-angle-left pull-right"></i>
-                        </a>
-                        <ul class="treeview-menu">
-                          <li><a href="http://localhost:1337/admin/iletisimtipi/add"><i class="fa fa-angle-double-right"></i> Ekle</a></li>
-                          <li><a href="http://localhost:1337/admin/iletisimtipi/"><i class="fa fa-angle-double-right"></i> Listele</a></li>
                         </ul>
                       </li>
                       <li class="treeview <%- req.flash('bina') %>">
@@ -76,17 +65,36 @@
                           <li><a href="http://localhost:1337/admin/blok"><i class="fa fa-angle-double-right"></i> Listele</a></li>
                         </ul>
                       </li>
-                        <li class="treeview <%- req.flash('birim') %>">
-                            <a href="#">
-                                <i class="fa fa-edit"></i> <span>Birim Modulü</span>
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </a>
-                            <ul class="treeview-menu">
-                                <li><a href="http://localhost:1337/admin/birim/add"><i class="fa fa-angle-double-right"></i> Ekle</a></li>
-                                <li><a href="http://localhost:1337/admin/birim"><i class="fa fa-angle-double-right"></i> Listele</a></li>
-                            </ul>
-                        </li>
-
+                      <li class="treeview <%- req.flash('birim') %>">
+                          <a href="#">
+                              <i class="fa fa-edit"></i> <span>Birim Modulü</span>
+                              <i class="fa fa-angle-left pull-right"></i>
+                          </a>
+                          <ul class="treeview-menu">
+                              <li><a href="http://localhost:1337/admin/birim/add"><i class="fa fa-angle-double-right"></i> Ekle</a></li>
+                              <li><a href="http://localhost:1337/admin/birim"><i class="fa fa-angle-double-right"></i> Listele</a></li>
+                          </ul>
+                      </li>
+                      <li class="treeview <%- req.flash('iletisim') %>">
+                        <a href="#">
+                          <i class="fa fa-edit"></i> <span>İletişim Modulü</span>
+                          <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                          <li><a href="http://localhost:1337/admin/iletisim/add"><i class="fa fa-angle-double-right"></i> Ekle</a></li>
+                          <li><a href="http://localhost:1337/admin/iletisim"><i class="fa fa-angle-double-right"></i> Listele</a></li>
+                        </ul>
+                      </li>
+                      <li class="treeview <%- req.flash('iletisimtipi') %>">
+                        <a href="#">
+                          <i class="fa fa-edit"></i> <span>İletisimTipi Modulü</span>
+                          <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                          <li><a href="http://localhost:1337/admin/iletisimtipi/add"><i class="fa fa-angle-double-right"></i> Ekle</a></li>
+                          <li><a href="http://localhost:1337/admin/iletisimtipi/"><i class="fa fa-angle-double-right"></i> Listele</a></li>
+                        </ul>
+                      </li>
                       <li class="treeview <%- req.flash('sikayetDurumTipi') %>">
                         <a href="#">
                           <i class="fa fa-edit"></i> <span>Şikayet Durum Modulü</span>
@@ -107,6 +115,16 @@
                           <li><a href="http://localhost:1337/admin/yetkitipi/"><i class="fa fa-angle-double-right"></i> Listele</a></li>
                         </ul>
                       </li>
+                      <li class="treeview <%- req.flash('karaliste') %>">
+                        <a href="#">
+                          <i class="fa fa-edit"></i> <span>Karaliste Modulü</span>
+                          <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                          <li><a href="http://localhost:1337/admin/karaliste/add"><i class="fa fa-angle-double-right"></i> Ekle</a></li>
+                          <li><a href="http://localhost:1337/admin/karaliste"><i class="fa fa-angle-double-right"></i> Listele</a></li>
+                        </ul>
+                      </li>
                       <li class="treeview <%- req.flash('siteayar') %>">
                         <a href="#">
                           <i class="fa fa-gear"></i> <span>Genel Ayar Modulü</span>
@@ -117,39 +135,16 @@
                           <li><a href="http://localhost:1337/admin/ayar"><i class="fa fa-angle-double-right"></i> Listele</a></li>
                         </ul>
                       </li>
-
-                      <li class="treeview <%- req.flash('karaliste') %>">
-                        <a href="#">
-                          <i class="fa fa-gear"></i> <span>Karaliste Modulü</span>
-                          <i class="fa fa-angle-left pull-right"></i>
-                        </a>
-                        <ul class="treeview-menu">
-                          <li><a href="http://localhost:1337/admin/karaliste/add"><i class="fa fa-angle-double-right"></i> Ekle</a></li>
-                          <li><a href="http://localhost:1337/admin/karaliste"><i class="fa fa-angle-double-right"></i> Listele</a></li>
-                        </ul>
-                      </li>
-
-                      <li class="treeview <%- req.flash('iletisim') %>">
-                        <a href="#">
-                          <i class="fa fa-gear"></i> <span>İletişim Modulü</span>
-                          <i class="fa fa-angle-left pull-right"></i>
-                        </a>
-                        <ul class="treeview-menu">
-                          <li><a href="http://localhost:1337/admin/iletisim/add"><i class="fa fa-angle-double-right"></i> Ekle</a></li>
-                          <li><a href="http://localhost:1337/admin/iletisim"><i class="fa fa-angle-double-right"></i> Listele</a></li>
-                        </ul>
-                      </li>
-
-                      <li class="treeview <%- req.flash('profil') %>">
+                      <!-- <li class="treeview <%- req.flash('profil') %>">
                         <a href="http://localhost:1337/admin/profil">
-                          <i class="fa fa-gear"></i> <span>Bilgilerim</span>
+                          <i class="fa fa-edit"></i> <span>Bilgilerim</span>
                           <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
-                          <li><a href="http://localhost:1337/admin/profil"><i class="fa fa-angle-double-right"></i> Ekle</a></li>
+                          <li><a href="http://localhost:1337/admin/profil"><i class="fa fa-angle-double-right"></i> Düzenle</a></li>
                         </ul>
                       </li>
-
+ -->
 
                     </ul>
                 </section>

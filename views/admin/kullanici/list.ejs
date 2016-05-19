@@ -32,6 +32,7 @@
             <th>Durum</th>
             <th>GörevId</th>
             <th style="width: 40px">Düzenle</th>
+            <th style="width: 40px">Karaliste</th>
             <th style="width: 40px">Sil</th>
           </tr>
           <% _.each(kullanicilar, function(kullanici) {%>
@@ -44,6 +45,7 @@
             <td><%=kullanici.hesapDurum%></td>
             <td><%=kullanici.gorevId%></td>
             <td><a href="/admin/kullanici/edit/<%=kullanici.id %>"><span class="badge bg-green">düzenle</span></a></td>
+            <td><a href="/admin/kullanici/ban/<%=kullanici.email %>"><span class="badge bg-black">karaliste</span></a></td>
             <td><a onclick="return confirm('Silmek İstediğinizden Eminmisiniz ?');" href="/admin/kullanici/delete/<%=kullanici.id %>"><span class="badge bg-red">sil</span></a></td>
           </tr>
           <% }) %>
