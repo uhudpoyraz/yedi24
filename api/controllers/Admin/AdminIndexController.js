@@ -19,27 +19,37 @@ module.exports = {
   	var TümSikayetler = 0;
     var KayitliKullanici = 0;
     var MisafirKullanici = 0;
+    var DosyaSayısı = 0;
+
     Sikayetler.count().exec(function countCB(err, found) {
       if(err){
         console.log(err);
       }else{
-      	console.log(found);
+      	//console.log(found);
         TümSikayetler = found;
         Sikayetler.count({kullaniciId:-1}).exec(function countCB(err, found) {
 	      if(err){
 	        console.log(err);
 	      }else{
-	      	console.log(found);
+	      	//console.log(found);
 	        MisafirKullanici = found;
 	        Kullanicilar.count().exec(function countCB(err, found) {
-		      if(err){
-		        console.log(err);
-		      }else{
-		      	console.log(found);
-		        KayitliKullanici = found;
-		          return res.view('admin/index/homepage', {layout: 'admin/layout',message: 'Login success!', TümSikayetler:TümSikayetler, MisafirKullanici:MisafirKullanici, KayitliKullanici:KayitliKullanici});
-		      }
-		    });
+  		      if(err){
+  		        console.log(err);
+  		      }else{
+  		      	//console.log(found);
+  		        KayitliKullanici = found;
+		          Eklentiler.count().exec(function countCB(err, found) {
+                if(err){
+                  console.log(err);
+                }else{
+                  //console.log(found);
+                  DosyaSayısı = found;
+                  return res.view('admin/index/homepage', {layout: 'admin/layout',message: 'Login success!', TümSikayetler:TümSikayetler, MisafirKullanici:MisafirKullanici, KayitliKullanici:KayitliKullanici, DosyaSayısı:DosyaSayısı});
+                }
+              });
+  		      }
+		      });
 	      }
 	    });
       }
