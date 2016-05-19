@@ -37,7 +37,7 @@ module.exports = {
       }
       if (num == 0) {
 
-        return res.json({"success": false, message: "Böyle bir kullanıcı bulunmamaktadır.",type:1});
+        return res.json({"success": false, message: "Hesabınız engellenmiştir.",type:1});
 
       } else {
         Kullanicilar.findOne({
