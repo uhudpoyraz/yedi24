@@ -25,49 +25,26 @@ module.exports = {
     var crypto = require('crypto');
     var hash = crypto.createHash('sha1').update(password).digest('hex');
 
-    Kullanicilar.count().where({email: email, sifre: hash}).exec(function (err, num) {
+    var query='select *,kullanicilar.id as kullaniciid from kullanicilar inner join yetkitipi on yetkitipi.id=kullanicilar."gorevId" ' +
+      'where yetkitipi."yetkiDerecesi"::numeric =0.1 and email=\''+email+'\' and sifre=\''+hash+'\'';
+
+    Kullanicilar.query(query, function(err, result) {
       if (err) {
         return console.log(err);
       }
-      if (num == 0) {
+
+       
+      if (result.rowCount!=1) {
+
 
         return res.redirect('/admin/login');
 
       } else {
-        Kullanicilar.findOne({
-          email: email
-        }).exec(function afterwards(err, kullanici) {
-          // Error handling
-          if (err) {
 
-          } else {
+        req.session.AdminkullaniciDetay = result.rows[0];
 
+        return res.redirect('/admin/');
 
-            var crypto = require('crypto');
-            var hash = crypto.createHash('sha1').update(password).digest('hex');
-
-
-            if (kullanici.sifre == hash) {
-              if (kullanici.hesapDurum == 1) {
-
-                req.session.AdminkullaniciDetay = kullanici;
-                return res.redirect('/admin/');
-              } else {
-
-                return res.redirect('/admin/login');
-
-
-              }
-
-
-            } else {
-              return res.redirect('/admin/login');
-
-            }
-
-
-          }
-        });
       }
     });
   },

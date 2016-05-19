@@ -19,10 +19,10 @@ module.exports = {
     var hash = crypto.createHash('sha1').update(password).digest('hex');
 
 
-    var count;
+    var count=0;
     KaraListe.count().where({email: email}).exec(function (err, num) {
       if (err) {
-         
+
       }
        count=num;
     });
@@ -30,7 +30,7 @@ module.exports = {
       if(count!=0){
         return   res.json({"success": false, message: "Hesabınız Engellenmiştir.",type:0});
       }
-  
+
         Kullanicilar.count().where({email: email, sifre: hash}).exec(function (err, num) {
       if (err) {
         return console.log(err);
@@ -63,7 +63,7 @@ module.exports = {
                 });
 
               }
-              
+
             } else {
               return res.json({"success": false, message: "Şifre veya Email Hatalı."});
 
