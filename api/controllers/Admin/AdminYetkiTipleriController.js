@@ -53,16 +53,14 @@ module.exports = {
   list: function (req, res) {
     req.flash('yetkitipleri', 'active');
 
-    YetkiTipi.find(function(err, yetkitipleri) {
+    var myQuery = YetkiTipi.find();
+
+    myQuery.sort('yetkiDerecesi ASC');
+
+    myQuery.exec(function callBack(err,yetkitipleri){
       if (err) {return res.serverError(err);}
-
       return res.view('admin/yetkitipi/list',{layout:'admin/layout',yetkitipleri: yetkitipleri});
-
     });
-
-
-
-
   },
 
 

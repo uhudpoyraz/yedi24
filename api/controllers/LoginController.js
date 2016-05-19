@@ -19,7 +19,7 @@ module.exports = {
     var hash = crypto.createHash('sha1').update(password).digest('hex');
 
 
-    var count;
+    var count=0;
     KaraListe.count().where({email: email}).exec(function (err, num) {
       if (err) {
          
@@ -37,7 +37,7 @@ module.exports = {
       }
       if (num == 0) {
 
-        return res.json({"success": false, message: "Böyle bir kullanıcı bulunmamaktadır.",type:1});
+        return res.json({"success": false, message: "Hesabınız engellenmiştir.",type:1});
 
       } else {
         Kullanicilar.findOne({
