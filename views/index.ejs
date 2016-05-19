@@ -17,13 +17,9 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-<<<<<<< HEAD
                         <li class="active"><a href="#">Şikayet Listesi <span class="sr-only">(current)</span></a></li>
-                      <% if (session.kullaniciDetay!=null) {%>
-=======
                       <% if (session.kullaniciDetay!=null && session.kullaniciDetay.gorevId==0) {%>
                       <li class="active"><a href="#">Yaptıgım Şikayetler<span class="sr-only">(current)</span></a></li>
->>>>>>> 84a33c5038b12802f421f8ff528125cf85431efa
                       <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                aria-haspopup="true" aria-expanded="false">Aktif Şikayetler <span
