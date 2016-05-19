@@ -10,11 +10,10 @@
 module.exports = {
 
 
-
   login: function (req, res) {
 
 
-    return res.view('admin/login/login',{layout:'admin/login/loginLayout'});
+    return res.view('admin/login/login', {layout: 'admin/login/loginLayout'});
 
   },
 
@@ -23,46 +22,59 @@ module.exports = {
     var email = req.param("email");
     var password = req.param("password");
 
-     Kullanicilar.findOne({
-      email: email
-    }).exec(function afterwards(err, kullanici) {
-      // Error handling
+    var crypto = require('crypto');
+    var hash = crypto.createHash('sha1').update(password).digest('hex');
+
+    Kullanicilar.count().where({email: email, sifre: hash}).exec(function (err, num) {
       if (err) {
+        return console.log(err);
+      }
+      if (num == 0) {
+
+        return res.redirect('/admin/login');
 
       } else {
-        var crypto = require('crypto');
-        var hash = crypto.createHash('sha1').update(password).digest('hex');
+        Kullanicilar.findOne({
+          email: email
+        }).exec(function afterwards(err, kullanici) {
+          // Error handling
+          if (err) {
+
+          } else {
 
 
+            var crypto = require('crypto');
+            var hash = crypto.createHash('sha1').update(password).digest('hex');
 
-        if (kullanici.sifre == hash) {
-            if(kullanici.hesapDurum==1){
 
-              req.session.AdminkullaniciDetay =kullanici;
-              return res.redirect('/admin/');
-            }else{
+            if (kullanici.sifre == hash) {
+              if (kullanici.hesapDurum == 1) {
 
-              return res.json({"success": false,message:"Hesabınız onaylanmamıstır.Lütfen Hesabınızı onaylayınız."});
+                req.session.AdminkullaniciDetay = kullanici;
+                return res.redirect('/admin/');
+              } else {
 
+                return res.redirect('/admin/login');
+
+
+              }
+
+
+            } else {
+              return res.redirect('/admin/login');
 
             }
 
 
-        } else {
-          return res.redirect('/admin/login');
-
-        }
-
-
+          }
+        });
       }
     });
-
-
   },
   logout: function (req, res) {
 
-    req.session.AdminkullaniciDetay =null;
-     return  res.redirect('/');
+    req.session.AdminkullaniciDetay = null;
+    return res.redirect('/');
 
 
   }
