@@ -15,46 +15,68 @@ module.exports = {
     var email = req.param("email");
     var password = req.param("password");
 
-    var kullanici = Kullanicilar.findOne({
-      email: email
-    }).exec(function afterwards(err, kullanici) {
-      // Error handling
+    var crypto = require('crypto');
+    var hash = crypto.createHash('sha1').update(password).digest('hex');
+
+
+    var count;
+    KaraListe.count().where({email: email}).exec(function (err, num) {
       if (err) {
-
-      } else {
-        var crypto = require('crypto');
-        var hash = crypto.createHash('sha1').update(password).digest('hex');
-
-
-
-        if (kullanici.sifre == hash) {
-            if(kullanici.hesapDurum==1){
-
-              req.session.kullaniciDetay =kullanici;
-              return res.json({"success": true,message:"Giriş Başarılı."});
-            }else{
-
-              return res.json({"success": false,message:"Hesabınız onaylanmamıstır.Lütfen Hesabınızı onaylayınız."});
-
-
-            }
-
-
-        } else {
-          return res.json({"success": false,message:"Şifre veya Email Hatalı."});
-
-        }
-
-
+         
       }
+       count=num;
     });
 
+      if(count!=0){
+        return   res.json({"success": false, message: "Hesabınız Engellenmiştir.",type:0});
+      }
+  
+        Kullanicilar.count().where({email: email, sifre: hash}).exec(function (err, num) {
+      if (err) {
+        return console.log(err);
+      }
+      if (num == 0) {
 
+        return res.json({"success": false, message: "Böyle bir kullanıcı bulunmamaktadır.",type:1});
+
+      } else {
+        Kullanicilar.findOne({
+          email: email
+        }).exec(function afterwards(err, kullanici) {
+          // Error handling
+          if (err) {
+
+          } else {
+
+            var crypto = require('crypto');
+            var hash = crypto.createHash('sha1').update(password).digest('hex');
+
+
+            if (kullanici.sifre == hash) {
+              if (kullanici.hesapDurum == 1) {
+
+                req.session.kullaniciDetay = kullanici;
+                return res.json({"success": true, message: "Giriş Başarılı."});
+              } else {
+
+                return res.json({"success": false,message: "Hesabınız onaylanmamıstır.Lütfen Hesabınızı onaylayınız."
+                });
+
+              }
+              
+            } else {
+              return res.json({"success": false, message: "Şifre veya Email Hatalı."});
+
+            }
+          }
+        });
+      }
+    });
   },
   logout: function (req, res) {
 
-    req.session.kullaniciDetay =null;
-     return  res.redirect('/');
+    req.session.kullaniciDetay = null;
+    return res.redirect('/');
 
 
   }

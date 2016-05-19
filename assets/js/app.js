@@ -72,6 +72,7 @@ $(function(){
         if(data.succes==true){
 
           alert(data.message);
+
         }else {
 
           alert(data.message);
@@ -95,15 +96,14 @@ $(function(){
       url:'/ajax/dologin/',
       success: function(data ) {
 
-        if(data.success==true){
-
-
-          location.reload();
-        }else {
+        if(data.success==false){
 
           alert(data.message);
-
+          
+        }else {
+          location.reload();
         }
+        
       }
     });
     return false;
