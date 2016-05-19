@@ -104,13 +104,13 @@ module.exports = {
     //
     // Node defaults to 2 minutes.
     console.log(req.params.all());
-    req.file('ek').upload({dirname: '../../assets/images/upload/ek' }, function (error, uploadedFiles) 
+    req.file('ek').upload({dirname: '../../assets/images/upload/ek' }, function (error, uploadedFiles)
       {
         console.log(error);
         if (!error)
         {
           console.log(uploadedFiles);
-          if ( uploadedFiles.length > 0) 
+          if ( uploadedFiles.length > 0)
           {
               console.log(uploadedFiles[0].fd+"bura mı?");
 
@@ -119,7 +119,7 @@ module.exports = {
               var birimId=req.param("birimid");
               var kullaniciId=-1;
               var birimSorumluId=-1;
-              
+
               if(req.session.kullaniciDetay!=null){
                 var kullaniciId=req.session.kullaniciDetay.id;
               }
@@ -129,7 +129,7 @@ module.exports = {
                 if(err) {
                   return res.json({succes:false,message:'Sorun Oluştur.'});
                 }
-                
+
 
                 Birim.findOne({id: created.birimId}).exec(function (err, record){
                   if(err) {
@@ -162,7 +162,7 @@ module.exports = {
           }
         }
     });
-    
+
   },
 
   sikayetListesi:function (req,res) {
@@ -177,7 +177,7 @@ module.exports = {
 
     if(binaId!=0 || birimId!=0 || blokId!=0|| req.session.kullaniciDetay!=null){
 
-      where='where '
+      where=' where '
     }
 
      if(binaId!=0){
@@ -206,14 +206,21 @@ module.exports = {
       '    INNER JOIN bina ON bina.id = blok."binaId"'+where+' limit '+limit+' offset '+offset;
 
 
+    console.log(query);
     Sikayetler.query(query, function(err, sikayetler) {
 
       if (err) {return res.serverError(err);}
 
-      Sikayetler.count().exec(function countCB(error, found) {
-      //  sikayetler.rows=sikayetler.rows.rows;
+
+      var query2='SELECT count(*) as toplam FROM sikayetler s INNER JOIN birim ON birim.id = s."birimId"' +
+        '    INNER JOIN blok ON blok.id = birim."blokId"' +
+        '    INNER JOIN bina ON bina.id = blok."binaId"'+where;
+     
+      Sikayetler.query(query2, function(err, found) { 
+       
       var result={};
-        result.total=found;
+ 
+        result.total=found.rows[0].toplam;
         result.rows=sikayetler.rows;
         return res.json(result);
 
