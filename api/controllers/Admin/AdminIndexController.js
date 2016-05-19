@@ -16,7 +16,7 @@ module.exports = {
 
   index: function (req,res) {
 
-  	var TümSikayetler = 0;
+  	var TumSikayetler = 0;
     var KayitliKullanici = 0;
     var MisafirKullanici = 0;
     Sikayetler.count().exec(function countCB(err, found) {
@@ -24,7 +24,7 @@ module.exports = {
         console.log(err);
       }else{
       	console.log(found);
-        TümSikayetler = found;
+        TumSikayetler = found;
         Sikayetler.count({kullaniciId:-1}).exec(function countCB(err, found) {
 	      if(err){
 	        console.log(err);
@@ -37,7 +37,7 @@ module.exports = {
 		      }else{
 		      	console.log(found);
 		        KayitliKullanici = found;
-		          return res.view('admin/index/homepage', {layout: 'admin/layout',message: 'Login success!', TümSikayetler:TümSikayetler, MisafirKullanici:MisafirKullanici, KayitliKullanici:KayitliKullanici});
+		          return res.view('admin/index/homepage', {layout: 'admin/layout',message: 'Login success!', TumSikayetler:TumSikayetler, MisafirKullanici:MisafirKullanici, KayitliKullanici:KayitliKullanici});
 		      }
 		    });
 	      }
