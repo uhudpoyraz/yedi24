@@ -1,0 +1,207 @@
+<div class="container">
+
+  <%if(session.kullaniciDetay.gorevId==0){%>
+  <% include /include/head %>
+    <%} else {%>
+  <% include idare/include/head %>
+  <%} %>
+    <div class="container-fluid modal-content">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default"  id="toolbar">
+                    <div class="panel-body">
+                      <div class="tab-pane fade active in" id="signinTab">
+                        <form role="form" method="post" action="/bilgiguncelle/save">
+                          <input required="" name="id" type="hidden" value="<%=kullanicilar.id %>" class="form-control input-medium" />
+
+                          <!-- Sign In Form -->
+                          <!-- Text input-->
+                          <div class="form-group">
+                              <label class="control-label" for="signinEmail">İsim:</label> <div class="controls">
+                              <input required="" name="name" type="text" value="<%=kullanicilar.isim %>" class="form-control input-medium" />
+                            </div>
+                          </div>
+
+
+                          <div class="form-group">
+                            <label class="control-label" for="signinEmail">Soyisim:</label> <div class="controls">
+                              <input required="" name="surname" type="text" value="<%=kullanicilar.soyIsim %>" class="form-control input-medium" />
+                            </div>
+                          </div>
+
+                          <div class="form-group">
+                            <label class="control-label" for="signinEmail">Email:</label> <div class="controls">
+                              <input required="" name="email" type="emal" value="<%=kullanicilar.email %>" class="form-control input-medium" />
+                            </div>
+                          </div>
+
+                          <div class="form-group">
+                            <label class="control-label" for="signinEmail">Şifre:</label> <div class="controls">
+                              <input   name="password" type="password" value="" class="form-control input-medium" />
+                            </div>
+                          </div>
+                          <!-- Button -->
+                          <div class="form-group">
+                            <label class="control-label" for="update"></label>
+                            <div class="controls">
+                              <button id="update" name="update" class="btn btn-success">Güncelle</button>
+                            </div>
+                          </div>
+
+                        </form>
+                      </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+
+
+
+    </div>
+
+</div>
+
+<!-- Login-->
+<div class="modal fade bs-modal-sm" id="myModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <br>
+            <div class="bs-example bs-example-tabs">
+                <ul id="myTab" class="nav nav-tabs">
+                    <li class="active"><a href="#signinTab" data-toggle="tab">Giriş Yap</a></li>
+                    <li class=""><a href="#signup" data-toggle="tab">Kayit Ol</a></li>
+                </ul>
+            </div>
+            <div class="modal-body">
+                <div id="myTabContent" class="tab-content">
+
+                    <div class="tab-pane fade active in" id="signinTab">
+                        <form role="form" method="post">
+
+                                <!-- Sign In Form -->
+                                <!-- Text input-->
+
+
+                              <div class="form-group">
+                                    <label class="control-label" for="signinEmail">Email:</label>
+                                    <div class="controls">
+                                        <input required="" id="signinEmail" name="email" type="text" value="dn@gmail.com"
+                                               class="form-control" placeholder="Email Adresiniz" class="input-medium"
+                                               required="">
+                                    </div>
+                                </div>
+
+                                <!-- Password input-->
+                                <div class="form-group">
+                                    <label class="control-label" for="passwordinput">Şifre:</label>
+                                    <div class="controls">
+                                        <input required="" id="passwordinput" name="password" class="form-control"
+                                               type="password" placeholder="Şifreniz" value="123456" class="input-medium">
+                                    </div>
+                                </div>
+
+                                <!-- Multiple Checkboxes (inline) -->
+                                <div class="checkbox">
+                                    <label class="control-label" for="rememberme"></label>
+                                    <div class="controls">
+                                        <label class="checkbox inline" for="rememberme">
+                                            <input type="checkbox" name="rememberme" id="rememberme"
+                                                   value="rrememberme">
+                                            Beni Hatirla
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <!-- Button -->
+                                <div class="form-group">
+                                    <label class="control-label" for="signin"></label>
+                                    <div class="controls">
+                                        <button id="signin" name="signin" class="btn btn-success">Giriş Yap</button>
+                                    </div>
+                                </div>
+
+                        </form>
+                    </div>
+                    <div class="tab-pane fade" id="signup">
+                        <form  role="form" method="post">
+
+                                <!-- Sign Up Form -->
+                                <!-- Text input-->
+
+
+                              <div class="form-group">
+                                <label class="control-label" for="name">İsim:</label>
+                                <div class="controls">
+                                  <input id="registerName"  name="registername" type="text" class="form-control" placeholder="İsminiz" class="input-medium"
+                                          required="">
+                                </div>
+                              </div>
+
+                              <div class="form-group">
+                                <label class="control-label" for="signinEmail">Soyadınız:</label>
+                                <div class="controls">
+                                  <input id="registerSurname" name="surname" type="text" class="form-control" placeholder="Soyadınız" class="input-medium"
+                                          required="">
+                                </div>
+                              </div>
+
+
+
+                              <div class="form-group">
+                                    <label class="control-label" for="Email">Email:</label>
+                                    <div class="controls">
+                                        <input id="registerEmail" name="registeremail" class="form-control" type="text"
+                                               placeholder="email adresiniz" class="input-large" required="">
+                                    </div>
+                                </div>
+
+                                <!-- Password input-->
+                                <div class="form-group">
+                                    <label class="control-label" for="password">Şifre:</label>
+                                    <div class="controls">
+                                        <input id="registerePassword" name="registerepassword" class="form-control" type="password"
+                                               placeholder="********" class="input-large" required="">
+                                        <em>1-8 Karakter</em>
+                                    </div>
+                                </div>
+
+                                <!-- Text input-->
+                                <div class="form-group">
+                                    <label class="control-label" for="reenterpassword">Şifre Tekrar:</label>
+                                    <div class="controls">
+                                        <input id="registereReEnterPassword" class="form-control" name="registerereenterpassword"
+                                               type="password" placeholder="********" class="input-large" required="">
+                                    </div>
+                                </div>
+
+                                <!-- Multiple Radios (inline) -->
+                                <br>
+                                <!-- Button -->
+                                <div class="form-group">
+                                    <label class="control-label" for="confirmsignup"></label>
+                                    <div class="controls">
+                                        <button id="confirmsignup" name="confirmsignup" class="btn btn-success">Kayit
+                                            Ol
+                                        </button>
+                                    </div>
+                                </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+

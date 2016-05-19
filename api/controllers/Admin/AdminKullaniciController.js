@@ -99,8 +99,11 @@ module.exports = {
 		if(req.body.email) {
 			kayıt.email = req.body.email;
 		}
-		if(req.body.password) {
-			kayıt.sifre = req.body.password;
+		if(req.body.password.length!=0) {
+      
+      var crypto = require('crypto');
+      var passwordHash= crypto.createHash('sha1').update(req.body.password).digest('hex');
+			kayıt.sifre = passwordHash;
 		}
 		if(req.body.status) {
 			kayıt.hesapDurum = req.body.status;

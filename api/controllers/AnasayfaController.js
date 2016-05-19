@@ -9,12 +9,12 @@ module.exports = {
 
 
   index: function (req, res) {
- 
+
     if(req.session.kullaniciDetay!=null && req.session.kullaniciDetay.gorevId!=0){
-      
+
      return res.redirect("/idare");
     }
-    
+
         Bina.find(function (err, binalar) {
           if (err) {
             return res.serverError(err);
@@ -31,7 +31,7 @@ module.exports = {
         });*/
   },
 
-  
+
   /**
    * `AnasayfaController.blokList()`
    */
@@ -54,7 +54,7 @@ module.exports = {
    * `AnasayfaController.birimList()`
    */
   birimList: function (req, res) {
-    
+
     var blokId = req.param('blokid');
     console.log("blokId" + blokId);
     Birim.find({blokId: blokId}).exec(function (err, birimByBlok) {
@@ -89,6 +89,7 @@ module.exports = {
   sikayetKayit:function (req,res) {
     console.log(req.params.all());
 
+    res.json(req.params.all());
     req.file('ek').upload({dirname: '../../assets/images/upload/ek'}, function (error, uploadedFiles)
       {
         //console.log(error);
@@ -216,13 +217,67 @@ module.exports = {
         result.rows=sikayetler.rows;
         return res.json(result);
 
+      });
+    });
 
+  },
+
+
+  bilgiGuncelle: function (req, res) {
+
+       Kullanicilar.findOne({id:req.session.kullaniciDetay.id}).exec(function (err, kullanicilar) {
+
+      if (err) {
+
+
+      }  else {
+
+         return res.view("front/bilgiguncelle", {kullanicilar: kullanicilar});
+      }
+    });
+
+
+  },
+  bilgiGuncelleSave: function (req, res) {
+
+
+    Kullanicilar.findOne(req.session.kullaniciDetay.id).exec(function(error, kullanici) {
+      if(error) {
+        // do something with the error.
+      }
+
+      if(req.body.name) {
+
+        kullanici.isim = req.body.name;
+      }
+      if(req.body.surname) {
+
+        kullanici.soyIsim = req.body.surname;
+      }
+      if(req.body.email) {
+
+        kullanici.email = req.body.email;
+      }
+      if(req.body.password.length!=0) {
+        var crypto = require('crypto');
+        var passwordHash= crypto.createHash('sha1').update(req.body.password).digest('hex');
+        kullanici.sifre = passwordHash;
+      }
+      kullanici.save(function(error) {
+        if(error) {
+          req.flash('message','Sorun Oluştu.');
+          req.flash('type','danger');
+          req.flash('icon', 'ban');
+        } else {
+          req.flash('message','Güncelleme Başarılı.');
+          req.flash('type','success');
+          req.flash('icon', 'check');
+          return res.redirect('bilgiguncelle');
+        }
       });
     });
 
   }
-
-
 
 
 };
