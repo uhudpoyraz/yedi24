@@ -36,7 +36,7 @@ module.exports = {
        
       if (result.rowCount!=1) {
 
-
+        req.flash('message','<script type="text/type"> alert("Hatalı Email yada Şifre");</script>');
         return res.redirect('/admin/login');
 
       } else {

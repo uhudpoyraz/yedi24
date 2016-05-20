@@ -1,5 +1,5 @@
 <div class="container">
-  <% include include/head %>
+  <%  include ../include/head %>
 
   <div class="container-fluid modal-content">
 
@@ -125,7 +125,7 @@
     $('#sikayetTable').bootstrapTable({
 
       method: 'get',
-      url: 'http://localhost:1337/ajax/idari/sikayet/list/',
+      url: 'http://localhost:1337/ajax/idari/sikayet/listem/',
       cache: false,
       striped: true,
       pagination: true,
@@ -209,11 +209,8 @@
 
     function operateFormatter(value, row, index) {
       return [
-        '<a class="like" href="/idari/sikayet/aktar/' + row.sikayetlerid + '" title="aktar">',
-        '<i class="">Aktar</i>',
-        '</a>  ',
-        '<a class="like" href="/idari/sikayet/detay/' + row.sikayetlerid + '" title="detay">',
-        '<i class="">detay</i>',
+        '<a class="like" href="/idari/sikayet/detay/' + row.sikayetlerid + '" title="Like">',
+        '<i class="">Detay</i>',
         '</a>  '
 
       ].join('');
