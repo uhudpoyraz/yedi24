@@ -299,14 +299,16 @@ console.log(query);
       '    INNER JOIN birim ON birim.id = s."birimId"' +
       '    INNER JOIN durumlar ON s.id = durumlar."sikayetId"' +
       '    INNER JOIN durumtipi ON durumlar."durumTipId" = durumtipi.id' +
-      '     where durumlar."sikayetIlgiliId"='+ilgiliId+' and s.id='+sikayetId+ ' and durumlar."durumBitis" IS NULL ';
+      '     where durumlar."sikayetIlgiliId"='+ilgiliId+' and s.id='+sikayetId+ '';
 
 
     console.log(query);
     Sikayetler.query(query, function(err, sikayetler) {
 
       if (err) {return res.serverError(err);}
-
+      
+ 
+      console.log(query);
 
       return res.view('front/idare/sikayet/detay',{sikayetler: sikayetler,kullanicilar:users,durumtipleri:durumtipleri});
 
