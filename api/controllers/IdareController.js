@@ -125,12 +125,24 @@ module.exports = {
     var limit=req.param("limit");
     var offset=req.param("offset");
     var sikayetId=req.param("sikayetId");
+    var order=req.param("order");
+    var sort=req.param("sort");
 
+
+    if(!sort){
+
+      sort='durumlar."createdAt"';
+      order="desc"
+    }if(sort=="durumBitis"){
+
+      sort='durumlar."'+sort+'"';
+
+    }
 
     var query='select *,durumtipi.isim as durumtipisim,durumlar."createdAt" as durumkayit,kullanicilar.isim as kullaniciisim from durumlar ' +
       '    INNER JOIN durumtipi ON durumlar."durumTipId" = durumtipi.id' +
       '    INNER JOIN kullanicilar ON kullanicilar.id = durumlar."sikayetIlgiliId"' +
-      ' where "sikayetId"='+sikayetId+' order by durumlar."createdAt" DESC limit '+limit+' offset '+offset;
+      ' where "sikayetId"='+sikayetId+' order by '+sort+' '+order+' limit '+limit+' offset '+offset;
 
 
 console.log(query);
@@ -303,11 +315,13 @@ console.log(query);
 
 
     console.log(query);
+
+
     Sikayetler.query(query, function(err, sikayetler) {
 
       if (err) {return res.serverError(err);}
-      
- 
+
+
       console.log(query);
 
       return res.view('front/idare/sikayet/detay',{sikayetler: sikayetler,kullanicilar:users,durumtipleri:durumtipleri});
