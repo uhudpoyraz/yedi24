@@ -12,6 +12,13 @@ module.exports = {
 
   login: function (req, res) {
 
+    if(req.flash('loginMessage')=="hata"){
+
+      req.flash('loginMessage','<script type="text/javascript"> alert("Hatalı Email yada Şifre"); </script>');
+
+    }else {
+      req.flash('loginMessage','');
+    }
 
     return res.view('admin/login/login', {layout: 'admin/login/loginLayout'});
 
@@ -33,10 +40,10 @@ module.exports = {
         return console.log(err);
       }
 
-       
+      console.log(query);
       if (result.rowCount!=1) {
-
-        req.flash('message','<script type="text/type"> alert("Hatalı Email yada Şifre");</script>');
+        console.log(result.rowCount);
+        req.flash('loginMessage','hata');
         return res.redirect('/admin/login');
 
       } else {

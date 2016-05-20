@@ -26,4 +26,6 @@
 
   </div>
 </div>
-
+<% if (req.session.flash.loginMessage) {%>
+<%- req.flash('loginMessage') %>
+<%}%>
