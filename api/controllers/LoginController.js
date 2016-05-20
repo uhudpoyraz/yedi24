@@ -24,13 +24,11 @@ module.exports = {
       if (err) {
 
       }
+      console.log(num);
        count=num;
-    });
-
-      if(count!=0){
+       if(count!=0){
         return   res.json({"success": false, message: "Hesabınız Engellenmiştir.",type:0});
-      }else{
-
+      }
       Kullanicilar.count().where({email: email, sifre: hash}).exec(function (err, num) {
       if (err) {
         return console.log(err);
@@ -72,7 +70,9 @@ module.exports = {
         });
       }
     });
-    }
+    });
+
+        
   },
   logout: function (req, res) {
 
