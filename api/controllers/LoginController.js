@@ -19,57 +19,52 @@ module.exports = {
     var hash = crypto.createHash('sha1').update(password).digest('hex');
 
 
-    var count=0;
+    
     KaraListe.count().where({email: email}).exec(function (err, num) {
-      if (err) {
-
-      }
-      console.log(num);
-       count=num;
-       if(count!=0){
-        return   res.json({"success": false, message: "Hesabınız Engellenmiştir.",type:0});
-      }
-      Kullanicilar.count().where({email: email, sifre: hash}).exec(function (err, num) {
       if (err) {
         return console.log(err);
       }
-      if (num == 0) {
+      console.log(num);
+      if(num!=0){
+        return   res.json({"success": false, message: "Hesabınız Engellenmiştir.",type:0});
+      }
 
-        return res.json({"success": false, message: "Hesabınız engellenmiştir.",type:1});
-
-      } else {
-        Kullanicilar.findOne({
-          email: email
-        }).exec(function afterwards(err, kullanici) {
-          // Error handling
-          if (err) {
-
-          } else {
-
-            var crypto = require('crypto');
-            var hash = crypto.createHash('sha1').update(password).digest('hex');
-
-
-            if (kullanici.sifre == hash) {
-              if (kullanici.hesapDurum == 1) {
-
-                req.session.kullaniciDetay = kullanici;
-                return res.json({"success": true, message: "Giriş Başarılı."});
-              } else {
-
-                return res.json({"success": false,message: "Hesabınız onaylanmamıstır.Lütfen Hesabınızı onaylayınız."
-                });
-
-              }
+      Kullanicilar.count().where({email: email, sifre: hash}).exec(function (err, count) {
+        if (err) {
+          return console.log(err);
+        }
+        if (count = 0) {
+          return res.json({"success": false, message: "Böyle bir kullanıcı bulunamadı.",type:1});
+        } else {
+          Kullanicilar.findOne({
+            email: email
+          }).exec(function afterwards(err, kullanici) {
+            // Error handling
+            if (err) {
 
             } else {
-              return res.json({"success": false, message: "Şifre veya Email Hatalı."});
 
+              var crypto = require('crypto');
+              var hash = crypto.createHash('sha1').update(password).digest('hex');
+              //console.log(hash+"\n");
+              //console.log(kullanici.sifre);
+              if (kullanici.sifre == hash) {
+                console.log("hash ok!");
+                console.log(kullanici.hesapDurum);
+                if (kullanici.hesapDurum == 1) {
+                  req.session.kullaniciDetay = kullanici;
+                  return res.json({"success": true, message: "Giriş Başarılı."});
+                } else {
+                  return res.json({"success": false,message: "Hesabınız onaylanmamıstır.Lütfen Hesabınızı onaylayınız."
+                  });
+                }
+              } else {
+                return res.json({"success": false, message: "Şifre veya Email Hatalı."});
+              }
             }
-          }
-        });
-      }
-    });
+          });
+        }
+      });
     });
 
         
