@@ -174,7 +174,7 @@ module.exports = {
 
     var where='';
 
-    if(binaId!=0 || birimId!=0 || blokId!=0|| req.session.kullaniciDetay!=null){
+    if(binzaId!=0 || birimId!=0 || blokId!=0|| req.session.kullaniciDetay!=null){
 
       where=' where '
     }

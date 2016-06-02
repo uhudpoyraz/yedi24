@@ -1,3 +1,70 @@
+KURULUM WINDOWS
+-------------------------
+
+NODE.JS
+--------
+https://nodejs.org/en/download/ 
+adresinden node.js LTS surumu indirilerek yüklenir.
+
+PGADMIN(POSTGRESQL)
+-------------------
+http://www.enterprisedb.com/products-services-training/pgdownload#windows
+
+Adresinden sisteminize uygun sürümü indirip yükleyin.
+Yükleme işlemi sırasında "postgres" kullanıcı için şifre sorulursa 
+şifrenizi "123456" olarak belirleyin.
+
+Veritabanının bilgileri şu şekilde olmalıdır. 
+	postgresql
+		kullanıcı adı: postgres
+		şifresi: 123456
+	veritabanı
+		adı: yedi24
+
+Eğer sisteminizde postgresql hali hazırda kurulu ise:
+	C:\Users\USER_NAME\AppData\Roaming\npm\yedi24\config\connections.js
+dosyasında bulunan 80 ve 81 satirdaki "user" ve "password" bilgilerinin degiştirilmesi gerekmektedir.
+Daha sonra "database" klasorundeki "yedi24.sql" dosyasını veritabanınıza aktarınız.
+
+
+SAILS.JS
+--------
+Windows komut satırı açılarak aşagıdaki komut çalıştırılır:
+	npm install -g sails
+
+Aşagıdaki klasörlerin içine sails yüklencektir:
+	C:\Users\USER_NAME\AppData\Roaming\npm
+	C:\Users\USER_NAME\AppData\Roaming\npm-cache
+
+Sails.js yüklendikten sonra windows 7 yada Server 2008'de ,"sails" command is not recognized.
+uyarısı verirse oluşturacağınız bir batch file dosyasının içine:
+
+	node C:\Users\USER_NAME\AppData\Roaming\npm\node_modules\sails\bin\sails.js lift
+
+komutunu yazarak system32 klasorune atınınız."c:\Windows\System32\sails.bat" gibi.
+Sails çalışıcak duruma geldi.
+
+
+PROJENIN ÇALIŞTIRILMASI
+------------------------
+Projeyi çalıştırmak için CD içindeki "yedi24" klasorunu aşagıdaki klasorun içine kopyalayınız.
+	C:\Users\USER_NAME\AppData\Roaming\npm
+
+Proje klasorunu kopyaladıktan sonra "npm update" komutunu calıştırınız.
+	C:\Users\USER_NAME\AppData\Roaming\npm\yedi24>npm update
+
+Daha sonra sırasıyla aşagıdaki komutları çalıştırınız.
+	C:\Users\USER_NAME\AppData\Roaming\npm\yedi24>npm install node-gyp rebuild
+	C:\Users\USER_NAME\AppData\Roaming\npm\yedi24>npm install sails-postgresql --save
+
+Projeyi çalıştırmak için komut satırına bu komutu giriniz: "sails lift"
+	C:\Users\USER_NAME\AppData\Roaming\npm\yedi24>sails lift
+
+
+Proje test etmek için aşagıdaki linke giriniz.
+
+http://localhost:1337
+
 KURULUM UBUNTU TABANLI LINUX SİSTEMLER
 --------------------------------------
 Projenin çalıştırılması için bilgisayarınızda node.js(npm), sails.js ve
@@ -46,4 +113,3 @@ Bu veritabanının bilgileri şu şekilde olmalıdır.
 		adı: yedi24
 
 Tüm işlemler tamamlandığında projenin root klasöründe sails lift komutu çalıştırılarak proje çalıştırılabilir.
-		
