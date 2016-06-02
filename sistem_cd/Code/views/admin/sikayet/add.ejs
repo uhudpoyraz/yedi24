@@ -1,0 +1,65 @@
+<aside class="right-side">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      Sikayeti Aktar
+
+    </h1>
+
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="box box" style="width: 50%;">
+      <div class="box-body">
+        <% if (req.session.flash.message) {%>
+        <div class="box-body">
+          <div class="alert alert-<%- req.flash('type') %> alert-dismissable">
+            <i class="fa fa-<%- req.flash('icon') %>"></i>
+            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+            <b><%- req.flash('message') %></b>
+          </div>
+        </div>
+        <%}%>
+
+        <form role="form" action="/admin/sikayet/save" method="post">
+          <!-- text input -->
+          <input type="hidden" name="sikayetId" value="<%=sikayetler.rows[0].sikayetlerid%>">
+           <div class="form-group">
+            <label>Birim</label>
+            <p><%=sikayetler.rows[0].birimismi%></p>
+          </div>
+          <div class="form-group">
+            <label>Açıklama</label>
+            <p><%=sikayetler.rows[0].aciklama%></p>
+          </div>
+          <div class="form-group">
+            <label>Durum Tipi</label>
+            <select class="form-control" name="durumTipiId" id="category">
+              <option value="0">Seçiniz</option>
+              <% _.each(durumtipleri, function(durumtipi) {%>
+              <option value="<%=durumtipi.id%>"><%=durumtipi.isim%></option>
+              <% }) %>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Kullanıcıya Aktar</label>
+            <select class="form-control" name="kullaniciId" id="category">
+              <option value="0">Seçiniz</option>
+              <% _.each(kullanicilar, function(kullanici) {%>
+              <option value="<%=kullanici.id%>"><%=kullanici.isim%>-<%=kullanici.soyIsim%></option>
+              <% }) %>
+            </select>
+          </div>
+
+
+
+          <div class="form-group">
+          <button class="btn btn-primary btn-sm">Aktar</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </section>
+  <!-- /.content -->
+</aside>

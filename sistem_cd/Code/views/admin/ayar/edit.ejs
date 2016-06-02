@@ -1,0 +1,58 @@
+<aside class="right-side">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      Ayar Düzenle
+
+    </h1>
+
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="box box" style="width: 50%;">
+      <div class="box-body">
+
+        <% if (req.session.flash.message) {%>
+        <div class="box-body">
+          <div class="alert alert-<%- req.flash('type') %> alert-dismissable">
+            <i class="fa fa-<%- req.flash('icon') %>"></i>
+            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+            <b><%- req.flash('message') %></b>
+          </div>
+        </div>
+        <%}%>
+
+        <form role="form" onsubmit="return form_validate();" action="/admin/ayar/update" method="post">
+          <!-- text input -->
+          <input type="hidden" name="id" value="<%=parametre.id%>">
+          <div class="form-group">
+            <label>Ayar İsmi</label>
+            <input type="text" name="name" id="name" value="<%=parametre.isim%>"  class="form-control">
+          </div>
+          <div class="form-group">
+            <label>Ayar Değeri</label>
+            <input type="text" name="value" id="value" value="<%=parametre.deger%>" class="form-control">
+          </div>
+          <div class="form-group">
+            <button class="btn btn-primary btn-sm">Düzenle</button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </section>
+  <!-- /.content -->
+</aside>
+
+
+<script type="text/javascript">
+  function form_validate(){
+    var name=$("#name").val().length;
+    if(name<3){
+      alert("Isim en az 3 karakter olmalı");
+      return false;
+    }
+  }
+
+</script>

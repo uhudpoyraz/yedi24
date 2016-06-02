@@ -1,0 +1,81 @@
+<aside class="right-side">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      İletisim Düzenle
+
+    </h1>
+
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="box box" style="width: 50%;">
+      <div class="box-body">
+
+        <% if (req.session.flash.message) {%>
+        <div class="box-body">
+          <div class="alert alert-<%- req.flash('type') %> alert-dismissable">
+            <i class="fa fa-<%- req.flash('icon') %>"></i>
+            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+            <b><%- req.flash('message') %></b>
+          </div>
+        </div>
+        <%}%>
+
+
+        <form role="form"  action="admin/iletisim/update" method="post">
+          <!-- text input -->
+          <input type="hidden" name="id" value="<%=iletisim.id%>">
+            <div class="form-group">
+            <label>Kullanici Seçiniz</label>
+            <select class="form-control" name="kullaniciId" id="category">
+              <option value="0">Seçiniz</option>
+
+              <% _.each(kullanicilar, function(kullanici) {%>
+              <option <% if (kullanici.id==iletisim.kullaniciId) {%> selected="selected" <% } %>  value="<%=kullanici.id%>"><%=kullanici.isim%>-<%=kullanici.soyIsim%>
+
+              </option>
+              <% }) %>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>İletişim Tipi Seçiniz</label>
+            <select class="form-control" name="iletisimTipId" id="iletisimTipId">
+              <option value="0">Seçiniz</option>
+
+              <% _.each(iletisimtipleri, function(tip) {%>
+              <option <% if (tip.id==iletisim.iletisimTipId) {%> selected="selected" <% } %> value="<%=tip.id%>"><%=tip.deger%>  </option>
+              <% }) %>
+
+            </select>
+          </div>
+
+          <!-- text input -->
+          <div class="form-group">
+            <label>Değer</label>
+            <input type="text" name="deger" id="deger" value="<%=iletisim.deger%>" class="form-control">
+          </div>
+          <div class="form-group">
+            <button class="btn btn-primary btn-sm">Güncelle</button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </section>
+  <!-- /.content -->
+</aside>
+
+
+<script type="text/javascript">
+  function form_validate(){
+    var name=$("#name").val().length;
+    if(name<3){
+      alert("Isim en az 3 karakter olmalı");
+      return false;
+    }
+  }
+
+</script>

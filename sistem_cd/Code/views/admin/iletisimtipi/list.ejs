@@ -1,0 +1,55 @@
+<aside class="right-side">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      İletişim Tipi Listesi
+
+    </h1>
+
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+
+    <div class="box">
+
+      <div class="box-body">
+      <% if (req.session.flash.message) {%>
+        <div class="box-body">
+          <div class="alert alert-<%- req.flash('type') %> alert-dismissable">
+            <i class="fa fa-<%- req.flash('icon') %>"></i>
+            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+            <b><%- req.flash('message') %></b>
+          </div>
+        </div>
+        <%}%>
+        <table class="table table-bordered">
+          <tbody><tr>
+            <th style="width: 10px">id</th>
+            <th>Iletisim Tipi</th>
+
+            <th style="width: 40px">Düzenle</th>
+            <th style="width: 40px">Sil</th>
+          </tr>
+
+          <% _.each(iletisimtipleri, function(tip) {%>
+          <tr>
+            <td><%=tip.id %></td>
+            <td><%=tip.deger%></td>
+
+            <td><a href="/admin/iletisimtipi/edit/<%=tip.id %>"><span class="badge bg-green">düzenle</span></a></td>
+            <td><a onclick="return confirm('Silmek İstediğinizden Eminmisiniz ?');" href="/admin/iletisimtipi/delete/<%=tip.id %>"><span class="badge bg-red">sil</span></a></td>
+          </tr>
+          <% }) %>
+
+          </tbody></table>
+      </div><!-- /.box-body -->
+      <div class="box-footer clearfix ">
+        <div class="pagination-sm no-margin pull-right">
+
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- /.content -->
+</aside>

@@ -1,0 +1,139 @@
+<div class="container">
+  <% include  ../include/head %>
+
+  <div class="container-fluid modal-content">
+
+    <div class="row">
+      <div class="panel panel-success">
+
+        <div class="panel-heading">Sikayet Bilgileri</div>
+
+        <div class="panel-body">
+
+          <dl class="dl-horizontal">
+            <dt>Son hareket </dt>
+            <dd><%=sikayetler.rows[0].durumtipismi%></dd>
+            <dt>Birim</dt>
+            <dd><%=sikayetler.rows[0].birimismi%></dd>
+
+            <dt>Açıklama</dt>
+            <dd><%=sikayetler.rows[0].aciklama%></dd>
+
+
+          </dl>
+
+          <div class="btn-toolbar text-center" role="toolbar">
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+
+
+      <div class="col-md-12">
+        <div id="toolbar1">
+          <div class="form-inline" role="form" method="post">
+            <button id="kayitlistele" type="submit" class="btn btn-default">Kayitları Listele</button>
+
+            <input type="hidden" id="sikayetId" name="sikayetId" value="<%=sikayetler.rows[0].sikayetlerid%>">
+
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+
+        <table id="sikayetTable" >
+          <thead>
+          <tr>
+
+          </tr>
+          </thead>
+          <tbody>
+
+
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<script type="text/javascript">
+
+
+
+
+
+  $(function () {
+
+
+    $('#sikayetTable').bootstrapTable({
+
+      method: 'get',
+      url: 'http://localhost:1337/ajax/idari/sikayet/durumlar/list',
+      cache: false,
+      striped: true,
+      pagination: true,
+      queryParams: function (p) {
+        return {
+
+          sikayetId: $('#sikayetId').val(),
+          limit: p.limit,
+          offset: p.offset,
+          sort:p.sort,
+          order:p.order
+        };
+      },
+      sidePagination:'server',
+      pageSize: 10,
+      pageList: [10, 25, 50, 100, 200],
+      search: false,
+      toolbar:"#toolbar1",
+      showColumns: false,
+      showRefresh: true,
+      minimumCountColumns: 2,
+      clickToSelect: false,
+      columns: [{
+        field: 'durumtipisim',
+        title: 'Durum Ismi',
+        align: 'center',
+        valign: 'middle',
+        sortable: true
+      }, {
+        field: 'durumkayit',
+        title: 'Durum Oluşturulma Tarihi',
+        align: 'center',
+        valign: 'middle',
+        sortable: true
+      },{
+        field: 'durumBitis',
+        title: 'Durum Kapanış Tarih',
+        align: 'center',
+        valign: 'middle',
+        sortable: true
+      },   {
+        field: 'kullaniciisim',
+        title: 'Durum İlgilisi',
+        align: 'left',
+        valign: 'middle',
+        sortable: true
+      }
+      ]
+    });
+
+
+
+
+  });
+</script>
