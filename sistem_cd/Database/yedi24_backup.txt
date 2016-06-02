@@ -1,0 +1,1181 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.3.13
+-- Dumped by pg_dump version 9.3.13
+-- Started on 2016-05-26 12:48:15 EEST
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- TOC entry 1 (class 3079 OID 11789)
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- TOC entry 2124 (class 0 OID 0)
+-- Dependencies: 1
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- TOC entry 171 (class 1259 OID 32429)
+-- Name: bina; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE bina (
+    id integer NOT NULL,
+    isim text,
+    kod text,
+    "createdAt" timestamp with time zone,
+    "updatedAt" timestamp with time zone
+);
+
+
+ALTER TABLE public.bina OWNER TO postgres;
+
+--
+-- TOC entry 172 (class 1259 OID 32435)
+-- Name: bina_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE bina_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.bina_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2125 (class 0 OID 0)
+-- Dependencies: 172
+-- Name: bina_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE bina_id_seq OWNED BY bina.id;
+
+
+--
+-- TOC entry 173 (class 1259 OID 32437)
+-- Name: birim; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE birim (
+    id integer NOT NULL,
+    isim text,
+    kod text,
+    "blokId" integer,
+    "createdAt" timestamp with time zone,
+    "updatedAt" timestamp with time zone
+);
+
+
+ALTER TABLE public.birim OWNER TO postgres;
+
+--
+-- TOC entry 174 (class 1259 OID 32443)
+-- Name: birim_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE birim_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.birim_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2126 (class 0 OID 0)
+-- Dependencies: 174
+-- Name: birim_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE birim_id_seq OWNED BY birim.id;
+
+
+--
+-- TOC entry 175 (class 1259 OID 32445)
+-- Name: blok; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE blok (
+    id integer NOT NULL,
+    isim text,
+    kod text,
+    "kullaniciId" integer,
+    "binaId" integer,
+    "createdAt" timestamp with time zone,
+    "updatedAt" timestamp with time zone
+);
+
+
+ALTER TABLE public.blok OWNER TO postgres;
+
+--
+-- TOC entry 176 (class 1259 OID 32451)
+-- Name: blok_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE blok_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.blok_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2127 (class 0 OID 0)
+-- Dependencies: 176
+-- Name: blok_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE blok_id_seq OWNED BY blok.id;
+
+
+--
+-- TOC entry 177 (class 1259 OID 32453)
+-- Name: durumlar; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE durumlar (
+    id integer NOT NULL,
+    "sikayetIlgiliId" integer,
+    "durumTipId" integer,
+    "durumBitis" timestamp with time zone,
+    "sikayetId" integer,
+    "createdAt" timestamp with time zone,
+    "updatedAt" timestamp with time zone
+);
+
+
+ALTER TABLE public.durumlar OWNER TO postgres;
+
+--
+-- TOC entry 178 (class 1259 OID 32456)
+-- Name: durumlar_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE durumlar_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.durumlar_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2128 (class 0 OID 0)
+-- Dependencies: 178
+-- Name: durumlar_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE durumlar_id_seq OWNED BY durumlar.id;
+
+
+--
+-- TOC entry 179 (class 1259 OID 32458)
+-- Name: durumtipi; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE durumtipi (
+    id integer NOT NULL,
+    isim text,
+    surec integer,
+    "createdAt" timestamp with time zone,
+    "updatedAt" timestamp with time zone
+);
+
+
+ALTER TABLE public.durumtipi OWNER TO postgres;
+
+--
+-- TOC entry 180 (class 1259 OID 32464)
+-- Name: durumtipi_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE durumtipi_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.durumtipi_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2129 (class 0 OID 0)
+-- Dependencies: 180
+-- Name: durumtipi_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE durumtipi_id_seq OWNED BY durumtipi.id;
+
+
+--
+-- TOC entry 181 (class 1259 OID 32466)
+-- Name: eklentiler; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE eklentiler (
+    id integer NOT NULL,
+    "sikayetId" integer,
+    "dosyaAdi" text,
+    "durumId" integer,
+    "createdAt" timestamp with time zone,
+    "updatedAt" timestamp with time zone
+);
+
+
+ALTER TABLE public.eklentiler OWNER TO postgres;
+
+--
+-- TOC entry 182 (class 1259 OID 32472)
+-- Name: eklentiler_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE eklentiler_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.eklentiler_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2130 (class 0 OID 0)
+-- Dependencies: 182
+-- Name: eklentiler_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE eklentiler_id_seq OWNED BY eklentiler.id;
+
+
+--
+-- TOC entry 183 (class 1259 OID 32474)
+-- Name: iletisim; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE iletisim (
+    id integer NOT NULL,
+    "kullaniciId" integer,
+    "iletisimTipId" integer,
+    deger text,
+    "createdAt" timestamp with time zone,
+    "updatedAt" timestamp with time zone
+);
+
+
+ALTER TABLE public.iletisim OWNER TO postgres;
+
+--
+-- TOC entry 184 (class 1259 OID 32480)
+-- Name: iletisim_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE iletisim_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.iletisim_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2131 (class 0 OID 0)
+-- Dependencies: 184
+-- Name: iletisim_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE iletisim_id_seq OWNED BY iletisim.id;
+
+
+--
+-- TOC entry 185 (class 1259 OID 32482)
+-- Name: iletisimtipi; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE iletisimtipi (
+    id integer NOT NULL,
+    deger text,
+    "createdAt" timestamp with time zone,
+    "updatedAt" timestamp with time zone
+);
+
+
+ALTER TABLE public.iletisimtipi OWNER TO postgres;
+
+--
+-- TOC entry 186 (class 1259 OID 32488)
+-- Name: iletisimtipi_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE iletisimtipi_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.iletisimtipi_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2132 (class 0 OID 0)
+-- Dependencies: 186
+-- Name: iletisimtipi_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE iletisimtipi_id_seq OWNED BY iletisimtipi.id;
+
+
+--
+-- TOC entry 187 (class 1259 OID 32490)
+-- Name: karaliste; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE karaliste (
+    id integer NOT NULL,
+    email text,
+    "createdAt" timestamp with time zone,
+    "updatedAt" timestamp with time zone
+);
+
+
+ALTER TABLE public.karaliste OWNER TO postgres;
+
+--
+-- TOC entry 188 (class 1259 OID 32496)
+-- Name: karaliste_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE karaliste_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.karaliste_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2133 (class 0 OID 0)
+-- Dependencies: 188
+-- Name: karaliste_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE karaliste_id_seq OWNED BY karaliste.id;
+
+
+--
+-- TOC entry 189 (class 1259 OID 32498)
+-- Name: kullanicilar; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE kullanicilar (
+    id integer NOT NULL,
+    isim text,
+    "soyIsim" text,
+    email text,
+    sifre text,
+    "hesapDurum" integer,
+    "gorevId" integer,
+    "createdAt" timestamp with time zone,
+    "updatedAt" timestamp with time zone
+);
+
+
+ALTER TABLE public.kullanicilar OWNER TO postgres;
+
+--
+-- TOC entry 190 (class 1259 OID 32504)
+-- Name: kullanicilar_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE kullanicilar_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.kullanicilar_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2134 (class 0 OID 0)
+-- Dependencies: 190
+-- Name: kullanicilar_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE kullanicilar_id_seq OWNED BY kullanicilar.id;
+
+
+--
+-- TOC entry 191 (class 1259 OID 32506)
+-- Name: parametre; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE parametre (
+    id integer NOT NULL,
+    isim text,
+    deger text,
+    "createdAt" timestamp with time zone,
+    "updatedAt" timestamp with time zone
+);
+
+
+ALTER TABLE public.parametre OWNER TO postgres;
+
+--
+-- TOC entry 192 (class 1259 OID 32512)
+-- Name: parametre_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE parametre_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.parametre_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2135 (class 0 OID 0)
+-- Dependencies: 192
+-- Name: parametre_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE parametre_id_seq OWNED BY parametre.id;
+
+
+--
+-- TOC entry 193 (class 1259 OID 32514)
+-- Name: sikayetler; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE sikayetler (
+    id integer NOT NULL,
+    aciklama text,
+    "birimId" integer,
+    "kullaniciId" integer,
+    "createdAt" timestamp with time zone,
+    "updatedAt" timestamp with time zone
+);
+
+
+ALTER TABLE public.sikayetler OWNER TO postgres;
+
+--
+-- TOC entry 194 (class 1259 OID 32520)
+-- Name: sikayetler_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE sikayetler_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.sikayetler_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2136 (class 0 OID 0)
+-- Dependencies: 194
+-- Name: sikayetler_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE sikayetler_id_seq OWNED BY sikayetler.id;
+
+
+--
+-- TOC entry 195 (class 1259 OID 32522)
+-- Name: yetkitipi; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE yetkitipi (
+    id integer NOT NULL,
+    gorev text,
+    "yetkiDerecesi" real,
+    "createdAt" timestamp with time zone,
+    "updatedAt" timestamp with time zone
+);
+
+
+ALTER TABLE public.yetkitipi OWNER TO postgres;
+
+--
+-- TOC entry 196 (class 1259 OID 32528)
+-- Name: yetkitipi_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE yetkitipi_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.yetkitipi_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2137 (class 0 OID 0)
+-- Dependencies: 196
+-- Name: yetkitipi_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE yetkitipi_id_seq OWNED BY yetkitipi.id;
+
+
+--
+-- TOC entry 1945 (class 2604 OID 32530)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY bina ALTER COLUMN id SET DEFAULT nextval('bina_id_seq'::regclass);
+
+
+--
+-- TOC entry 1946 (class 2604 OID 32531)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY birim ALTER COLUMN id SET DEFAULT nextval('birim_id_seq'::regclass);
+
+
+--
+-- TOC entry 1947 (class 2604 OID 32532)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY blok ALTER COLUMN id SET DEFAULT nextval('blok_id_seq'::regclass);
+
+
+--
+-- TOC entry 1948 (class 2604 OID 32533)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY durumlar ALTER COLUMN id SET DEFAULT nextval('durumlar_id_seq'::regclass);
+
+
+--
+-- TOC entry 1949 (class 2604 OID 32534)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY durumtipi ALTER COLUMN id SET DEFAULT nextval('durumtipi_id_seq'::regclass);
+
+
+--
+-- TOC entry 1950 (class 2604 OID 32535)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY eklentiler ALTER COLUMN id SET DEFAULT nextval('eklentiler_id_seq'::regclass);
+
+
+--
+-- TOC entry 1951 (class 2604 OID 32536)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY iletisim ALTER COLUMN id SET DEFAULT nextval('iletisim_id_seq'::regclass);
+
+
+--
+-- TOC entry 1952 (class 2604 OID 32537)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY iletisimtipi ALTER COLUMN id SET DEFAULT nextval('iletisimtipi_id_seq'::regclass);
+
+
+--
+-- TOC entry 1953 (class 2604 OID 32538)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY karaliste ALTER COLUMN id SET DEFAULT nextval('karaliste_id_seq'::regclass);
+
+
+--
+-- TOC entry 1954 (class 2604 OID 32539)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY kullanicilar ALTER COLUMN id SET DEFAULT nextval('kullanicilar_id_seq'::regclass);
+
+
+--
+-- TOC entry 1955 (class 2604 OID 32540)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY parametre ALTER COLUMN id SET DEFAULT nextval('parametre_id_seq'::regclass);
+
+
+--
+-- TOC entry 1956 (class 2604 OID 32541)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY sikayetler ALTER COLUMN id SET DEFAULT nextval('sikayetler_id_seq'::regclass);
+
+
+--
+-- TOC entry 1957 (class 2604 OID 32542)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY yetkitipi ALTER COLUMN id SET DEFAULT nextval('yetkitipi_id_seq'::regclass);
+
+
+--
+-- TOC entry 2091 (class 0 OID 32429)
+-- Dependencies: 171
+-- Data for Name: bina; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO bina VALUES (2, 'Elektrik Elektronik Fakültesi', 'EEF', '2016-05-18 13:45:57+03', '2016-05-18 13:45:57+03');
+INSERT INTO bina VALUES (3, 'İnşaat Fakültesi', 'IF', '2016-05-18 17:00:03+03', '2016-05-18 17:00:03+03');
+INSERT INTO bina VALUES (5, 'Tıp Fakültesi', 'TP', '2016-05-19 15:00:35+03', '2016-05-19 15:00:35+03');
+
+
+--
+-- TOC entry 2138 (class 0 OID 0)
+-- Dependencies: 172
+-- Name: bina_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('bina_id_seq', 7, true);
+
+
+--
+-- TOC entry 2093 (class 0 OID 32437)
+-- Dependencies: 173
+-- Data for Name: birim; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO birim VALUES (1, 'D-B11', 'D-B11', 5, '2016-05-18 14:15:19+03', '2016-05-18 14:15:19+03');
+INSERT INTO birim VALUES (2, 'D-B10', 'D-B10', 5, '2016-05-18 14:15:30+03', '2016-05-18 14:15:30+03');
+INSERT INTO birim VALUES (6, 'D-B06', 'D-B06', 5, '2016-05-18 14:16:11+03', '2016-05-18 14:16:11+03');
+INSERT INTO birim VALUES (7, 'D-B29', 'D-B29', 5, '2016-05-18 14:16:23+03', '2016-05-18 14:16:23+03');
+INSERT INTO birim VALUES (8, 'D-B28', 'D-B28', 5, '2016-05-18 14:16:31+03', '2016-05-18 14:16:31+03');
+INSERT INTO birim VALUES (9, 'D-B27', 'D-B27', 5, '2016-05-18 14:16:40+03', '2016-05-18 14:16:40+03');
+INSERT INTO birim VALUES (10, 'D-B26', 'D-B26', 5, '2016-05-18 14:16:51+03', '2016-05-18 14:16:51+03');
+INSERT INTO birim VALUES (12, 'D-B23', 'D-B23', 5, '2016-05-18 14:17:07+03', '2016-05-18 14:17:07+03');
+INSERT INTO birim VALUES (13, 'D-B24', 'D-B24', 5, '2016-05-18 14:17:15+03', '2016-05-18 14:17:15+03');
+INSERT INTO birim VALUES (14, 'D-B22', 'D-B22', 5, '2016-05-18 14:17:26+03', '2016-05-18 14:17:26+03');
+INSERT INTO birim VALUES (16, 'D-006', 'D-006', 5, '2016-05-18 14:17:58+03', '2016-05-18 14:17:58+03');
+INSERT INTO birim VALUES (17, 'D-007', 'D-007', 5, '2016-05-18 14:18:11+03', '2016-05-18 14:18:11+03');
+INSERT INTO birim VALUES (18, 'D-008', 'D-008', 5, '2016-05-18 14:18:22+03', '2016-05-18 14:18:22+03');
+INSERT INTO birim VALUES (3, 'D-B09', 'D-B09', 5, '2016-05-18 14:15:40+03', '2016-05-18 14:15:40+03');
+INSERT INTO birim VALUES (11, 'D-B25', 'D-B25', 5, '2016-05-18 14:17:00+03', '2016-05-18 14:17:00+03');
+INSERT INTO birim VALUES (15, 'D-B21', 'D-B21', 5, '2016-05-18 14:17:35+03', '2016-05-18 14:17:35+03');
+INSERT INTO birim VALUES (21, 'D-011', 'D-011', 5, '2016-05-18 14:20:48+03', '2016-05-18 14:20:48+03');
+INSERT INTO birim VALUES (22, 'D-012', 'D-012', 5, '2016-05-18 14:21:04+03', '2016-05-18 14:21:04+03');
+INSERT INTO birim VALUES (23, 'D-022', 'D-022', 5, '2016-05-18 14:21:18+03', '2016-05-18 14:21:18+03');
+INSERT INTO birim VALUES (24, 'D-023', 'D-023', 5, '2016-05-18 14:21:46+03', '2016-05-18 14:21:46+03');
+INSERT INTO birim VALUES (25, 'D-024', 'D-024', 5, '2016-05-18 14:21:51+03', '2016-05-18 14:21:51+03');
+INSERT INTO birim VALUES (26, 'D-025', 'D-025', 5, '2016-05-18 14:22:31+03', '2016-05-18 14:22:31+03');
+INSERT INTO birim VALUES (27, 'D-026', 'D-026', 5, '2016-05-18 14:22:40+03', '2016-05-18 14:22:40+03');
+INSERT INTO birim VALUES (28, 'D-027', 'D-027', 5, '2016-05-18 14:22:47+03', '2016-05-18 14:22:47+03');
+INSERT INTO birim VALUES (29, 'D-028', 'D-028', 5, '2016-05-18 14:22:55+03', '2016-05-18 14:22:55+03');
+INSERT INTO birim VALUES (30, 'D-029', 'D-029', 5, '2016-05-18 14:23:02+03', '2016-05-18 14:23:02+03');
+INSERT INTO birim VALUES (31, 'D-030', 'D-030', 5, '2016-05-18 14:23:14+03', '2016-05-18 14:23:14+03');
+INSERT INTO birim VALUES (32, 'D-031', 'D-031', 5, '2016-05-18 14:24:02+03', '2016-05-18 14:24:02+03');
+INSERT INTO birim VALUES (33, 'D-032', 'D-032', 5, '2016-05-18 14:24:09+03', '2016-05-18 14:24:09+03');
+INSERT INTO birim VALUES (34, 'D-033', 'D-033', 5, '2016-05-18 14:24:23+03', '2016-05-18 14:24:23+03');
+INSERT INTO birim VALUES (35, 'D-034', 'D-034', 5, '2016-05-18 14:24:30+03', '2016-05-18 14:24:30+03');
+INSERT INTO birim VALUES (36, 'D-035', 'D-035', 5, '2016-05-18 14:24:36+03', '2016-05-18 14:24:36+03');
+INSERT INTO birim VALUES (37, 'D-036', 'D-036', 5, '2016-05-18 14:24:46+03', '2016-05-18 14:24:46+03');
+INSERT INTO birim VALUES (38, 'D-037', 'D-037', 5, '2016-05-18 14:24:56+03', '2016-05-18 14:24:56+03');
+INSERT INTO birim VALUES (19, 'D-009', 'D-009', 5, '2016-05-18 14:18:30+03', '2016-05-18 14:18:30+03');
+INSERT INTO birim VALUES (20, 'D-010', 'D-010', 5, '2016-05-18 14:18:38+03', '2016-05-18 14:18:38+03');
+INSERT INTO birim VALUES (39, 'Sosyal Mekan 0', 'D-038', 5, '2016-05-18 14:25:16+03', '2016-05-18 14:25:16+03');
+INSERT INTO birim VALUES (40, 'D-121', 'D-121', 5, '2016-05-18 14:27:29+03', '2016-05-18 14:27:29+03');
+INSERT INTO birim VALUES (41, 'D-122', 'D-122', 5, '2016-05-18 14:27:35+03', '2016-05-18 14:27:35+03');
+INSERT INTO birim VALUES (42, 'D-123', 'D-123', 5, '2016-05-18 14:27:40+03', '2016-05-18 14:27:40+03');
+INSERT INTO birim VALUES (43, 'D-124', 'D-124', 5, '2016-05-18 14:27:46+03', '2016-05-18 14:27:46+03');
+INSERT INTO birim VALUES (44, 'D-125', 'D-125', 5, '2016-05-18 14:27:55+03', '2016-05-18 14:27:55+03');
+INSERT INTO birim VALUES (45, 'D-126', 'D-126', 5, '2016-05-18 14:28:19+03', '2016-05-18 14:28:19+03');
+INSERT INTO birim VALUES (46, 'D-127', 'D-127', 5, '2016-05-18 14:28:25+03', '2016-05-18 14:28:25+03');
+INSERT INTO birim VALUES (47, 'D-128', 'D-128', 5, '2016-05-18 14:28:38+03', '2016-05-18 14:28:38+03');
+INSERT INTO birim VALUES (48, 'D-129', 'D-129', 5, '2016-05-18 14:28:45+03', '2016-05-18 14:28:45+03');
+INSERT INTO birim VALUES (49, 'D-130', 'D-130', 5, '2016-05-18 14:28:59+03', '2016-05-18 14:28:59+03');
+INSERT INTO birim VALUES (50, 'D-131', 'D-131', 5, '2016-05-18 14:29:12+03', '2016-05-18 14:29:12+03');
+INSERT INTO birim VALUES (51, 'Sekreterya', 'D-132', 5, '2016-05-18 14:29:48+03', '2016-05-18 14:29:48+03');
+INSERT INTO birim VALUES (52, 'D-133', 'D-133', 5, '2016-05-18 14:30:06+03', '2016-05-18 14:30:06+03');
+INSERT INTO birim VALUES (53, 'Bölüm Başkan Yardımcısı Oda', 'D-134', 5, '2016-05-18 14:30:42+03', '2016-05-18 14:30:42+03');
+INSERT INTO birim VALUES (54, 'Bölüm Başkanı Oda', 'D-135', 5, '2016-05-18 14:31:12+03', '2016-05-18 14:31:12+03');
+INSERT INTO birim VALUES (55, 'D-106', 'D-106', 5, '2016-05-18 14:32:24+03', '2016-05-18 14:32:24+03');
+INSERT INTO birim VALUES (56, 'D-107', 'D-107', 5, '2016-05-18 14:32:30+03', '2016-05-18 14:32:30+03');
+INSERT INTO birim VALUES (57, 'D-108', 'D-108', 5, '2016-05-18 14:32:38+03', '2016-05-18 14:32:38+03');
+INSERT INTO birim VALUES (58, 'D-109', 'D-109', 5, '2016-05-18 14:32:47+03', '2016-05-18 14:32:47+03');
+INSERT INTO birim VALUES (59, 'D-110', 'D-110', 5, '2016-05-18 14:33:06+03', '2016-05-18 14:33:06+03');
+INSERT INTO birim VALUES (60, 'D-111', 'D-111', 5, '2016-05-18 14:33:31+03', '2016-05-18 14:33:31+03');
+INSERT INTO birim VALUES (61, 'D-208', 'D-208', 5, '2016-05-18 14:34:10+03', '2016-05-18 14:34:10+03');
+INSERT INTO birim VALUES (62, 'D-209', 'D-209', 5, '2016-05-18 14:34:23+03', '2016-05-18 14:34:23+03');
+INSERT INTO birim VALUES (63, 'D-210', 'D-210', 5, '2016-05-18 14:34:38+03', '2016-05-18 14:34:38+03');
+INSERT INTO birim VALUES (64, 'D-211', 'D-211', 5, '2016-05-18 14:34:45+03', '2016-05-18 14:34:45+03');
+INSERT INTO birim VALUES (65, 'D-212', 'D-212', 5, '2016-05-18 14:34:51+03', '2016-05-18 14:34:51+03');
+INSERT INTO birim VALUES (66, 'D-213', 'D-213', 5, '2016-05-18 14:35:46+03', '2016-05-18 14:35:46+03');
+INSERT INTO birim VALUES (67, 'D-214', 'D-214', 5, '2016-05-18 14:35:53+03', '2016-05-18 14:35:53+03');
+INSERT INTO birim VALUES (68, 'D-215', 'D-215', 5, '2016-05-18 14:36:03+03', '2016-05-18 14:36:03+03');
+INSERT INTO birim VALUES (69, 'D-216', 'D-216', 5, '2016-05-18 14:36:10+03', '2016-05-18 14:36:10+03');
+INSERT INTO birim VALUES (70, 'D-217', 'D-217', 5, '2016-05-18 14:36:18+03', '2016-05-18 14:36:18+03');
+INSERT INTO birim VALUES (71, 'D-218', 'D-218', 5, '2016-05-18 14:36:26+03', '2016-05-18 14:36:26+03');
+INSERT INTO birim VALUES (72, 'D-219', 'D-219', 5, '2016-05-18 14:36:34+03', '2016-05-18 14:36:34+03');
+INSERT INTO birim VALUES (73, 'D-220', 'D-220', 5, '2016-05-18 14:36:50+03', '2016-05-18 14:36:50+03');
+INSERT INTO birim VALUES (74, 'D-221', 'D-221', 5, '2016-05-18 14:36:57+03', '2016-05-18 14:36:57+03');
+INSERT INTO birim VALUES (75, 'D-222', 'D-222', 5, '2016-05-18 14:37:06+03', '2016-05-18 14:37:06+03');
+INSERT INTO birim VALUES (76, 'Toplantı Odası', 'D-223', 5, '2016-05-18 14:37:34+03', '2016-05-18 14:37:34+03');
+INSERT INTO birim VALUES (4, 'D-B08', 'D-B08', 5, '2016-05-18 14:15:51+03', '2016-05-18 14:15:51+03');
+INSERT INTO birim VALUES (5, 'D-B07', 'D-B07', 5, '2016-05-18 14:16:01+03', '2016-05-18 14:16:01+03');
+INSERT INTO birim VALUES (77, 'WC Erkek Zemin', 'D-BWC0', 5, '2016-05-18 14:39:19+03', '2016-05-18 14:39:19+03');
+INSERT INTO birim VALUES (78, 'WC Bayan Zemin', 'D-BWC1', 5, '2016-05-18 14:39:57+03', '2016-05-18 14:39:57+03');
+INSERT INTO birim VALUES (79, 'WC Bayan 0', 'D-0WC1', 5, '2016-05-18 14:40:40+03', '2016-05-18 14:40:40+03');
+INSERT INTO birim VALUES (80, 'WC Erkek 0', 'D-0WC0', 5, '2016-05-18 14:40:52+03', '2016-05-18 14:40:52+03');
+INSERT INTO birim VALUES (81, 'WC Erkek 2', 'D-1WC0', 5, '2016-05-18 14:44:38+03', '2016-05-18 14:44:38+03');
+INSERT INTO birim VALUES (82, 'WC Bayan 2', 'D-1WC1', 5, '2016-05-18 14:45:03+03', '2016-05-18 14:45:03+03');
+INSERT INTO birim VALUES (83, 'Sosyal Mekan 2', 'D-224', 5, '2016-05-18 14:47:17+03', '2016-05-18 14:47:17+03');
+INSERT INTO birim VALUES (84, 'AZ-001', 'AZ-001', 9, '2016-05-18 17:04:04+03', '2016-05-18 17:04:04+03');
+INSERT INTO birim VALUES (85, 'AZ-002', 'AZ-002', 9, '2016-05-18 17:04:10+03', '2016-05-18 17:04:10+03');
+INSERT INTO birim VALUES (86, 'AZ-003', 'AZ-003', 9, '2016-05-18 17:04:17+03', '2016-05-18 17:04:17+03');
+INSERT INTO birim VALUES (87, 'WC Bayan Z', 'AZ-0WC1', 9, '2016-05-18 17:04:33+03', '2016-05-18 17:04:51+03');
+INSERT INTO birim VALUES (88, 'WC Erkek Z', 'AZ-0WC0', 9, '2016-05-18 17:05:09+03', '2016-05-18 17:05:09+03');
+INSERT INTO birim VALUES (89, 'Sosyal Mekan Z', 'AZ-015', 9, '2016-05-18 17:05:26+03', '2016-05-18 17:05:26+03');
+
+
+--
+-- TOC entry 2139 (class 0 OID 0)
+-- Dependencies: 174
+-- Name: birim_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('birim_id_seq', 92, true);
+
+
+--
+-- TOC entry 2095 (class 0 OID 32445)
+-- Dependencies: 175
+-- Data for Name: blok; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO blok VALUES (4, 'Elektrik  Mühendisliği Bölümü', 'C', NULL, 2, '2016-05-18 14:11:58+03', '2016-05-18 14:11:58+03');
+INSERT INTO blok VALUES (2, 'Kontrol ve  Otomasyon  Mühendisliği  Bölümü', 'A', NULL, 2, '2016-05-18 14:10:51+03', '2016-05-18 14:10:51+03');
+INSERT INTO blok VALUES (3, 'Elektronik ve  Haberleşme  Mühendisliği  Bölümü', 'B', NULL, 2, '2016-05-18 14:11:21+03', '2016-05-18 14:11:21+03');
+INSERT INTO blok VALUES (9, 'İnşaat Mühendisliği', 'A', NULL, 3, '2016-05-18 17:01:14+03', '2016-05-18 17:01:14+03');
+INSERT INTO blok VALUES (5, 'Bilgisayar  Mühendisliği  Bölüm', 'D', 9, 2, '2016-05-18 14:13:52+03', '2016-05-18 14:13:52+03');
+
+
+--
+-- TOC entry 2140 (class 0 OID 0)
+-- Dependencies: 176
+-- Name: blok_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('blok_id_seq', 13, true);
+
+
+--
+-- TOC entry 2097 (class 0 OID 32453)
+-- Dependencies: 177
+-- Data for Name: durumlar; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO durumlar VALUES (1, 9, 1, NULL, 1, '2016-05-18 17:57:41+03', '2016-05-18 17:57:41+03');
+INSERT INTO durumlar VALUES (2, 9, 1, NULL, 2, '2016-05-18 19:57:41+03', '2016-05-18 19:57:41+03');
+INSERT INTO durumlar VALUES (3, 9, 1, NULL, 3, '2016-05-19 12:15:41+03', '2016-05-19 12:15:41+03');
+INSERT INTO durumlar VALUES (4, 9, 1, NULL, 4, '2016-05-19 12:55:41+03', '2016-05-19 12:55:41+03');
+INSERT INTO durumlar VALUES (5, 9, 1, NULL, 5, '2016-05-19 14:15:41+03', '2016-05-19 14:15:41+03');
+INSERT INTO durumlar VALUES (6, 9, 1, NULL, 6, '2016-05-19 15:15:41+03', '2016-05-19 15:15:41+03');
+
+
+--
+-- TOC entry 2141 (class 0 OID 0)
+-- Dependencies: 178
+-- Name: durumlar_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('durumlar_id_seq', 72, true);
+
+
+--
+-- TOC entry 2099 (class 0 OID 32458)
+-- Dependencies: 179
+-- Data for Name: durumtipi; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO durumtipi VALUES (2, 'Şikayet Alındı', 1, '2016-05-18 17:10:00+03', '2016-05-18 17:10:00+03');
+INSERT INTO durumtipi VALUES (3, 'Yetkili Birime Aktarıldı', 1, '2016-05-18 17:10:23+03', '2016-05-18 17:10:23+03');
+INSERT INTO durumtipi VALUES (4, 'Yedek Parça Bekliyor', 0, '2016-05-18 17:10:33+03', '2016-05-18 17:10:33+03');
+INSERT INTO durumtipi VALUES (5, 'Şikayet Tamamlandı', 0, '2016-05-18 17:10:45+03', '2016-05-18 17:10:45+03');
+INSERT INTO durumtipi VALUES (1, 'Yeni Şikayet', 1, '2016-05-18 17:09:48+03', '2016-05-18 17:10:59+03');
+
+
+--
+-- TOC entry 2142 (class 0 OID 0)
+-- Dependencies: 180
+-- Name: durumtipi_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('durumtipi_id_seq', 8, true);
+
+
+--
+-- TOC entry 2101 (class 0 OID 32466)
+-- Dependencies: 181
+-- Data for Name: eklentiler; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 2143 (class 0 OID 0)
+-- Dependencies: 182
+-- Name: eklentiler_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('eklentiler_id_seq', 21, true);
+
+
+--
+-- TOC entry 2103 (class 0 OID 32474)
+-- Dependencies: 183
+-- Data for Name: iletisim; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO iletisim VALUES (2, 6, 5, '0 212 383 57 31', '2016-05-18 17:13:29+03', '2016-05-18 17:23:39+03');
+INSERT INTO iletisim VALUES (3, 9, 5, '0 212 383 57 36', '2016-05-18 17:14:04+03', '2016-05-18 17:23:56+03');
+INSERT INTO iletisim VALUES (1, 5, 5, '0 212 383 57 48', '2016-05-18 17:12:47+03', '2016-05-18 17:24:06+03');
+
+
+--
+-- TOC entry 2144 (class 0 OID 0)
+-- Dependencies: 184
+-- Name: iletisim_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('iletisim_id_seq', 8, true);
+
+
+--
+-- TOC entry 2105 (class 0 OID 32482)
+-- Dependencies: 185
+-- Data for Name: iletisimtipi; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO iletisimtipi VALUES (4, 'EV TELEFONU', '2016-05-18 14:07:37+03', '2016-05-18 14:07:37+03');
+INSERT INTO iletisimtipi VALUES (5, 'İŞ TELEFONU', '2016-05-18 14:07:43+03', '2016-05-18 14:07:43+03');
+INSERT INTO iletisimtipi VALUES (6, 'CEP TELEFONU', '2016-05-18 14:08:14+03', '2016-05-18 16:33:48+03');
+
+
+--
+-- TOC entry 2145 (class 0 OID 0)
+-- Dependencies: 186
+-- Name: iletisimtipi_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('iletisimtipi_id_seq', 2, true);
+
+
+--
+-- TOC entry 2107 (class 0 OID 32490)
+-- Dependencies: 187
+-- Data for Name: karaliste; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 2146 (class 0 OID 0)
+-- Dependencies: 188
+-- Name: karaliste_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('karaliste_id_seq', 12, true);
+
+
+--
+-- TOC entry 2109 (class 0 OID 32498)
+-- Dependencies: 189
+-- Data for Name: kullanicilar; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO kullanicilar VALUES (4, 'İsmail ', 'Yüksek', 'ismail@ce.yildiz.edu.tr', '7c4a8d09ca3762af61e59520943dc26494f8941b', 1, 1, '2016-05-18 16:41:41+03', '2016-05-18 16:41:41+03');
+INSERT INTO kullanicilar VALUES (5, 'Nizamettin', 'Aydın', 'nizamettin@ce.yildiz.edu.tr', '7c4a8d09ca3762af61e59520943dc26494f8941b', 1, 2, '2016-05-18 16:42:00+03', '2016-05-18 16:42:00+03');
+INSERT INTO kullanicilar VALUES (6, 'Suna', 'Taçalan', 'suna@ce.yildiz.edu.tr', '7c4a8d09ca3762af61e59520943dc26494f8941b', 1, 5, '2016-05-18 16:43:09+03', '2016-05-18 16:43:09+03');
+INSERT INTO kullanicilar VALUES (7, 'Hasan Hüseyin ', 'Balık', 'balik@yildiz.edu.tr', '7c4a8d09ca3762af61e59520943dc26494f8941b', 1, 4, '2016-05-18 16:44:24+03', '2016-05-18 16:44:24+03');
+INSERT INTO kullanicilar VALUES (8, 'Oya', 'Kalıpsız', 'oya@ce.yildiz.edu.tr', '7c4a8d09ca3762af61e59520943dc26494f8941b', 1, 4, '2016-05-18 16:45:09+03', '2016-05-18 16:45:09+03');
+INSERT INTO kullanicilar VALUES (9, 'Kazım', 'Çapar', 'kazim@ce.yildiz.edu.tr', '7c4a8d09ca3762af61e59520943dc26494f8941b', 1, 6, '2016-05-18 16:46:02+03', '2016-05-18 16:46:02+03');
+INSERT INTO kullanicilar VALUES (10, 'Fatih', 'Kara', 'fatihkara@yildiz.edu.tr', '7c4a8d09ca3762af61e59520943dc26494f8941b', 1, 7, '2016-05-18 16:46:46+03', '2016-05-18 16:46:46+03');
+INSERT INTO kullanicilar VALUES (11, 'Ayşe', 'Okumuş', 'okumus@yildiz.edu.tr', '7c4a8d09ca3762af61e59520943dc26494f8941b', 1, 8, '2016-05-18 16:47:33+03', '2016-05-18 16:47:33+03');
+INSERT INTO kullanicilar VALUES (12, 'Muhittin', 'Kaçak', 'kacak@yildiz.edu.tr', '7c4a8d09ca3762af61e59520943dc26494f8941b', 1, 9, '2016-05-18 16:47:59+03', '2016-05-18 16:47:59+03');
+INSERT INTO kullanicilar VALUES (13, 'Hakan', 'Fidan', 'fidan@yildiz.edu.tr', '7c4a8d09ca3762af61e59520943dc26494f8941b', 1, 10, '2016-05-18 16:48:26+03', '2016-05-18 16:48:26+03');
+INSERT INTO kullanicilar VALUES (14, 'Hayriye', 'Balaban', 'balaban@yildiz.edu.tr', 'dd5fef9c1c1da1394d6d34b248c51be2ad740840', 1, 11, '2016-05-18 16:48:56+03', '2016-05-18 16:48:56+03');
+INSERT INTO kullanicilar VALUES (15, 'Mustafa', 'Demirbilek', 'demirbilek@yildiz.edu.tr', '7c4a8d09ca3762af61e59520943dc26494f8941b', 1, 12, '2016-05-18 16:49:28+03', '2016-05-18 16:49:28+03');
+INSERT INTO kullanicilar VALUES (16, 'Hayrettin', 'Çarpar', 'carpar@yildiz.edu.tr', '7c4a8d09ca3762af61e59520943dc26494f8941b', 1, 10, '2016-05-18 16:50:03+03', '2016-05-18 16:50:03+03');
+INSERT INTO kullanicilar VALUES (17, 'Gülsüm', 'Çiçek', 'cicek@yildiz.edu.tr', '7c4a8d09ca3762af61e59520943dc26494f8941b', 1, 8, '2016-05-18 16:50:32+03', '2016-05-18 16:50:32+03');
+INSERT INTO kullanicilar VALUES (18, 'Kudret', 'Düzenli', 'duzenli@yildiz.edu.tr', '7c4a8d09ca3762af61e59520943dc26494f8941b', 1, 12, '2016-05-18 16:50:59+03', '2016-05-18 16:50:59+03');
+INSERT INTO kullanicilar VALUES (19, 'Celal', 'Çetin', 'cetin@yildiz.edu.tr', '7c4a8d09ca3762af61e59520943dc26494f8941b', 1, 6, '2016-05-18 17:00:42+03', '2016-05-18 17:00:42+03');
+INSERT INTO kullanicilar VALUES (20, 'Ahmet', 'Demir', 'demir@yildiz.edu.tr', 'b2ee60370ad57d9bc3877e9024c507ab99303a64', 1, 2, '2016-05-18 17:25:11+03', '2016-05-18 17:25:11+03');
+INSERT INTO kullanicilar VALUES (24, 'admin', 'admin', 'admin@admin.com', 'd033e22ae348aeb5660fc2140aec35850c4da997', 1, 17, '2016-05-20 00:07:25+03', '2016-05-20 00:07:25+03');
+
+
+--
+-- TOC entry 2147 (class 0 OID 0)
+-- Dependencies: 190
+-- Name: kullanicilar_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('kullanicilar_id_seq', 25, true);
+
+
+--
+-- TOC entry 2111 (class 0 OID 32506)
+-- Dependencies: 191
+-- Data for Name: parametre; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO parametre VALUES (1, 'hostname', 'localhost:1337', '2016-05-19 13:05:48+03', '2016-05-19 13:05:48+03');
+INSERT INTO parametre VALUES (2, 'imagesPath', '../../assets/images/upload/ek', '2016-05-19 13:06:44+03', '2016-05-19 13:06:44+03');
+
+
+--
+-- TOC entry 2148 (class 0 OID 0)
+-- Dependencies: 192
+-- Name: parametre_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('parametre_id_seq', 2, true);
+
+
+--
+-- TOC entry 2113 (class 0 OID 32514)
+-- Dependencies: 193
+-- Data for Name: sikayetler; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO sikayetler VALUES (1, 'Giriş Kattaki Erkek Tuvaletinde 2 Musluk Çalışmıyor', 80, 1, '2016-05-18 17:32:52+03', '2016-05-18 17:32:52+03');
+INSERT INTO sikayetler VALUES (2, 'Üst Kat Oturma Alanında Sandalye Kırık', 83, 1, '2016-05-18 17:34:35+03', '2016-05-18 17:34:35+03');
+INSERT INTO sikayetler VALUES (3, 'Sınıftaki Saatin Pili Yok', 57, 1, '2016-05-18 17:35:12+03', '2016-05-18 17:35:12+03');
+INSERT INTO sikayetler VALUES (4, 'Sınıftaki Perdeler Yetersiz Olduğundan Projeksiyon İle Ders İşlenmiyor', 58, 1, '2016-05-18 17:36:02+03', '2016-05-18 17:36:02+03');
+INSERT INTO sikayetler VALUES (5, 'Zemin Kat Erkekler Tuvaleti  3 Gündür Temizlenmiyor', 77, 1, '2016-05-18 17:39:13+03', '2016-05-18 17:39:13+03');
+INSERT INTO sikayetler VALUES (6, 'D-025 Numaralı Lab''da Işıkları Açarken Elektrik Çarpıyor', 26, 1, '2016-05-18 17:40:28+03', '2016-05-18 17:40:28+03');
+
+
+--
+-- TOC entry 2149 (class 0 OID 0)
+-- Dependencies: 194
+-- Name: sikayetler_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('sikayetler_id_seq', 97, true);
+
+
+--
+-- TOC entry 2115 (class 0 OID 32522)
+-- Dependencies: 195
+-- Data for Name: yetkitipi; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO yetkitipi VALUES (1, 'REKTÖR', 1, '2016-05-18 15:25:05+03', '2016-05-18 15:25:05+03');
+INSERT INTO yetkitipi VALUES (2, 'DEKAN', 2, '2016-05-18 15:25:11+03', '2016-05-18 15:25:11+03');
+INSERT INTO yetkitipi VALUES (3, 'BÖLÜM BAŞKANI', 3, '2016-05-18 16:37:49+03', '2016-05-18 16:37:49+03');
+INSERT INTO yetkitipi VALUES (4, 'ANA BİLİM DALI BAŞKANI', 4, '2016-05-18 16:37:55+03', '2016-05-18 16:37:55+03');
+INSERT INTO yetkitipi VALUES (5, 'SEKRETER', 5, '2016-05-18 16:38:04+03', '2016-05-18 16:38:15+03');
+INSERT INTO yetkitipi VALUES (6, 'KOORDİNATÖR', 6, '2016-05-18 16:38:37+03', '2016-05-18 16:38:37+03');
+INSERT INTO yetkitipi VALUES (7, 'TEMİZLİK MÜDÜR', 7, '2016-05-18 16:38:51+03', '2016-05-18 16:38:51+03');
+INSERT INTO yetkitipi VALUES (8, 'TEMİZLİK PERSONEL', 8, '2016-05-18 16:39:10+03', '2016-05-18 16:39:10+03');
+INSERT INTO yetkitipi VALUES (9, 'ELEKTRİK MÜDÜR', 9, '2016-05-18 16:39:23+03', '2016-05-18 16:39:23+03');
+INSERT INTO yetkitipi VALUES (10, 'ELEKTRİK PERSONEL', 10, '2016-05-18 16:39:42+03', '2016-05-18 16:39:42+03');
+INSERT INTO yetkitipi VALUES (11, 'PEYZAJ MÜDÜR', 11, '2016-05-18 16:39:55+03', '2016-05-18 16:39:55+03');
+INSERT INTO yetkitipi VALUES (12, 'PEYZAJ PERSONEL', 12, '2016-05-18 16:40:09+03', '2016-05-18 16:40:09+03');
+INSERT INTO yetkitipi VALUES (17, 'ADMIN', 0.100000001, '2016-05-20 00:06:28+03', '2016-05-20 00:06:28+03');
+
+
+--
+-- TOC entry 2150 (class 0 OID 0)
+-- Dependencies: 196
+-- Name: yetkitipi_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('yetkitipi_id_seq', 17, true);
+
+
+--
+-- TOC entry 1959 (class 2606 OID 32544)
+-- Name: bina_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY bina
+    ADD CONSTRAINT bina_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1961 (class 2606 OID 32546)
+-- Name: birim_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY birim
+    ADD CONSTRAINT birim_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1963 (class 2606 OID 32548)
+-- Name: blok_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY blok
+    ADD CONSTRAINT blok_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1965 (class 2606 OID 32550)
+-- Name: durumlar_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY durumlar
+    ADD CONSTRAINT durumlar_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1967 (class 2606 OID 32552)
+-- Name: durumtipi_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY durumtipi
+    ADD CONSTRAINT durumtipi_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1969 (class 2606 OID 32554)
+-- Name: eklentiler_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY eklentiler
+    ADD CONSTRAINT eklentiler_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1971 (class 2606 OID 32556)
+-- Name: iletisim_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY iletisim
+    ADD CONSTRAINT iletisim_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1973 (class 2606 OID 32558)
+-- Name: iletisimtipi_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY iletisimtipi
+    ADD CONSTRAINT iletisimtipi_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1975 (class 2606 OID 32560)
+-- Name: karaliste_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY karaliste
+    ADD CONSTRAINT karaliste_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1977 (class 2606 OID 32562)
+-- Name: kullanicilar_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY kullanicilar
+    ADD CONSTRAINT kullanicilar_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1979 (class 2606 OID 32564)
+-- Name: parametre_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY parametre
+    ADD CONSTRAINT parametre_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1981 (class 2606 OID 32566)
+-- Name: sikayetler_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY sikayetler
+    ADD CONSTRAINT sikayetler_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1983 (class 2606 OID 32568)
+-- Name: yetkitipi_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY yetkitipi
+    ADD CONSTRAINT yetkitipi_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2123 (class 0 OID 0)
+-- Dependencies: 7
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+-- Completed on 2016-05-26 12:48:15 EEST
+
+--
+-- PostgreSQL database dump complete
+--
+
